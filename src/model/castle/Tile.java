@@ -1,9 +1,16 @@
 package model.castle;
 
-public class Tile extends Floor {
+import model.actor.Monster;
 
-	public Tile() {
-		// TODO Auto-generated constructor stub
+public class Tile  {
+	private int x, y;
+	private String id; //wall, hero, monster, item...
+	
+	public Tile(int x, int y, String id) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
 	}
+	
 
 }
