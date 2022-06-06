@@ -1,8 +1,8 @@
 package model.actor;
 
-import model.castle.Tile;
 
-public class Actor extends Tile {
+
+public class Actor  {
 
 	public Actor() {
 		// TODO Auto-generated constructor stub

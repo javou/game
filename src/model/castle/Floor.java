@@ -17,15 +17,37 @@ public class Floor{
 			for(int j = 0; j < floorData[i].length(); j++) {
 				switch(floorData[i].charAt(j)) {
 				case '#':
-					tiles[i][j] = new Tile(i,j,"wall");
+					tiles[i][j] = new Tile(i,j,false,"wall");
+					break;
+				case 'H':
+					tiles[i][j] = new Tile(i,j,true,"hero");
+					break;
+				case ' ':
+					tiles[i][j] = new Tile(i,j,true,"corridor");
+					break;
+				case 'D':
+					tiles[i][j] = new Tile(i,j,false,"door");
+					break;
 				}
-				
 			}
 		}
-		
-		this.monsters = new ArrayList<Monster>();
-		for(Monster monster : monsters)
-			this.monsters.add(monster);		
+		if(monsters != null) {
+			this.monsters = new ArrayList<Monster>();
+			for(Monster monster : monsters)
+				this.monsters.add(monster);	
+		}
 	}
+	public int getHeight() {
+		return tiles.length;
+	}
+	public int getWidth() {
+		return tiles[0].length;
+	}
+	public Tile getTile(int i, int j) {
+		return tiles[i][j];
+	}
+	
+	
+	
 
 }

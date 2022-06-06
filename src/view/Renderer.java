@@ -7,15 +7,23 @@ import java.awt.image.BufferedImage;
 import java.math.*;
 
 import model.actor.Hero;
+import model.castle.Floor;
 import resources.Constants;
 import resources.Textures;
 
 
 public class Renderer {
 	public static int ativarPaint = 0;
-	public Renderer() {
-		// TODO Auto-generated constructor stub
+	
+	//just for tests
+	public static int posHeroX = 1;
+	public static int posHeroY = 1;
+	public static void setPosHero(int dx, int dy) {
+		Renderer.posHeroX += dx;
+		Renderer.posHeroY += dy;
 	}
+	
+	
 	public void firstScreen(Graphics graphics) {
 		
 		graphics.setColor(Color.WHITE);
@@ -25,22 +33,33 @@ public class Renderer {
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
 		graphics.drawString("Do you wanna play a game?", 100, 150);
 	}
-	public void drawMap(Graphics graphics, String[] map) {
-		for(int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length(); j++) {
-				if(map[i].charAt(j) == '#') {
-					BufferedImage texture = Textures.getTexture("wall");
-					graphics.drawImage(texture, j*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH - map[i].length()*Constants.CELL_SIZE*Constants.ZOOM)/2 ,
-							                   i*Constants.CELL_SIZE*Constants.ZOOM + (Window.HEIGHT - map.length*Constants.CELL_SIZE*Constants.ZOOM)/2 , texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
-					//graphics.drawImage(texture, (j-(Hero.posX ))*Constants.CELL_SIZE +Window.WIDTH/2 ,(i-(Hero.posY ))*Constants.CELL_SIZE +Window.HEIGHT/2, texture.getWidth(), texture.getHeight(), null);
-					
-				}
-				
-			}
-		}
-		BufferedImage texture = Textures.getTexture("hero");
-		graphics.drawImage(texture, Window.WIDTH/2 - Constants.CELL_SIZE, Window.HEIGHT/2 - Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
+	public void drawFloor(Graphics graphics, Floor floor) {
 		
+		BufferedImage texture;
+		for(int i = 0; i < floor.getHeight(); i++) {
+			for (int j = 0; j < floor.getWidth(); j++) {
+				if(floor.getTile(i, j).isOccupiableSpace()) {
+					
+					texture = Textures.getTexture("corridor");
+					graphics.drawImage(texture, (j-posHeroX)*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH)/2 ,
+							                    (i-posHeroY)*Constants.CELL_SIZE*Constants.ZOOM + (Window.HEIGHT )/2 ,
+							                   texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+				}
+				else {
+					if(floor.getTile(i, j).getId() == "door")
+						texture = Textures.getTexture("door");
+					else
+						texture = Textures.getTexture("wall");
+					graphics.drawImage(texture, (j-posHeroX)*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH)/2 ,
+							                    (i-posHeroY)*Constants.CELL_SIZE*Constants.ZOOM + (Window.HEIGHT )/2 ,
+							                   texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);	
+				}
+			
+		}
+		texture = Textures.getTexture("hero");
+		graphics.drawImage(texture, Window.WIDTH/2 - 3/2*Constants.CELL_SIZE*Constants.ZOOM, Window.HEIGHT/2 - Constants.CELL_SIZE*Constants.ZOOM, texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+		
+	}
 	}
 	public void messageBox(Graphics graphics, String message) {
 		if(message != null) {

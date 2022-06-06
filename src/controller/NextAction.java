@@ -19,20 +19,23 @@ public class NextAction implements ActionListener{
 			GameScreen.setMessage("Up là!");
 			
 			Music.setSong("songs/boss.wav");
-			
+			Renderer.setPosHero(1,0);
 			//Music.loop();
 		}
 		else if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
 			God.moveHero();
 			GameScreen.setMessage("Up là!");
+			Renderer.setPosHero(-1,0);
 
 		}
 		else if(Keyboard.isKeyPressed(KeyEvent.VK_UP)) {
 			God.moveHero();
 			GameScreen.setMessage(null);
+			Renderer.setPosHero(0,-1);
 		}
 		else if(Keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
 			God.moveHero();
+			Renderer.setPosHero(0,1);
 		}
 		else if(Keyboard.isKeyPressed(KeyEvent.VK_E)) {
 			 //equip an item

@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JPanel;
 
+import controller.God;
 import resources.Constants;
 import resources.Textures;
 
@@ -36,7 +37,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 			else {
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-				renderer.drawMap(graphics, Constants.ENTRY_1);
+				renderer.drawFloor(graphics, God.getCastle().getCurrentFloor());
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics);
 			}
