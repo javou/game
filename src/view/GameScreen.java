@@ -3,6 +3,7 @@ package view;
 import javax.swing.JPanel;
 
 import controller.God;
+import controller.Keyboard;
 import resources.Constants;
 import resources.Textures;
 
