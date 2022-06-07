@@ -1,8 +1,8 @@
 package model.item;
 
-public class Armor extends Item {
+public class Weapon extends Item {
 
-	public Armor() {
+	public Weapon() {
 		// TODO Auto-generated constructor stub
 	}
 

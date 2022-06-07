@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import model.actor.Monster;
 
-public class Floor{
+public class Floor {
 	private Tile[][] tiles;
 	private ArrayList<Monster> monsters;
 	private boolean darkMode;//in the future, a floor might be dark and the hero must use a light source to see around
