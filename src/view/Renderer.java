@@ -16,8 +16,8 @@ public class Renderer {
 	public static int ativarPaint = 0;
 	
 	//just for tests
-	public static int posHeroX = 1;
-	public static int posHeroY = 1;
+	public static int posHeroX = 10;
+	public static int posHeroY = 10;
 	public static void setPosHero(int dx, int dy) {
 		Renderer.posHeroX += dx;
 		Renderer.posHeroY += dy;
@@ -41,18 +41,18 @@ public class Renderer {
 				if(floor.getTile(i, j).isOccupiableSpace()) {
 					
 					texture = Textures.getTexture("corridor");
-					graphics.drawImage(texture, (j-posHeroX)*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH)/2 ,
-							                    (i-posHeroY)*Constants.CELL_SIZE*Constants.ZOOM + (Window.HEIGHT )/2 ,
-							                   texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+					graphics.drawImage(texture, offset(j,posHeroX),
+												offset(i,posHeroY),
+												texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 				}
 				else {
 					if(floor.getTile(i, j).getId() == "door")
 						texture = Textures.getTexture("door");
 					else
 						texture = Textures.getTexture("wall");
-					graphics.drawImage(texture, (j-posHeroX)*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH)/2 ,
-							                    (i-posHeroY)*Constants.CELL_SIZE*Constants.ZOOM + (Window.HEIGHT )/2 ,
-							                   texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);	
+					graphics.drawImage(texture, offset(j,posHeroX),
+												offset(i,posHeroY) ,
+							                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);	
 				}
 			
 		}
@@ -60,6 +60,9 @@ public class Renderer {
 		graphics.drawImage(texture, Window.WIDTH/2 - 3/2*Constants.CELL_SIZE*Constants.ZOOM, Window.HEIGHT/2 - Constants.CELL_SIZE*Constants.ZOOM, texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 		
 	}
+	}
+	public int offset(int k, int posHero) {
+		return (k-posHero)*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH)/2 ;
 	}
 	public void messageBox(Graphics graphics, String message) {
 		if(message != null) {

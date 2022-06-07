@@ -25,7 +25,8 @@ public class NextAction implements ActionListener{
 		else if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
 			God.moveHero();
 			GameScreen.setMessage("Up là!");
-			Renderer.setPosHero(-1,0);
+			//Renderer.setPosHero(-1,0);
+			
 
 		}
 		else if(Keyboard.isKeyPressed(KeyEvent.VK_UP)) {
