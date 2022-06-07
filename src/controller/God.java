@@ -4,18 +4,18 @@ import javax.swing.Timer;
 
 import model.castle.Castle;
 import view.GameScreen;
+import view.Renderer;
 
 public class God {
 	private static Castle castle;
 	public static void newWorld() {
 		//create hero, castle, monster....
 		castle = new Castle();
-		
-		//Timer timer = new Timer(10, new NextAction());
-		//timer.start();
+
 		
 	}
 	public static void moveHero() {
+		GameScreen.setMessage("");//always reset
 		GameScreen.disablePrintOnce();
 		
 		
@@ -25,6 +25,12 @@ public class God {
 	}
 	public static Castle getCastle() {
 		return castle;
+	}
+	public static void checkInteractionsWithObjects() {
+		//get hero position
+		//create a method in floor (is there a item in)
+		if(castle != null)
+			castle.getCurrentFloor().checkInteractions(Renderer.posHeroX , Renderer.posHeroY );
 	}
 	
 

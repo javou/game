@@ -16,8 +16,8 @@ public class Renderer {
 	public static int ativarPaint = 0;
 	
 	//just for tests
-	public static int posHeroX = 10;
-	public static int posHeroY = 10;
+	public static int posHeroX = 0;
+	public static int posHeroY = 0;
 	public static void setPosHero(int dx, int dy) {
 		Renderer.posHeroX += dx;
 		Renderer.posHeroY += dy;
@@ -57,7 +57,8 @@ public class Renderer {
 			
 		}
 		texture = Textures.getTexture("hero");
-		graphics.drawImage(texture, Window.WIDTH/2 - 3/2*Constants.CELL_SIZE*Constants.ZOOM, Window.HEIGHT/2 - Constants.CELL_SIZE*Constants.ZOOM, texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+		//graphics.drawImage(texture, Window.WIDTH/2 - 3/2*Constants.CELL_SIZE*Constants.ZOOM, Window.HEIGHT/2 - Constants.CELL_SIZE*Constants.ZOOM, texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+		graphics.drawImage(texture, Window.WIDTH/2 , Window.HEIGHT/2 , texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 		
 	}
 	}

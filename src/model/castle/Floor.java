@@ -3,10 +3,13 @@ package model.castle;
 import java.util.ArrayList;
 
 import model.actor.Monster;
+import model.item.Item;
+import view.GameScreen;
 
 public class Floor{
 	private Tile[][] tiles;
 	private ArrayList<Monster> monsters;
+	private ArrayList<Item> itens;
 	private boolean darkMode;//in the future, a floor might be dark and the hero must use a light source to see around
 	
 	public Floor(boolean darkMode, String[] floorData, Monster... monsters) {
@@ -45,6 +48,23 @@ public class Floor{
 	}
 	public Tile getTile(int i, int j) {
 		return tiles[i][j];
+	}
+	
+	public void checkInteractions(int posHeroX, int posHeroY) {
+		System.out.println(tiles[0][8].getId());
+		System.out.println(posHeroX);
+		System.out.println(posHeroY);
+		if(tiles[posHeroY][posHeroX].getId() == "door") {
+			GameScreen.setMessage("The is a door around");
+		}
+		/*
+		if(itens != null) {
+			for(Item i : itens) {
+				//get item position  and compare to hero position
+				GameScreen.setMessage("The is an item around");
+			}
+	
+		}*/
 	}
 	
 	

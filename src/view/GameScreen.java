@@ -3,7 +3,7 @@ package view;
 import javax.swing.JPanel;
 
 import controller.God;
-import controller.Keyboard;
+import controller.NextAction;
 import resources.Constants;
 import resources.Textures;
 
@@ -19,7 +19,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 	
 	public GameScreen() {
 		super();
-		this.addKeyListener(new Keyboard());
+		this.addKeyListener(new NextAction());
 		this.setFocusable(true);
 		Textures.init();
 		renderer = new Renderer();
