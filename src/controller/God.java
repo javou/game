@@ -18,8 +18,8 @@ public class God {
 		//create hero, castle, monster....
 		castle = new Castle();
 		
-		Timer timer = new Timer(10, new NextAction());
-		timer.start();
+		//Timer timer = new Timer(10, new NextAction());
+		//timer.start();
 		
 	}
 	
