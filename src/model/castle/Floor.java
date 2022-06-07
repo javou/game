@@ -6,7 +6,7 @@ import model.actor.Monster;
 import model.item.Item;
 import view.GameScreen;
 
-public class Floor{
+public class Floor {
 	private Tile[][] tiles;
 	private ArrayList<Monster> monsters;
 	private ArrayList<Item> itens;
