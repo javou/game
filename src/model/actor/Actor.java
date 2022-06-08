@@ -12,4 +12,12 @@ public class Actor {
 	public int getSpeed() {
 		return speed;
 	}
+	
+	public int getEnergy() {
+		return energy;
+	}
+	
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
 }

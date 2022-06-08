@@ -30,7 +30,16 @@ public class God {
  			}
 		}); // ordena a lista com base no atributo speed dos atores.
 		
-		// loop
+		int i = 0;
+		while (true) {
+			Actor actor = actors.get(i);
+			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
+			if (actor.getEnergy() >= 1000) {
+				// actor.act();
+				actor.setEnergy(actor.getEnergy() - 1000);
+			}
+			i = (i + 1) % actors.size();
+		}
 	}
 	
 	public static void moveHero() {
