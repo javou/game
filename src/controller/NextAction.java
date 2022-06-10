@@ -16,7 +16,8 @@ public class NextAction implements  KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if(heroIsReady) {
 			key = e.getKeyCode();
-			heroIsReady = false;
+			if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_D||e.getKeyCode() == KeyEvent.VK_W)
+				heroIsReady = false;
 		}
 	}
 
