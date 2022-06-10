@@ -7,14 +7,23 @@ import resources.Music;
 import view.GameScreen;
 import view.Renderer;
 public class NextAction implements  KeyListener {
-	
+	private static boolean heroIsReady;
+	private static int key;
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		if(heroIsReady) {
+			key = e.getKeyCode();
+			heroIsReady = false;
+		}
 	}
+
+	public int getKey() {	
+		return key;
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		
