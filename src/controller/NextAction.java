@@ -9,13 +9,17 @@ import view.Renderer;
 public class NextAction implements  KeyListener {
 	
 	@Override
-	public void keyTyped(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {
+	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//keys[e.getKeyCode()] = true;
+		
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
+		
+		
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			Renderer.setPosHero(-1,0);
@@ -26,7 +30,7 @@ public class NextAction implements  KeyListener {
 			God.moveHero();
 			//GameScreen.setMessage("Up là!");
 			
-			Music.setSong("songs/boss.wav");
+			//Music.setSong("songs/boss.wav");
 			Renderer.setPosHero(1,0);
 			//Music.loop();
 		}
@@ -47,7 +51,7 @@ public class NextAction implements  KeyListener {
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			 //attack
-			Music.setSong("songs/attack.wav");
+			//Music.setSong("songs/attack.wav");
 		}
 		God.checkInteractionsWithObjects();
 	}

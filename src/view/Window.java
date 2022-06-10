@@ -3,8 +3,8 @@ import java.awt.*;
 import javax.swing.JFrame;
 
 public class Window {
-	public static final int HEIGHT = 32*30;
-	public static final int WIDTH = 32*30;
+	public static final int HEIGHT = 32*20;
+	public static final int WIDTH = 32*20;
 	private static JFrame window;
 	public static void create() {
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -13,6 +13,6 @@ public class Window {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.add(new GameScreen());
 		window.setVisible(true);
+		window.setResizable(false);
 	}
-
 }

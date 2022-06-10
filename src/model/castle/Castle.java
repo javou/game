@@ -36,4 +36,7 @@ public class Castle {
 	public Floor getCurrentFloor() {
 		return floors.get(currentFloor);
 	}
+	public void moveHeroNextFloor() {
+		currentFloor++;
+	}
 }

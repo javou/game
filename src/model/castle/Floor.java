@@ -50,21 +50,16 @@ public class Floor {
 		return tiles[i][j];
 	}
 	
-	public void checkInteractions(int posHeroX, int posHeroY) {
+	public boolean checkDoor(int posHeroX, int posHeroY) {
 		System.out.println(tiles[0][8].getId());
 		System.out.println(posHeroX);
 		System.out.println(posHeroY);
+		boolean changeFloor = false;
 		if(tiles[posHeroY][posHeroX].getId() == "door") {
 			GameScreen.setMessage("The is a door around");
+			changeFloor = true;
 		}
-		/*
-		if(itens != null) {
-			for(Item i : itens) {
-				//get item position  and compare to hero position
-				GameScreen.setMessage("The is an item around");
-			}
-	
-		}*/
+		return changeFloor;
 	}
 	
 	

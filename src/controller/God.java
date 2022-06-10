@@ -18,8 +18,6 @@ public class God {
 	public static void newWorld() {
 		//create hero, castle, monster....
 		castle = new Castle();
-
-		
 	}
 	
 	private void gameLoop() {
@@ -58,7 +56,9 @@ public class God {
 		//get hero position
 		//create a method in floor (is there a item in)
 		if(castle != null)
-			castle.getCurrentFloor().checkInteractions(Renderer.posHeroX , Renderer.posHeroY );
+			if(castle.getCurrentFloor().checkDoor(Renderer.posHeroX , Renderer.posHeroY ))
+				castle.moveHeroNextFloor();
+				
 	}
 	
 
