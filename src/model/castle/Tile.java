@@ -1,8 +1,5 @@
 package model.castle;
 
-import model.actor.Actor;
-import model.item.Item;
-
 public class Tile {
 	private int x, y;
 

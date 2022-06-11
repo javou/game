@@ -1,35 +1,39 @@
 package controller;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import model.actor.Hero;
 import resources.Music;
 import view.GameScreen;
 import view.Renderer;
-public class NextAction implements  KeyListener {
-	private static boolean heroIsReady;
+
+public class NextAction implements KeyListener {
+	private static boolean _heroIsReady;
 	private static int key;
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(heroIsReady) {
+		if(_heroIsReady) {
 			key = e.getKeyCode();
 			if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_D||e.getKeyCode() == KeyEvent.VK_W)
-				heroIsReady = false;
+				_heroIsReady = false;
 		}
 	}
 
-	public int getKey() {	
+	public static int getKey() {	
 		return key;
+	}
+	
+	public static void setHeroIsReady(boolean heroIsReady) {
+		_heroIsReady = heroIsReady;
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
-		
-		
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			Renderer.setPosHero(-1,0);
