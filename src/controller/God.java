@@ -30,12 +30,12 @@ public class God { // montador + controle // separar?
 		return god;
 	}
 	
-	public static Hero getHero() {
+	public Hero getHero() {
 		return hero;
 	}
 
 	// montador
-	public static void newWorld() {
+	public void newWorld() {
 		//create hero, castle, monster....
 		castle = new Castle();
 		hero = new Hero();
@@ -43,7 +43,7 @@ public class God { // montador + controle // separar?
 	}
 	
 	// controle
-	public static void gameLoop() {
+	public void gameLoop() {
 		Collections.sort(actors, new Comparator<Actor>() {
 			@Override
 			public int compare(Actor actor1, Actor actor2) {
@@ -137,7 +137,7 @@ public class God { // montador + controle // separar?
 		GameScreen.disablePrintOnce();
 	}
 	
-	public static Castle getCastle() {
+	public Castle getCastle() {
 		return castle;
 	}
 	
