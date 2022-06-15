@@ -14,18 +14,19 @@ import resources.Textures;
 
 public class Renderer {
 	public static int ativarPaint = 0;
+	public static Renderer renderer; //singleton pattern, lazy way
 	
-	//just for tests
-	public static int posHeroX = 0;
-	public static int posHeroY = 0;
-	public static void setPosHero(int dx, int dy) {
-		Renderer.posHeroX += dx;
-		Renderer.posHeroY += dy;
+	private Renderer() {};
+	
+	public static Renderer getInstance() {
+		if(renderer == null)
+			renderer = new Renderer();
+		return renderer;
 	}
-	
+
+
 	
 	public void firstScreen(Graphics graphics) {
-		
 		graphics.setColor(Color.WHITE);
 		graphics.drawRoundRect(50, 50, Window.WIDTH-100, Window.HEIGHT-100, 10, 10);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 40));
@@ -33,8 +34,9 @@ public class Renderer {
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
 		graphics.drawString("Do you wanna play a game?", 100, 150);
 	}
-	public void drawFloor(Graphics graphics, Floor floor) {
-		
+	public void drawFloor(Graphics graphics, Floor floor, Hero hero) {
+		int posHeroX = hero.getPosX();
+		int posHeroY = hero.getPosY();
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
 			for (int j = 0; j < floor.getWidth(); j++) {
@@ -72,13 +74,13 @@ public class Renderer {
 			graphics.drawString(message,Constants.CELL_SIZE*7, Constants.CELL_SIZE*29);
 		}
 	}
-	public void heroStatus(Graphics graphics) {
+	public void heroStatus(Graphics graphics, Hero hero) {
 		graphics.setColor(Color.WHITE);
 		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*5, Constants.CELL_SIZE*5, 10, 10);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 15));
-		graphics.drawString("HP:",20,25 );
-		graphics.drawString("Strength:",20,40 );
-		graphics.drawString("Armour:",20,55);
+		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,25 );
+		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,40 );
+		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,55);
 		//if the hero has a shield equipped
 		BufferedImage texture = Textures.getTexture("shield");
 		graphics.drawImage(texture, 0 ,Window.HEIGHT/2, texture.getWidth(), texture.getHeight(), null);

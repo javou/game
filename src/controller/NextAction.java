@@ -34,7 +34,7 @@ public class NextAction implements KeyListener {
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+		/*
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			Renderer.setPosHero(-1,0);
 			God.moveHero();
@@ -68,5 +68,7 @@ public class NextAction implements KeyListener {
 			//Music.setSong("songs/attack.wav");
 		}
 		God.checkInteractionsWithObjects();
+	*/
 	}
+	
 }

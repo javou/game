@@ -33,4 +33,19 @@ public class Actor {
 	public void setPosY(int posy) {
 		this.posy = posy;
 	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+
+
+	public int getArmour() {
+		return armour;
+	}
+	
 }

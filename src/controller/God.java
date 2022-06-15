@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,6 +10,8 @@ import exception.*;
 import model.actor.Actor;
 import model.actor.Hero;
 import model.castle.Castle;
+import model.castle.Floor;
+import resources.Constants;
 import view.GameScreen;
 import view.Renderer;
 
@@ -15,11 +19,27 @@ public class God { // montador + controle // separar?
 	// ambos
 	private static ArrayList<Actor> actors = new ArrayList<Actor>();
 	private static Castle castle;
+	private static God god; //lazy way, singleton pattern
+	private static Hero hero;
 	
+	private God() {};
+	
+	public static God getInstance() { 
+		if(god == null)
+			god = new God();
+		return god;
+	}
+	
+	public static Hero getHero() {
+		return hero;
+	}
+
 	// montador
 	public static void newWorld() {
 		//create hero, castle, monster....
 		castle = new Castle();
+		hero = new Hero();
+		actors.add(hero);
 	}
 	
 	// controle
@@ -32,7 +52,7 @@ public class God { // montador + controle // separar?
 		}); // ordena a lista com base no atributo speed dos atores.
 		
 		int i = 0;
-		while (true) { // mudar condição.
+		while (true) { // mudar condiï¿½ï¿½o.
 			Actor actor = actors.get(i);
 			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
 			if (actor.getEnergy() >= 1000) {
@@ -56,7 +76,7 @@ public class God { // montador + controle // separar?
 			int action = NextAction.getKey();
 			readAction(action, actor);
 		} else {
-			// executar melhor ação.
+			// executar melhor aï¿½ï¿½o.
 		}
 	}
 	
@@ -77,7 +97,7 @@ public class God { // montador + controle // separar?
 		if (castle.getCurrentFloor().getTile(xAtual, yAtual - 1).isOccupiableSpace()) {
 			actor.setPosY(yAtual - 1);
 		} else {
-			throw new exception.InvalidMovement("Célula ocupada!"); 
+			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
 		}
 	}
 	
@@ -87,7 +107,7 @@ public class God { // montador + controle // separar?
 		if (castle.getCurrentFloor().getTile(xAtual - 1, yAtual).isOccupiableSpace()) {
 			actor.setPosX(xAtual - 1);
 		} else {
-			throw new exception.InvalidMovement("Célula ocupada!"); 
+			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
 		}
 	}
 	
@@ -97,7 +117,7 @@ public class God { // montador + controle // separar?
 		if (castle.getCurrentFloor().getTile(xAtual, yAtual + 1).isOccupiableSpace()) {
 			actor.setPosY(yAtual + 1);
 		} else {
-			throw new exception.InvalidMovement("Célula ocupada!"); 
+			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
 		}
 	}
 	
@@ -107,11 +127,10 @@ public class God { // montador + controle // separar?
 		if (castle.getCurrentFloor().getTile(xAtual + 1, yAtual).isOccupiableSpace()) {
 			actor.setPosX(xAtual + 1);
 		} else {
-			throw new exception.InvalidMovement("Célula ocupada!"); 
+			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
 		}
 	}
-	
-	
+
 	// teste
 	public static void moveHero() {
 		GameScreen.setMessage("");//always reset
@@ -126,9 +145,23 @@ public class God { // montador + controle // separar?
 		//get hero position
 		//create a method in floor (is there a item in)
 		if(castle != null)
-			if(castle.getCurrentFloor().checkDoor(Renderer.posHeroX , Renderer.posHeroY ))
-				castle.moveHeroNextFloor();	
+			if(castle.getCurrentFloor().checkDoor(hero.getPosX(), hero.getPosY() )) {
+				castle.moveHeroNextFloor();
+				//set the initial position of the hero when he moves to the next floor
+				Floor f = castle.getCurrentFloor();
+				for(int y = 0; y < f.getHeight(); y++) {
+					for(int x = 0; x < f.getWidth(); x++) {
+						if(f.getTile(x, y).getId() == "hero") {
+							hero.setPosX(x);
+							hero.setPosY(y);
+							break;			
+						}	
+					}
+				}
+			}
 	}
+
+
 	
 
 }

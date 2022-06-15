@@ -14,15 +14,17 @@ import java.awt.event.KeyEvent;
 
 public class GameScreen extends JPanel implements IGameScreen{
 	private Renderer renderer;
-	private static boolean printOnce = true;
+	private static boolean printOnce = false;
 	private static String message = "";
+	private God god;
 	
 	public GameScreen() {
 		super();
 		this.addKeyListener(new NextAction());
 		this.setFocusable(true);
 		Textures.init();
-		renderer = new Renderer();
+		renderer = Renderer.getInstance();
+		god = God.getInstance();
 	}
 
 	@Override
@@ -38,9 +40,9 @@ public class GameScreen extends JPanel implements IGameScreen{
 			else {
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-				renderer.drawFloor(graphics, God.getCastle().getCurrentFloor());
+				renderer.drawFloor(graphics, god.getCastle().getCurrentFloor(), god.getHero());
 				renderer.messageBox(graphics, message);
-				renderer.heroStatus(graphics);
+				renderer.heroStatus(graphics, god.getHero());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
