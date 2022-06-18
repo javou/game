@@ -2,7 +2,9 @@ package model.actor;
 
 public class Monster extends Actor {
 
-	public Monster() {
-		// TODO Auto-generated constructor stub
+	public Monster(String name, int posX, int posY) {
+		this.name = name;
+		this.setPosX(posX);
+		this.setPosY(posY);
 	}
 }

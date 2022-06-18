@@ -1,11 +1,16 @@
 package model.actor;
 
 public class Actor {
+	protected String name = "";
 	protected int hp, speed, armour, evasion;
 	protected int damage; // weapon exclusive
 	protected int energy = 0;
 	protected int posx, posy;
 	
+	public String getName() {
+		return name;
+	}
+
 	public int getSpeed() {
 		return speed;
 	}

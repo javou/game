@@ -3,12 +3,14 @@ package model.castle;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import model.actor.Monster;
 import resources.Constants;
 
 public class Castle {
 	private ArrayList<Floor>  floors;
 	private Floor firstFloor;//always the same
 	private int currentFloor = 0;//identify which floor the hero is
+	
 	
 	public Castle() {
 		//the first floor is always the same and the other are shuffled randomly

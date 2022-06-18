@@ -5,8 +5,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.math.*;
+import java.util.ArrayList;
 
+import controller.God;
 import model.actor.Hero;
+import model.actor.Monster;
 import model.castle.Floor;
 import resources.Constants;
 import resources.Textures;
@@ -40,22 +43,26 @@ public class Renderer {
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
 			for (int j = 0; j < floor.getWidth(); j++) {
-				if(floor.getTile(i, j).isOccupiableSpace()) {
+				
 					
 					texture = Textures.getTexture("corridor");
 					graphics.drawImage(texture, offset(j,posHeroX),
 												offset(i,posHeroY),
 												texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
-				}
-				else {
+
 					if(floor.getTile(i, j).getId() == "door")
 						texture = Textures.getTexture("door");
-					else
+					else if(floor.getTile(i, j).getId() == "wall")
 						texture = Textures.getTexture("wall");
+					else if(floor.getTile(i, j).getId() == "chest")
+						texture = Textures.getTexture("chest");
+					else if(floor.getTile(i, j).getId() == "error")
+						texture = Textures.getTexture("error");
+					
 					graphics.drawImage(texture, offset(j,posHeroX),
 												offset(i,posHeroY) ,
 							                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);	
-				}
+				
 			
 		}
 		texture = Textures.getTexture("hero");
@@ -87,6 +94,22 @@ public class Renderer {
 		//if the hero has a sword equipped
 		texture = Textures.getTexture("sword");
 		graphics.drawImage(texture, 0 ,Window.HEIGHT/2+Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
+	}
+	
+	public void drawMonsters(Graphics graphics, Floor floor, Hero hero) {
+		ArrayList<Monster> monsters = God.getInstance().getCastle().getCurrentFloor().getMonsters();
+		if(monsters != null) {
+			BufferedImage texture;
+			int posHeroX = hero.getPosX();
+			int posHeroY = hero.getPosY();
+			for(Monster monster : monsters) {
+				System.out.println(monster.getName());
+				texture = Textures.getTexture(monster.getName());
+				graphics.drawImage(texture, offset(monster.getPosX(),posHeroX),
+						offset(monster.getPosY(),posHeroY) ,
+	                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+			}
+		}
 	}
 
 }

@@ -41,8 +41,10 @@ public class GameScreen extends JPanel implements IGameScreen{
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 				renderer.drawFloor(graphics, god.getCastle().getCurrentFloor(), god.getHero());
+				renderer.drawMonsters(graphics, god.getCastle().getCurrentFloor(), god.getHero());
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics, god.getHero());
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
