@@ -11,13 +11,14 @@ import model.actor.Actor;
 import model.actor.Hero;
 import model.castle.Castle;
 import model.castle.Floor;
+import model.item.Item;
 import resources.Constants;
 import view.GameScreen;
 import view.Renderer;
 
 public class God { // montador + controle // separar?
 	// ambos
-	private static ArrayList<Actor> actors = new ArrayList<Actor>();
+	private static ArrayList<Actor> actors = new ArrayList<Actor>();//does it make sense to have it here?
 	private static Castle castle;
 	private static God god; //lazy way, singleton pattern
 	private static Hero hero;
@@ -140,12 +141,12 @@ public class God { // montador + controle // separar?
 	public Castle getCastle() {
 		return castle;
 	}
-	
+	//if we want to that the player has the decision power whether take it or not we should put this method together with keyboard method
 	public static void checkInteractionsWithObjects() {
 		//get hero position
 		//create a method in floor (is there a item in)
 		if(castle != null)
-			if(castle.getCurrentFloor().checkDoor(hero.getPosX(), hero.getPosY() )) {
+			if(castle.getCurrentFloor().lookFor(hero.getPosX(), hero.getPosY(), "door" )) {
 				castle.moveHeroNextFloor();
 				//set the initial position of the hero when he moves to the next floor
 				Floor f = castle.getCurrentFloor();
@@ -159,7 +160,13 @@ public class God { // montador + controle // separar?
 					}
 				}
 			}
+		if(castle.getCurrentFloor().lookFor(hero.getPosX(), hero.getPosY(), "potion" )) {
+			castle.getCurrentFloor().removeItem(hero.getPosX(), hero.getPosY());
+			hero.addPotion();
+		}
 	}
+	
+	
 
 
 	

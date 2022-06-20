@@ -26,8 +26,6 @@ public class Renderer {
 			renderer = new Renderer();
 		return renderer;
 	}
-
-
 	
 	public void firstScreen(Graphics graphics) {
 		graphics.setColor(Color.WHITE);
@@ -56,6 +54,8 @@ public class Renderer {
 						texture = Textures.getTexture("wall");
 					else if(floor.getTile(i, j).getId() == "chest")
 						texture = Textures.getTexture("chest");
+					else if(floor.getTile(i, j).getId() == "potion")
+						texture = Textures.getTexture("potion");
 					else if(floor.getTile(i, j).getId() == "error")
 						texture = Textures.getTexture("error");
 					
@@ -83,19 +83,23 @@ public class Renderer {
 	}
 	public void heroStatus(Graphics graphics, Hero hero) {
 		graphics.setColor(Color.WHITE);
-		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*5, Constants.CELL_SIZE*5, 10, 10);
+		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*5, Constants.CELL_SIZE*3, 10, 10);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 15));
 		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,25 );
 		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,40 );
 		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,55);
 		//if the hero has a shield equipped
-		BufferedImage texture = Textures.getTexture("shield");
-		graphics.drawImage(texture, 0 ,Window.HEIGHT/2, texture.getWidth(), texture.getHeight(), null);
-		//if the hero has a sword equipped
-		texture = Textures.getTexture("sword");
-		graphics.drawImage(texture, 0 ,Window.HEIGHT/2+Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
-	}
+		if(hero.isArmorIsEquipped()) {
+			BufferedImage texture = Textures.getTexture("shield");
+			graphics.drawImage(texture, 0 ,Window.HEIGHT*1/4, texture.getWidth(), texture.getHeight(), null);
+		}
+			//if the hero has a sword equipped
+		if(hero.isWeaponIsEquipped()) {
+			BufferedImage texture = Textures.getTexture("sword");
+			graphics.drawImage(texture, 0 ,Window.HEIGHT*1/4+Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
 	
+		}
+	}
 	public void drawMonsters(Graphics graphics, Floor floor, Hero hero) {
 		ArrayList<Monster> monsters = God.getInstance().getCastle().getCurrentFloor().getMonsters();
 		if(monsters != null) {

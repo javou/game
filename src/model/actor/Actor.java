@@ -2,7 +2,7 @@ package model.actor;
 
 public class Actor {
 	protected String name = "";
-	protected int hp, speed, armour, evasion;
+	protected int hp, hpMax, speed, armour, evasion;
 	protected int damage; // weapon exclusive
 	protected int energy = 0;
 	protected int posx, posy;
@@ -44,7 +44,10 @@ public class Actor {
 	}
 
 	public void setHp(int hp) {
-		this.hp = hp;
+		if(hp > this.hp) 
+			this.hp = hpMax;
+		else
+			this.hp = hp;
 	}
 
 

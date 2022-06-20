@@ -56,13 +56,21 @@ public class Floor {
 					tiles[i][j] = new Tile(i,j,false,"5");
 					this.monsters.add(new Monster("5",j,i));
 					break;
+				case 'P':
+					tiles[i][j] = new Tile(i,j,true,"potion");
+					break;
+				case 'A':
+					tiles[i][j] = new Tile(i,j,true,"armour");
+					break;
+				case 'S':
+					tiles[i][j] = new Tile(i,j,true,"shield");
+					break;
 				default:
 					tiles[i][j] = new Tile(i,j,false,"error");
 					break;
 				}
 			}
-		}
-		
+		}	
 	}
 	public int getHeight() {
 		return tiles.length;
@@ -74,24 +82,19 @@ public class Floor {
 		return tiles[i][j];
 	}
 	
-	public boolean checkDoor(int posHeroX, int posHeroY) {
-		System.out.println(tiles[0][8].getId());
-		System.out.println(posHeroX);
-		System.out.println(posHeroY);
-		boolean changeFloor = false;
-		if(tiles[posHeroY][posHeroX].getId() == "door") {
+	public boolean lookFor(int posHeroX, int posHeroY, String target) {
+		boolean output = false;
+		if(tiles[posHeroY][posHeroX].getId() == target) {
 			GameScreen.setMessage("The is a door around");
-			changeFloor = true;
+			output = true;
 		}
-		return changeFloor;
+		return output;
 	}
 	public ArrayList<Monster> getMonsters() {
 		return monsters;
 	}
 	
-	
-	
-	
-	
-
+	public void removeItem(int posX, int posY) {
+		tiles[posY][posX].setId("corridor");
+	}
 }

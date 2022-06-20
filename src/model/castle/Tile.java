@@ -29,6 +29,11 @@ public class Tile {
 	public boolean isOccupiableSpace() {
 		return occupiableSpace;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	
 	
