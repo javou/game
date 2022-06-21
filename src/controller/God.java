@@ -13,25 +13,26 @@ import view.GameScreen;
 
 public class God { // montador + controle // separar
 	// ambos
-	private static ArrayList<Actor> actors = new ArrayList<Actor>();//does it make sense to have it here?
-	private static Castle castle; // ICastle
 	private static God god; //lazy way, singleton pattern
-	private static Hero hero; //IHero
+	private static ArrayList<Actor> actors = new ArrayList<Actor>(); // get from floor (or use castle.getFloor().getActors() every time?)
+	// private Assembler assembler = Assembler.getInstance();
+	private static Castle castle; // private ICastle castle = assembler.getCastle();
+	private static Hero hero; // remover
 	
 	private God() {};
 	
 	public static God getInstance() { 
-		if(god == null)
+		if (god == null)
 			god = new God();
 		return god;
 	}
 	
-	public Hero getHero() {
+	public Hero getHero() { // remover
 		return hero;
 	}
 
 	// montador
-	public void newWorld() {
+	public void newWorld() { // remover
 		//create hero, castle, monster....
 		castle = new Castle();
 		hero = new Hero();
@@ -90,7 +91,7 @@ public class God { // montador + controle // separar
 	private static void moveActorUp(Actor actor) throws InvalidMovement {
 		if (castle.getCurrentFloor().getTile(actor.getPosX(), actor.getPosY() - 1).isOccupiableSpace()) {
 			actor.setPosY(actor.getPosY() - 1);
-		} else {
+		} else { // if there is a monster: attack; else:
 			throw new exception.InvalidMovement("C�lula ocupada!"); 
 		}
 	}

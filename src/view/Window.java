@@ -1,8 +1,9 @@
 package view;
+
 import java.awt.*;
 import javax.swing.JFrame;
 
-public class Window {
+public class Window implements IWindow {
 	public static final int HEIGHT = 32*20;
 	public static final int WIDTH = 32*20;
 	private static JFrame jframe;

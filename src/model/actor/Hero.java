@@ -3,7 +3,7 @@ package model.actor;
 import java.util.ArrayList;
 
 import model.item.Item;
-import model.item.Potion;
+import model.item.HPPotion;
 import model.item.Weapon;
 import resources.Constants;
 
@@ -31,13 +31,13 @@ public class Hero extends Actor {
 		}
 	}
 	public void addPotion() {
-		items.add(new Potion(10));
+		items.add(new HPPotion(10));
 	}
 	
 	public void usePotion() {
 		for(Item item : items) {
-			if(item.getClass() == Potion.class) {
-				this.setHp(this.getHp() + ((Potion)item).getHitPoints());
+			if(item.getClass() == HPPotion.class) {
+				this.setHp(this.getHp() + ((HPPotion)item).getHitPoints());
 				items.remove(item);
 				break;
 			}

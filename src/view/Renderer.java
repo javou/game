@@ -14,7 +14,6 @@ import model.castle.Floor;
 import resources.Constants;
 import resources.Textures;
 
-
 public class Renderer {
 	public static int ativarPaint = 0;
 	public static Renderer renderer; //singleton pattern, lazy way

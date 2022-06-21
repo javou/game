@@ -7,10 +7,10 @@ import model.actor.Monster;
 import resources.Constants;
 
 public class Castle implements ICastle {
+	private static Castle castle;
 	private ArrayList<Floor>  floors;
 	private Floor firstFloor;//always the same
 	private int currentFloor = 0;//identify which floor the hero is
-	
 	
 	public Castle() {
 		//the first floor is always the same and the other are shuffled randomly
@@ -20,6 +20,13 @@ public class Castle implements ICastle {
 		floors.add(new Floor(true, Constants.ENTRY_2));
 		shuffleFloors();
 		floors.add(0,firstFloor);
+	}
+	
+	public static Castle getInstance() {
+		if (castle == null) {
+			castle = new Castle();
+		}
+		return castle;
 	}
 	
 	public void shuffleFloors() {
