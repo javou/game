@@ -3,10 +3,6 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import resources.Music;
-import view.GameScreen;
-import view.Renderer;
-
 public class NextAction implements KeyListener {
 	private static boolean _heroIsReady;
 	private static int key;

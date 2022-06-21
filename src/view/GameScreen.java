@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 public class GameScreen extends JPanel implements IGameScreen{
+	private static final long serialVersionUID = -1683041340076218616L;
 	private Renderer renderer;
 	private static boolean printOnce = false;
 	private static String message = "";

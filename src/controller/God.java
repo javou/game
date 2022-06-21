@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,17 +9,14 @@ import model.actor.Actor;
 import model.actor.Hero;
 import model.castle.Castle;
 import model.castle.Floor;
-import model.item.Item;
-import resources.Constants;
 import view.GameScreen;
-import view.Renderer;
 
-public class God { // montador + controle // separar?
+public class God { // montador + controle // separar
 	// ambos
 	private static ArrayList<Actor> actors = new ArrayList<Actor>();//does it make sense to have it here?
-	private static Castle castle;
+	private static Castle castle; // ICastle
 	private static God god; //lazy way, singleton pattern
-	private static Hero hero;
+	private static Hero hero; //IHero
 	
 	private God() {};
 	
@@ -93,40 +88,32 @@ public class God { // montador + controle // separar?
 	}
 	
 	private static void moveActorUp(Actor actor) throws InvalidMovement {
-		int xAtual = actor.getPosX(); // WET?
-		int yAtual = actor.getPosY();
-		if (castle.getCurrentFloor().getTile(xAtual, yAtual - 1).isOccupiableSpace()) {
-			actor.setPosY(yAtual - 1);
+		if (castle.getCurrentFloor().getTile(actor.getPosX(), actor.getPosY() - 1).isOccupiableSpace()) {
+			actor.setPosY(actor.getPosY() - 1);
 		} else {
 			throw new exception.InvalidMovement("C�lula ocupada!"); 
 		}
 	}
 	
 	private static void moveActorLeft(Actor actor) throws InvalidMovement {
-		int xAtual = actor.getPosX();
-		int yAtual = actor.getPosY();
-		if (castle.getCurrentFloor().getTile(xAtual - 1, yAtual).isOccupiableSpace()) {
-			actor.setPosX(xAtual - 1);
+		if (castle.getCurrentFloor().getTile(actor.getPosX() - 1, actor.getPosY()).isOccupiableSpace()) {
+			actor.setPosX(actor.getPosX() - 1);
 		} else {
 			throw new exception.InvalidMovement("C�lula ocupada!"); 
 		}
 	}
 	
 	private static void moveActorDown(Actor actor) throws InvalidMovement {
-		int xAtual = actor.getPosX();
-		int yAtual = actor.getPosY();
-		if (castle.getCurrentFloor().getTile(xAtual, yAtual + 1).isOccupiableSpace()) {
-			actor.setPosY(yAtual + 1);
+		if (castle.getCurrentFloor().getTile(actor.getPosX(), actor.getPosY() + 1).isOccupiableSpace()) {
+			actor.setPosY(actor.getPosY() + 1);
 		} else {
 			throw new exception.InvalidMovement("C�lula ocupada!"); 
 		}
 	}
 	
 	private static void moveActorRight(Actor actor) throws InvalidMovement {
-		int xAtual = actor.getPosX();
-		int yAtual = actor.getPosY();
-		if (castle.getCurrentFloor().getTile(xAtual + 1, yAtual).isOccupiableSpace()) {
-			actor.setPosX(xAtual + 1);
+		if (castle.getCurrentFloor().getTile(actor.getPosX() + 1, actor.getPosY()).isOccupiableSpace()) {
+			actor.setPosX(actor.getPosX() + 1);
 		} else {
 			throw new exception.InvalidMovement("C�lula ocupada!"); 
 		}
@@ -141,6 +128,7 @@ public class God { // montador + controle // separar?
 	public Castle getCastle() {
 		return castle;
 	}
+	
 	//if we want to that the player has the decision power whether take it or not we should put this method together with keyboard method
 	public static void checkInteractionsWithObjects() {
 		//get hero position

@@ -6,7 +6,7 @@ import java.util.Collections;
 import model.actor.Monster;
 import resources.Constants;
 
-public class Castle {
+public class Castle implements ICastle {
 	private ArrayList<Floor>  floors;
 	private Floor firstFloor;//always the same
 	private int currentFloor = 0;//identify which floor the hero is
