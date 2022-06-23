@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 public class NextAction implements KeyListener {
 	private static NextAction nextAction;
-	private boolean heroIsReady;
 	private int key;
 	
 	private NextAction() {}
@@ -18,11 +17,9 @@ public class NextAction implements KeyListener {
 	}
 	
 	public int getKey() {	
-		return key;
-	}
-	
-	public void setHeroIsReady(boolean heroIsReady) {
-		this.heroIsReady = heroIsReady;
+		int aux = key;
+		key = 0; // invalid key
+		return aux;
 	}
 	
 	@Override
@@ -30,14 +27,7 @@ public class NextAction implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(heroIsReady) {
-			key = e.getKeyCode();
-			if (
-					e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S ||
-					e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_W ||
-					e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_Q)
-				heroIsReady = false;
-		}
+		key = e.getKeyCode();
 	}
 
 	@Override

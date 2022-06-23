@@ -41,6 +41,10 @@ public class Castle implements ICastle {
 		return floors.get(currentFloor).getTile(x, y).isOccupiableSpace();
 	}
 	
+	public String typeAtTile(int x, int y) {
+		return floors.get(currentFloor).getTileId(x, y);
+	}
+	
 	public IActor getActorAtTile(int x, int y) {
 		
 	}

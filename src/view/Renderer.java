@@ -37,9 +37,9 @@ public class Renderer {
 		graphics.drawString("Do you wanna play a game?", 100, 150);
 	}
 	
-	public void drawFloor(Graphics graphics, IFloor floor, IActor hero) {
-		int posHeroX = hero.getPosX();
-		int posHeroY = hero.getPosY();
+	public void drawFloor(Graphics graphics, IFloor floor) {
+		int posHeroX = floor.getHero().getPosX();
+		int posHeroY = floor.getHero().getPosY();
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
 			for (int j = 0; j < floor.getWidth(); j++) {
@@ -122,6 +122,10 @@ public class Renderer {
 	                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 			}
 		}
+	}
+	
+	public void drawActors(Graphics graphics, IFloor floor) {
+		
 	}
 
 }

@@ -33,7 +33,7 @@ public class God {
 		}); // ordena a lista com base no atributo speed dos atores.
 		
 		int i = 0;
-		while (true) { // mudar condição.
+		while (true) { // mudar condiï¿½ï¿½o.
 			IActor actor = floorActors.get(i);
 			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
 			if (actor.getEnergy() >= 1000) {
@@ -53,15 +53,21 @@ public class God {
 	
 	private void act(IActor actor) throws InvalidMovement {
 		if (actor.getClass() == Hero.class) {
-			nextAction.setHeroIsReady(true);
-			int action = nextAction.getKey();
-			readAction(action, actor);
+			while (true) {
+				try {
+					int action = nextAction.getKey();
+					readAction(action, actor);
+					break;
+				} catch (InvalidKey e) {
+					e.printStackTrace();
+				}
+			}
 		} else {
-			// executar melhor ação.
+			// executar melhor aï¿½ï¿½o.
 		}
 	}
 	
-	private void readAction(int action, IActor actor) throws InvalidMovement {
+	private void readAction(int action, IActor actor) throws InvalidMovement, InvalidKey {
 		if (action == 87) 
 			moveActorUp(actor);
 		else if (action == 65)
@@ -74,16 +80,19 @@ public class God {
 			holdPosition(actor); // pass turn
 		else if (action == 81)
 			consumePotion();
+		else
+			throw new exception.InvalidKey("Tecla invÃ¡lida.");
 	}
 	
 	private void moveActorUp(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) { // item and door.
 			actor.setPosY(actor.getPosY() - 1);
+			checkInteractionsWithObjects();
 		} else { // if there is an enemy: attack; else:
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null) {
 				
 			}
-			throw new exception.InvalidMovement("Você não é um fantasma!"); 
+			throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
 		}
 	}
 	
@@ -91,7 +100,7 @@ public class God {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() - 1);
 		} else {
-			throw new exception.InvalidMovement("Você não é um fantasma!"); 
+			throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
 		}
 	}
 	
@@ -99,7 +108,7 @@ public class God {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() + 1)) {
 			actor.setPosY(actor.getPosY() + 1);
 		} else {
-			throw new exception.InvalidMovement("Você não é um fantasma!"); 
+			throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
 		}
 	}
 	
@@ -107,7 +116,7 @@ public class God {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() + 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() + 1);
 		} else {
-			throw new exception.InvalidMovement("Você não é um fantasma!"); 
+			throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
 		}
 	}
 	
@@ -123,24 +132,23 @@ public class God {
 		
 	}
 	
-	/*
+	private void moveHeroNextFloor()
+	
 	// teste
+	/*
 	public static void moveHero() {
 		GameScreen.setMessage("");//always reset
 		GameScreen.disablePrintOnce();
 	}
-	
-	public Castle getCastle() {
-		return castle;
-	}	
+	*/
 	
 	//if we want to that the player has the decision power whether take it or not we should put this method together with keyboard method
-	public static void checkInteractionsWithObjects() {
+	private void checkInteractionsWithObjects(int x, int y) {
 		//get hero position
 		//create a method in floor (is there a item in)
-		if(castle != null)
-			if(castle.getCurrentFloor().lookFor(hero.getPosX(), hero.getPosY(), "door" )) {
-				castle.moveHeroNextFloor();
+		if (castle != null)
+			if (castle.typeAtTile(x, y) == "door") {
+				moveHeroNextFloor();
 				//set the initial position of the hero when he moves to the next floor
 				Floor f = castle.getCurrentFloor();
 				for(int y = 0; y < f.getHeight(); y++) {
@@ -158,7 +166,7 @@ public class God {
 			hero.addPotion();
 		}
 	}
-	*/
+	
 
 
 	

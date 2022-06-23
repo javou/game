@@ -52,8 +52,8 @@ public class GameScreen extends JPanel {
 			else {
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-				renderer.drawFloor(graphics, castle.getCurrentFloor(), castle.getCurrentFloor().getHero());
-				renderer.drawEnemies(graphics, castle.getCurrentFloor(), castle.getCurrentFloor().getHero());
+				renderer.drawFloor(graphics, castle.getCurrentFloor());
+				renderer.drawEnemies(graphics, castle.getCurrentFloor());
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics, castle.getCurrentFloor().getHero());
 				
