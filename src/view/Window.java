@@ -22,7 +22,7 @@ public class Window implements IWindow {
 		jframe = new JFrame("Haunted Castle");
 		jframe.setBounds(((int)size.getWidth()-WIDTH)/2, ((int)size.getHeight()-HEIGHT)/2 -32, WIDTH, HEIGHT+32);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jframe.add(new GameScreen());
+		jframe.add(GameScreen.getInstance());
 		jframe.setVisible(true);
 		jframe.setResizable(false);
 	}

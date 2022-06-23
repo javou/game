@@ -12,7 +12,7 @@ public class App {
 		assembler = Assembler.getInstance();
 		god = God.getInstance();
 		assembler.createWindow();
-		god.newWorld(); // assembler.newWorld();
+		assembler.newWorld();
 		god.gameLoop();
 	}
 }

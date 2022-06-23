@@ -1,11 +1,23 @@
 package model.actor;
 
-public class Actor {
+public class Actor implements IActor {
 	protected String name = "";
 	protected int hp, hpMax, speed, armour, evasion;
 	protected int damage; // weapon exclusive
 	protected int energy = 0;
 	protected int posx, posy;
+	
+	public Actor(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
+		this.name = name;
+		this.hpMax = hpMax;
+		hp = hpMax;
+		this.speed = speed;
+		this.armour = armour;
+		this.evasion = evasion;
+		this.damage = damage;
+		this.posx = posx;
+		this.posy = posy;
+	}
 	
 	public String getName() {
 		return name;
@@ -49,8 +61,6 @@ public class Actor {
 		else
 			this.hp = hp;
 	}
-
-
 
 	public int getArmour() {
 		return armour;

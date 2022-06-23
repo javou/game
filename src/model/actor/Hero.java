@@ -5,31 +5,16 @@ import java.util.ArrayList;
 import model.item.Item;
 import model.item.HPPotion;
 import model.item.Weapon;
-import resources.Constants;
 
 public class Hero extends Actor {
 	private static ArrayList<Item> items = new ArrayList<Item>();
 	private boolean armorIsEquipped = true;
 	private boolean weaponIsEquipped = false;
 	
-	public Hero() {
-		hp = 100;
-		hpMax = 100;
-		speed = 10;
-		armour = 0;
-		evasion = 0;
-		damage = 5;
-		
-		for(int y = 0; y < Constants.FIRST_ROOM.length; y++) {
-			int x = Constants.FIRST_ROOM[y].indexOf("H",0);
-			if(x > 0 ) {
-				posx = x;
-				posy = y;
-				break;
-				
-			}
-		}
+	public Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
+		super(name, hpMax, speed, armour, evasion, damage, posx, posy);		
 	}
+	
 	public void addPotion() {
 		items.add(new HPPotion(10));
 	}

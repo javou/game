@@ -3,16 +3,16 @@ package model.castle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import model.actor.Monster;
+import model.actor.IActor;
 import resources.Constants;
 
 public class Castle implements ICastle {
 	private static Castle castle;
 	private ArrayList<Floor>  floors;
-	private Floor firstFloor;//always the same
-	private int currentFloor = 0;//identify which floor the hero is
+	private Floor firstFloor; //always the same
+	private int currentFloor = 0; //identify in which floor the hero currently is
 	
-	public Castle() {
+	private Castle() {
 		//the first floor is always the same and the other are shuffled randomly
 		floors = new ArrayList<Floor>();
 		firstFloor = new Floor(true, Constants.FIRST_ROOM);
@@ -32,6 +32,14 @@ public class Castle implements ICastle {
 	public void shuffleFloors() {
 		Collections.shuffle(floors);
 	}
+	
+	public ArrayList<IActor> getFloorActors() {
+		return floors.get(currentFloor).getActors();
+	}
+	
+	public boolean isTileAtCurrentFloorOccupiable(int x, int y) {
+		return floors.get(currentFloor).getTile(x, y).isOccupiableSpace();
+	}
 
 	public Floor getFloorAt(int index) {
 		return floors.get(index);
@@ -45,6 +53,7 @@ public class Castle implements ICastle {
 	public Floor getCurrentFloor() {
 		return floors.get(currentFloor);
 	}
+	
 	public void moveHeroNextFloor() {
 		currentFloor++;
 	}

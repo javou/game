@@ -4,67 +4,40 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class NextAction implements KeyListener {
-	private static boolean _heroIsReady;
-	private static int key;
+	private static NextAction nextAction;
+	private boolean heroIsReady;
+	private int key;
 	
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
+	private NextAction() {}
 	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if(_heroIsReady) {
-			key = e.getKeyCode();
-			if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_D||e.getKeyCode() == KeyEvent.VK_W)
-				_heroIsReady = false;
+	public static NextAction getInstance() {
+		if (nextAction == null) {
+			nextAction = new NextAction();
 		}
+		return nextAction;
 	}
-
-	public static int getKey() {	
+	
+	public int getKey() {	
 		return key;
 	}
 	
-	public static void setHeroIsReady(boolean heroIsReady) {
-		_heroIsReady = heroIsReady;
+	public void setHeroIsReady(boolean heroIsReady) {
+		this.heroIsReady = heroIsReady;
 	}
 	
 	@Override
-	public void keyReleased(KeyEvent e) {
-		/*
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			Renderer.setPosHero(-1,0);
-			God.moveHero();
-			//GameScreen.setMessage("Up là!");
+	public void keyTyped(KeyEvent e) {}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(heroIsReady) {
+			key = e.getKeyCode();
+			if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_SPACE)
+				heroIsReady = false;
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			God.moveHero();
-			//GameScreen.setMessage("Up là!");
-			
-			//Music.setSong("songs/boss.wav");
-			Renderer.setPosHero(1,0);
-			//Music.loop();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_UP) {
-			God.moveHero();
-			GameScreen.setMessage(null);
-			Renderer.setPosHero(0,-1);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			God.moveHero();
-			Renderer.setPosHero(0,1);
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_E) {
-			 //equip an item
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_F) {
-			 //use potion
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			 //attack
-			//Music.setSong("songs/attack.wav");
-		}
-		God.checkInteractionsWithObjects();
-	*/
 	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {}
 	
 }

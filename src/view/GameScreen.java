@@ -12,20 +12,30 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-public class GameScreen extends JPanel implements IGameScreen{
+public class GameScreen extends JPanel {
+	
 	private static final long serialVersionUID = -1683041340076218616L;
+	
+	private static GameScreen gameScreen;
 	private Renderer renderer;
 	private static boolean printOnce = false;
 	private static String message = "";
 	private God god;
 	
-	public GameScreen() {
+	private GameScreen() {
 		super();
-		this.addKeyListener(new NextAction());
+		this.addKeyListener(NextAction.getInstance());
 		this.setFocusable(true);
 		Textures.init();
 		renderer = Renderer.getInstance();
 		god = God.getInstance();
+	}
+	
+	public static GameScreen getInstance() {
+		if (gameScreen == null) {
+			gameScreen = new GameScreen();
+		}
+		return gameScreen;
 	}
 
 	@Override
@@ -42,7 +52,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 				renderer.drawFloor(graphics, god.getCastle().getCurrentFloor(), god.getHero());
-				renderer.drawMonsters(graphics, god.getCastle().getCurrentFloor(), god.getHero());
+				renderer.drawEnemies(graphics, god.getCastle().getCurrentFloor(), god.getHero());
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics, god.getHero());
 				
@@ -53,17 +63,15 @@ public class GameScreen extends JPanel implements IGameScreen{
 		repaint();
 	}
 
-	public static void disablePrintOnce() {
+	public void disablePrintOnce() {
 		printOnce = false;
 	}
 
-	public static String getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
-	public static void setMessage(String message) {
+	public void setMessage(String message) {
 		GameScreen.message = message;
 	}
-	
-
 }

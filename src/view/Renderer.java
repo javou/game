@@ -9,13 +9,14 @@ import java.util.ArrayList;
 
 import controller.God;
 import model.actor.Hero;
-import model.actor.Monster;
+import model.actor.IActor;
+import model.actor.Enemy;
 import model.castle.Floor;
 import resources.Constants;
 import resources.Textures;
 
 public class Renderer {
-	public static int ativarPaint = 0;
+	public int ativarPaint = 0;
 	public static Renderer renderer; //singleton pattern, lazy way
 	
 	private Renderer() {};
@@ -34,7 +35,8 @@ public class Renderer {
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
 		graphics.drawString("Do you wanna play a game?", 100, 150);
 	}
-	public void drawFloor(Graphics graphics, Floor floor, Hero hero) {
+	
+	public void drawFloor(Graphics graphics, Floor floor, IActor hero) {
 		int posHeroX = hero.getPosX();
 		int posHeroY = hero.getPosY();
 		BufferedImage texture;
@@ -43,9 +45,10 @@ public class Renderer {
 				
 					
 					texture = Textures.getTexture("corridor");
-					graphics.drawImage(texture, offset(j,posHeroX),
-												offset(i,posHeroY),
-												texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+					graphics.drawImage(texture, offset(j, posHeroX),
+												offset(i, posHeroY),
+												texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+												null);
 
 					if(floor.getTile(i, j).getId() == "door")
 						texture = Textures.getTexture("door");
@@ -58,8 +61,8 @@ public class Renderer {
 					else if(floor.getTile(i, j).getId() == "error")
 						texture = Textures.getTexture("error");
 					
-					graphics.drawImage(texture, offset(j,posHeroX),
-												offset(i,posHeroY) ,
+					graphics.drawImage(texture, offset(j, posHeroX),
+												offset(i, posHeroY) ,
 							                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);	
 				
 			
@@ -99,17 +102,17 @@ public class Renderer {
 	
 		}
 	}
-	public void drawMonsters(Graphics graphics, Floor floor, Hero hero) {
-		ArrayList<Monster> monsters = God.getInstance().getCastle().getCurrentFloor().getMonsters();
-		if(monsters != null) {
+	public void drawEnemies(Graphics graphics, Floor floor, Hero hero) {
+		ArrayList<Enemy> enemies = God.getInstance().getCastle().getCurrentFloor().getMonsters();
+		if(enemies != null) {
 			BufferedImage texture;
 			int posHeroX = hero.getPosX();
 			int posHeroY = hero.getPosY();
-			for(Monster monster : monsters) {
-				System.out.println(monster.getName());
-				texture = Textures.getTexture(monster.getName());
-				graphics.drawImage(texture, offset(monster.getPosX(),posHeroX),
-						offset(monster.getPosY(),posHeroY) ,
+			for(Enemy enemy : enemies) {
+				System.out.println(enemy.getName());
+				texture = Textures.getTexture(enemy.getName());
+				graphics.drawImage(texture, offset(enemy.getPosX(),posHeroX),
+						offset(enemy.getPosY(),posHeroY) ,
 	                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 			}
 		}

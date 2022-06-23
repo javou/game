@@ -5,19 +5,16 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import exception.*;
-import model.actor.Actor;
 import model.actor.Hero;
-import model.castle.Castle;
-import model.castle.Floor;
-import view.GameScreen;
+import model.actor.IActor;
+import model.castle.ICastle;
 
-public class God { // montador + controle // separar
-	// ambos
+public class God {
 	private static God god; //lazy way, singleton pattern
-	private static ArrayList<Actor> actors = new ArrayList<Actor>(); // get from floor (or use castle.getFloor().getActors() every time?)
-	// private Assembler assembler = Assembler.getInstance();
-	private static Castle castle; // private ICastle castle = assembler.getCastle();
-	private static Hero hero; // remover
+	private Assembler assembler = Assembler.getInstance();
+	private ICastle castle = assembler.getCastle();
+	private NextAction nextAction = NextAction.getInstance();
+	private ArrayList<IActor> floorActors = castle.getFloorActors();
 	
 	private God() {};
 	
@@ -27,30 +24,17 @@ public class God { // montador + controle // separar
 		return god;
 	}
 	
-	public Hero getHero() { // remover
-		return hero;
-	}
-
-	// montador
-	public void newWorld() { // remover
-		//create hero, castle, monster....
-		castle = new Castle();
-		hero = new Hero();
-		actors.add(hero);
-	}
-	
-	// controle
 	public void gameLoop() {
-		Collections.sort(actors, new Comparator<Actor>() {
+		Collections.sort(floorActors, new Comparator<IActor>() {
 			@Override
-			public int compare(Actor actor1, Actor actor2) {
+			public int compare(IActor actor1, IActor actor2) {
 				return actor1.getSpeed() > actor2.getSpeed() ? -1 : actor1.getSpeed() == actor2.getSpeed() ? 0 : 1; 
  			}
 		}); // ordena a lista com base no atributo speed dos atores.
 		
 		int i = 0;
-		while (true) { // mudar condiï¿½ï¿½o.
-			Actor actor = actors.get(i);
+		while (true) { // mudar condição.
+			IActor actor = floorActors.get(i);
 			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
 			if (actor.getEnergy() >= 1000) {
 				while (true) {
@@ -63,21 +47,21 @@ public class God { // montador + controle // separar
 				}
 				actor.setEnergy(actor.getEnergy() - 1000);
 			}
-			i = (i + 1) % actors.size();
+			i = (i + 1) % floorActors.size();
 		}
 	}
 	
-	private static void act(Actor actor) throws InvalidMovement {
+	private void act(IActor actor) throws InvalidMovement {
 		if (actor.getClass() == Hero.class) {
-			NextAction.setHeroIsReady(true);
-			int action = NextAction.getKey();
+			nextAction.setHeroIsReady(true);
+			int action = nextAction.getKey();
 			readAction(action, actor);
 		} else {
-			// executar melhor aï¿½ï¿½o.
+			// executar melhor ação.
 		}
 	}
 	
-	private static void readAction(int action, Actor actor) throws InvalidMovement {
+	private void readAction(int action, IActor actor) throws InvalidMovement {
 		if (action == 87) 
 			moveActorUp(actor);
 		else if (action == 65)
@@ -86,40 +70,45 @@ public class God { // montador + controle // separar
 			moveActorDown(actor);
 		else if (action == 68)
 			moveActorRight(actor);
+		else if (action == 32);
+			holdPosition(actor); // pass turn
 	}
 	
-	private static void moveActorUp(Actor actor) throws InvalidMovement {
-		if (castle.getCurrentFloor().getTile(actor.getPosX(), actor.getPosY() - 1).isOccupiableSpace()) {
+	private void moveActorUp(IActor actor) throws InvalidMovement {
+		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) { // item and door.
 			actor.setPosY(actor.getPosY() - 1);
-		} else { // if there is a monster: attack; else:
-			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
+		} else { // if there is an enemy: attack; else:
+			throw new exception.InvalidMovement("Você não é um fantasma!"); 
 		}
 	}
 	
-	private static void moveActorLeft(Actor actor) throws InvalidMovement {
-		if (castle.getCurrentFloor().getTile(actor.getPosX() - 1, actor.getPosY()).isOccupiableSpace()) {
+	private void moveActorLeft(IActor actor) throws InvalidMovement {
+		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() - 1);
 		} else {
-			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
+			throw new exception.InvalidMovement("Você não é um fantasma!"); 
 		}
 	}
 	
-	private static void moveActorDown(Actor actor) throws InvalidMovement {
-		if (castle.getCurrentFloor().getTile(actor.getPosX(), actor.getPosY() + 1).isOccupiableSpace()) {
+	private void moveActorDown(IActor actor) throws InvalidMovement {
+		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() + 1)) {
 			actor.setPosY(actor.getPosY() + 1);
 		} else {
-			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
+			throw new exception.InvalidMovement("Você não é um fantasma!"); 
 		}
 	}
 	
-	private static void moveActorRight(Actor actor) throws InvalidMovement {
-		if (castle.getCurrentFloor().getTile(actor.getPosX() + 1, actor.getPosY()).isOccupiableSpace()) {
+	private void moveActorRight(IActor actor) throws InvalidMovement {
+		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() + 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() + 1);
 		} else {
-			throw new exception.InvalidMovement("Cï¿½lula ocupada!"); 
+			throw new exception.InvalidMovement("Você não é um fantasma!"); 
 		}
 	}
-
+	
+	private void holdPosition(IActor actor) {}
+	
+	/*
 	// teste
 	public static void moveHero() {
 		GameScreen.setMessage("");//always reset
@@ -128,7 +117,7 @@ public class God { // montador + controle // separar
 	
 	public Castle getCastle() {
 		return castle;
-	}
+	}	
 	
 	//if we want to that the player has the decision power whether take it or not we should put this method together with keyboard method
 	public static void checkInteractionsWithObjects() {
@@ -154,8 +143,7 @@ public class God { // montador + controle // separar
 			hero.addPotion();
 		}
 	}
-	
-	
+	*/
 
 
 	

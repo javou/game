@@ -1,6 +1,5 @@
 package controller;
 
-import model.actor.Hero;
 import model.castle.Castle;
 import model.castle.ICastle;
 import view.IWindow;
@@ -11,6 +10,8 @@ public class Assembler {
 	private IWindow window;
 	private ICastle castle;
 	
+	private Assembler() {}
+	
 	public static Assembler getInstance() {
 		if (assembler == null) {
 			assembler = new Assembler();
@@ -20,7 +21,7 @@ public class Assembler {
 	
 	public void newWorld() {
 		//create hero, castle, monster....
-		castle = new Castle();
+		castle = Castle.getInstance();
 	}
 	
 	public void createWindow() {
