@@ -7,11 +7,19 @@ import model.item.HpPotion;
 import model.item.Weapon;
 
 public class Hero extends Actor {
-	private static ArrayList<Item> items = new ArrayList<Item>();
+	private static Hero hero;
+	private ArrayList<Item> items = new ArrayList<Item>();
 	private boolean armorIsEquipped = true;
 	private boolean weaponIsEquipped = false;
 	
-	public Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
+	public static Hero getInstance() {
+		if (hero == null) {
+			hero = new Hero("hero", 100, 10, 0, 0, 10, 0, 0);
+		}
+		return hero;
+	}
+	
+	private Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
 		super(name, hpMax, speed, armour, evasion, damage, posx, posy);		
 	}
 	

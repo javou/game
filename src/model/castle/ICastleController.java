@@ -8,5 +8,7 @@ public interface ICastleController {
 	public boolean isTileAtCurrentFloorOccupiable(int x, int y);
 	public IActor getActorAtTile(int x, int y);
 	public ArrayList<IActor> getFloorActors();
-	public String typeAtTile(int x, int y);
+	public String typeAtTileInCurrentFloor(int x, int y);
+	public void removeItemAtCurrentFloor(int x, int y);
+	public void updateCurrentFloor();
 }

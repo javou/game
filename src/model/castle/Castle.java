@@ -3,6 +3,7 @@ package model.castle;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import model.actor.Hero;
 import model.actor.IActor;
 import resources.Constants;
 
@@ -20,6 +21,8 @@ public class Castle implements ICastle {
 		floors.add(new Floor(true, Constants.ENTRY_2));
 		shuffleFloors();
 		floors.add(0, firstFloor);
+		IActor hero = Hero.getInstance();
+		firstFloor.addHero(hero);
 	}
 	
 	public static Castle getInstance() {
@@ -41,21 +44,30 @@ public class Castle implements ICastle {
 		return floors.get(currentFloor).getTile(x, y).isOccupiableSpace();
 	}
 	
-	public String typeAtTile(int x, int y) {
+	public String typeAtTileInCurrentFloor(int x, int y) {
 		return floors.get(currentFloor).getTileId(x, y);
 	}
 	
 	public IActor getActorAtTile(int x, int y) {
-		
+		for(IActor actor:floors.get(currentFloor).getActors())
+			if (actor.getPosX() == x && actor.getPosY() == y)
+				return actor;
+		return null;
 	}
 
 	public Floor getFloorAt(int index) {
 		return floors.get(index);
 	}
 	
-	public Floor getNextFloor() {
+	public void updateCurrentFloor() {
+		IActor hero = floors.get(currentFloor).getHero();
+		// remove
 		currentFloor += 1;
-		return floors.get(currentFloor);
+		floors.get(currentFloor).addHero(hero);
+	}
+	
+	public void removeItemAtCurrentFloor(int x, int y) {
+		floors.get(currentFloor).getTile(y, x).setId("corridor");
 	}
 	
 	public IFloor getCurrentFloor() {
@@ -63,7 +75,9 @@ public class Castle implements ICastle {
 		return current;
 	}
 	
+	/*
 	public void moveHeroNextFloor() {
 		currentFloor++;
 	}
+	*/
 }

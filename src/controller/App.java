@@ -10,9 +10,9 @@ public class App {
 	
 	private static void executeGame() {
 		assembler = Assembler.getInstance();
-		god = God.getInstance();
 		assembler.createWindow();
 		assembler.newWorld();
+		god = God.getInstance();
 		god.gameLoop();
 	}
 }

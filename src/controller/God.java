@@ -33,7 +33,7 @@ public class God {
 		}); // ordena a lista com base no atributo speed dos atores.
 		
 		int i = 0;
-		while (true) { // mudar condi��o.
+		while (true) { // mudar condi��o. // hp > 0; bossAlive.
 			IActor actor = floorActors.get(i);
 			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
 			if (actor.getEnergy() >= 1000) {
@@ -59,7 +59,7 @@ public class God {
 					readAction(action, actor);
 					break;
 				} catch (InvalidKey e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 				}
 			}
 		} else {
@@ -85,38 +85,50 @@ public class God {
 	}
 	
 	private void moveActorUp(IActor actor) throws InvalidMovement {
-		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) { // item and door.
+		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) {
 			actor.setPosY(actor.getPosY() - 1);
-			interactWithDestination();
+			interactWithDestination(actor.getPosX(), actor.getPosY());
 		} else { // if there is an enemy: attack; else:
-			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null) {
-				
-			}
-			throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			else
+				throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
 		}
 	}
 	
 	private void moveActorLeft(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() - 1);
+			interactWithDestination(actor.getPosX(), actor.getPosY());
 		} else {
-			throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			else
+				throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
 		}
 	}
 	
 	private void moveActorDown(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() + 1)) {
 			actor.setPosY(actor.getPosY() + 1);
+			interactWithDestination(actor.getPosX(), actor.getPosY());
 		} else {
-			throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			else
+				throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
 		}
 	}
 	
 	private void moveActorRight(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() + 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() + 1);
+			interactWithDestination(actor.getPosX(), actor.getPosY());
 		} else {
-			throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			else
+				throw new exception.InvalidMovement("Voc� n�o � um fantasma!"); 
 		}
 	}
 	
@@ -125,14 +137,17 @@ public class God {
 	private void consumePotion() {}
 	
 	private void attack(IActor attacker, IActor target) {
-		
+		target.setHp(target.getHp() - calculateDamage(attacker, target));
 	}
 	
 	private int calculateDamage(IActor attacker, IActor target) {
-		
+		return attacker.getDamage() - target.getArmour();
 	}
 	
-	private void moveHeroNextFloor() {}
+	private void moveHeroNextFloor() {
+		castle.updateCurrentFloor();
+		floorActors = castle.getFloorActors();
+	}
 	
 	// teste
 	/*
@@ -144,28 +159,12 @@ public class God {
 	
 
 	private void interactWithDestination(int x, int y) {
-		if (castle != null)
-			if (castle.typeAtTile(x, y) == "door") {
-				moveHeroNextFloor();
-				Floor f = castle.getCurrentFloor();
-				for(int y = 0; y < f.getHeight(); y++) {
-					for(int x = 0; x < f.getWidth(); x++) {
-						if(f.getTile(x, y).getId() == "hero") {
-							hero.setPosX(x);
-							hero.setPosY(y);
-							break;			
-						}	
-					}
-				}
-			}
-		if(castle.getCurrentFloor().lookFor(hero.getPosX(), hero.getPosY(), "potion" )) {
-			castle.getCurrentFloor().removeItem(hero.getPosX(), hero.getPosY());
-			hero.addPotion();
+		if (castle.typeAtTileInCurrentFloor(x, y) == "door") {
+			moveHeroNextFloor();
+		}
+		else if(castle.typeAtTileInCurrentFloor(x, y) == "potion" ) {
+			castle.removeItemAtCurrentFloor(x, y);
+			// hero.addPotion();
 		}
 	}
-	
-
-
-	
-
 }

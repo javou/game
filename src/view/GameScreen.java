@@ -5,13 +5,10 @@ import javax.swing.JPanel;
 import controller.NextAction;
 import model.castle.Castle;
 import model.castle.ICastleView;
-import resources.Constants;
 import resources.Textures;
 
-import java.awt.event.KeyListener;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
 public class GameScreen extends JPanel {
 	

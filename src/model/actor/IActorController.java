@@ -9,5 +9,7 @@ public interface IActorController {
 	public int getPosY();
 	public void setPosY(int posy);
 	public int getHp();
+	public void setHp(int hp);
 	public int getArmour();
+	public int getDamage();
 }

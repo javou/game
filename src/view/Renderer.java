@@ -4,14 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.math.*;
 import java.util.ArrayList;
 
-import controller.God;
 import model.actor.Hero;
 import model.actor.IActor;
-import model.actor.Enemy;
-import model.castle.Floor;
 import model.castle.IFloor;
 import resources.Constants;
 import resources.Textures;
@@ -68,10 +64,6 @@ public class Renderer {
 				
 			
 		}
-		texture = Textures.getTexture("hero");
-		//graphics.drawImage(texture, Window.WIDTH/2 - 3/2*Constants.CELL_SIZE*Constants.ZOOM, Window.HEIGHT/2 - Constants.CELL_SIZE*Constants.ZOOM, texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
-		graphics.drawImage(texture, Window.WIDTH/2 , Window.HEIGHT/2 , texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
-		
 	}
 	}
 	

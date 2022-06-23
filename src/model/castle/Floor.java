@@ -2,7 +2,6 @@ package model.castle;
 
 import java.util.ArrayList;
 
-import model.actor.Hero;
 import model.actor.IActor;
 import model.actor.Enemy;
 
@@ -10,6 +9,7 @@ public class Floor implements IFloor {
 	private Tile[][] tiles; // tiles should be an nxn graph that holds information about what is in each position. It shall be used for enemy pathfinding. 
 	private ArrayList<IActor> actors;
 	private IActor hero;
+	private int spawnX, spawnY;
 	private boolean darkMode;//in the future, a floor might be dark and the hero must use a light source to see around
 	
 	public Floor(boolean darkMode, String[] floorData) {
@@ -26,7 +26,8 @@ public class Floor implements IFloor {
 					break;
 				case 'H':
 					tiles[i][j] = new Tile(j,i,true,"hero");
-					this.actors.add(new Hero("hero", 100, 10, 0, 0, 10, j, i));
+					spawnX = j;
+					spawnY = i;
 					break;
 				case ' ':
 					tiles[i][j] = new Tile(j,i,true,"corridor");
@@ -73,6 +74,14 @@ public class Floor implements IFloor {
 			}
 		}	
 	}
+	
+	public void addHero(IActor hero) {
+		hero.setPosX(spawnX);
+		hero.setPosY(spawnY);
+		actors.add(hero);
+		this.hero = hero;
+	}
+	
 	public int getHeight() {
 		return tiles.length;
 	}
@@ -97,7 +106,9 @@ public class Floor implements IFloor {
 		return actors;
 	}
 	
+	/*
 	public void removeItem(int posX, int posY) {
 		tiles[posY][posX].setId("corridor");
 	}
+	*/
 }

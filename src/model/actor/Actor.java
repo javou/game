@@ -65,5 +65,9 @@ public class Actor implements IActor {
 	public int getArmour() {
 		return armour;
 	}
+
+	public int getDamage() {
+		return damage;
+	}
 	
 }
