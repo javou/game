@@ -87,7 +87,7 @@ public class God {
 	private void moveActorUp(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) { // item and door.
 			actor.setPosY(actor.getPosY() - 1);
-			checkInteractionsWithObjects();
+			interactWithDestination();
 		} else { // if there is an enemy: attack; else:
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null) {
 				
@@ -132,7 +132,7 @@ public class God {
 		
 	}
 	
-	private void moveHeroNextFloor()
+	private void moveHeroNextFloor() {}
 	
 	// teste
 	/*
@@ -142,14 +142,11 @@ public class God {
 	}
 	*/
 	
-	//if we want to that the player has the decision power whether take it or not we should put this method together with keyboard method
-	private void checkInteractionsWithObjects(int x, int y) {
-		//get hero position
-		//create a method in floor (is there a item in)
+
+	private void interactWithDestination(int x, int y) {
 		if (castle != null)
 			if (castle.typeAtTile(x, y) == "door") {
 				moveHeroNextFloor();
-				//set the initial position of the hero when he moves to the next floor
 				Floor f = castle.getCurrentFloor();
 				for(int y = 0; y < f.getHeight(); y++) {
 					for(int x = 0; x < f.getWidth(); x++) {
