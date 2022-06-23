@@ -1,4 +1,5 @@
-/view/
 /controller/
-/model/
 /exception/
+/model/
+/resources/
+/view/

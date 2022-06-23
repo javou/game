@@ -1,5 +1,7 @@
 package model.castle;
 
+import java.util.ArrayList;
+
 import model.actor.IActor;
 
 public interface IFloor {
@@ -7,4 +9,5 @@ public interface IFloor {
 	public int getWidth();
 	public String getTileId(int x, int y);
 	public IActor getHero();
+	public ArrayList<IActor> getActors();
 }

@@ -10,4 +10,5 @@ public interface IActor extends IActorController, IActorView {
 	public void setPosY(int posy);
 	public int getHp();
 	public int getArmour();
+	public String getName();
 }

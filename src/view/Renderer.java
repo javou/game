@@ -105,9 +105,10 @@ public class Renderer {
 			BufferedImage texture = Textures.getTexture("sword");
 			graphics.drawImage(texture, 0 ,Window.HEIGHT*1/4+Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
 	
-		}
-		*/
+		}*/
+		
 	}
+	/*
 	public void drawEnemies(Graphics graphics, IFloor floor, IHero hero) { // drawActors
 		ArrayList<Enemy> enemies = God.getInstance().getCastle().getCurrentFloor().getMonsters(); // gameScreen should pass actors
 		if(enemies != null) {
@@ -123,9 +124,28 @@ public class Renderer {
 			}
 		}
 	}
-	
+	*/
 	public void drawActors(Graphics graphics, IFloor floor) {
-		
+		ArrayList<IActor> actors = floor.getActors(); 
+		if(actors != null) {
+			BufferedImage texture;
+			
+			int posHeroX = floor.getHero().getPosX();
+			int posHeroY = floor.getHero().getPosY();
+			for(IActor actor : actors) {
+				if(actor instanceof Hero) {
+					texture = Textures.getTexture("hero");
+					graphics.drawImage(texture, Window.WIDTH/2 , Window.HEIGHT/2 , texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+				}
+				else {	
+					System.out.println(actor.getName());
+					texture = Textures.getTexture(actor.getName());
+					graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
+							offset(actor.getPosY(),posHeroY) ,
+		                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+				}
+			}
+		}
 	}
 
 }
