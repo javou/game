@@ -1,6 +1,6 @@
 package model.actor;
 
-public interface IActor extends IActorController, IActorView {
+public interface IActorController {
 	public int getSpeed();
 	public int getEnergy();
 	public void setEnergy(int energy);

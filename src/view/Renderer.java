@@ -12,6 +12,7 @@ import model.actor.Hero;
 import model.actor.IActor;
 import model.actor.Enemy;
 import model.castle.Floor;
+import model.castle.IFloor;
 import resources.Constants;
 import resources.Textures;
 
@@ -36,7 +37,7 @@ public class Renderer {
 		graphics.drawString("Do you wanna play a game?", 100, 150);
 	}
 	
-	public void drawFloor(Graphics graphics, Floor floor, IActor hero) {
+	public void drawFloor(Graphics graphics, IFloor floor, IActor hero) {
 		int posHeroX = hero.getPosX();
 		int posHeroY = hero.getPosY();
 		BufferedImage texture;
@@ -50,15 +51,15 @@ public class Renderer {
 												texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
 												null);
 
-					if(floor.getTile(i, j).getId() == "door")
+					if(floor.getTileId(j, i) == "door")
 						texture = Textures.getTexture("door");
-					else if(floor.getTile(i, j).getId() == "wall")
+					else if(floor.getTileId(j, i) == "wall")
 						texture = Textures.getTexture("wall");
-					else if(floor.getTile(i, j).getId() == "chest")
+					else if(floor.getTileId(j, i) == "chest")
 						texture = Textures.getTexture("chest");
-					else if(floor.getTile(i, j).getId() == "potion")
+					else if(floor.getTileId(j, i) == "potion")
 						texture = Textures.getTexture("potion");
-					else if(floor.getTile(i, j).getId() == "error")
+					else if(floor.getTileId(j, i) == "error")
 						texture = Textures.getTexture("error");
 					
 					graphics.drawImage(texture, offset(j, posHeroX),
@@ -73,9 +74,11 @@ public class Renderer {
 		
 	}
 	}
+	
 	public int offset(int k, int posHero) {
 		return (k-posHero)*Constants.CELL_SIZE*Constants.ZOOM + (Window.WIDTH)/2 ;
 	}
+	
 	public void messageBox(Graphics graphics, String message) {
 		if(message != null) {
 			graphics.setColor(Color.WHITE);
@@ -83,13 +86,15 @@ public class Renderer {
 			graphics.drawString(message,Constants.CELL_SIZE*7, Constants.CELL_SIZE*29);
 		}
 	}
-	public void heroStatus(Graphics graphics, Hero hero) {
+	
+	public void heroStatus(Graphics graphics, IActor hero) {
 		graphics.setColor(Color.WHITE);
 		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*5, Constants.CELL_SIZE*3, 10, 10);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 15));
 		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,25 );
 		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,40 );
 		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,55);
+		/*
 		//if the hero has a shield equipped
 		if(hero.isArmorIsEquipped()) {
 			BufferedImage texture = Textures.getTexture("shield");
@@ -101,9 +106,10 @@ public class Renderer {
 			graphics.drawImage(texture, 0 ,Window.HEIGHT*1/4+Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
 	
 		}
+		*/
 	}
-	public void drawEnemies(Graphics graphics, Floor floor, Hero hero) {
-		ArrayList<Enemy> enemies = God.getInstance().getCastle().getCurrentFloor().getMonsters();
+	public void drawEnemies(Graphics graphics, IFloor floor, IHero hero) { // drawActors
+		ArrayList<Enemy> enemies = God.getInstance().getCastle().getCurrentFloor().getMonsters(); // gameScreen should pass actors
 		if(enemies != null) {
 			BufferedImage texture;
 			int posHeroX = hero.getPosX();

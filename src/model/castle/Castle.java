@@ -19,7 +19,7 @@ public class Castle implements ICastle {
 		floors.add(new Floor(true, Constants.ENTRY_1));
 		floors.add(new Floor(true, Constants.ENTRY_2));
 		shuffleFloors();
-		floors.add(0,firstFloor);
+		floors.add(0, firstFloor);
 	}
 	
 	public static Castle getInstance() {
@@ -40,6 +40,10 @@ public class Castle implements ICastle {
 	public boolean isTileAtCurrentFloorOccupiable(int x, int y) {
 		return floors.get(currentFloor).getTile(x, y).isOccupiableSpace();
 	}
+	
+	public IActor getActorAtTile(int x, int y) {
+		
+	}
 
 	public Floor getFloorAt(int index) {
 		return floors.get(index);
@@ -50,8 +54,9 @@ public class Castle implements ICastle {
 		return floors.get(currentFloor);
 	}
 	
-	public Floor getCurrentFloor() {
-		return floors.get(currentFloor);
+	public IFloor getCurrentFloor() {
+		IFloor current = floors.get(currentFloor);
+		return current;
 	}
 	
 	public void moveHeroNextFloor() {

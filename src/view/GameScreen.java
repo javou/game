@@ -2,8 +2,9 @@ package view;
 
 import javax.swing.JPanel;
 
-import controller.God;
 import controller.NextAction;
+import model.castle.Castle;
+import model.castle.ICastleView;
 import resources.Constants;
 import resources.Textures;
 
@@ -20,7 +21,7 @@ public class GameScreen extends JPanel {
 	private Renderer renderer;
 	private static boolean printOnce = false;
 	private static String message = "";
-	private God god;
+	private ICastleView castle;
 	
 	private GameScreen() {
 		super();
@@ -28,7 +29,7 @@ public class GameScreen extends JPanel {
 		this.setFocusable(true);
 		Textures.init();
 		renderer = Renderer.getInstance();
-		god = God.getInstance();
+		castle = Castle.getInstance();
 	}
 	
 	public static GameScreen getInstance() {
@@ -51,10 +52,10 @@ public class GameScreen extends JPanel {
 			else {
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-				renderer.drawFloor(graphics, god.getCastle().getCurrentFloor(), god.getHero());
-				renderer.drawEnemies(graphics, god.getCastle().getCurrentFloor(), god.getHero());
+				renderer.drawFloor(graphics, castle.getCurrentFloor(), castle.getCurrentFloor().getHero());
+				renderer.drawEnemies(graphics, castle.getCurrentFloor(), castle.getCurrentFloor().getHero());
 				renderer.messageBox(graphics, message);
-				renderer.heroStatus(graphics, god.getHero());
+				renderer.heroStatus(graphics, castle.getCurrentFloor().getHero());
 				
 			}
 		}catch(Exception e) {

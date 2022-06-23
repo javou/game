@@ -32,7 +32,10 @@ public class NextAction implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if(heroIsReady) {
 			key = e.getKeyCode();
-			if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_SPACE)
+			if (
+					e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_S ||
+					e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_W ||
+					e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_Q)
 				heroIsReady = false;
 		}
 	}

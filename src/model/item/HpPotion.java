@@ -1,9 +1,9 @@
 package model.item;
 
-public class HPPotion extends Consumable {
+public class HpPotion extends Consumable {
 	private int hitPoints;
 	
-	public HPPotion(int hitPoints){
+	public HpPotion(int hitPoints){
 		this.hitPoints = hitPoints;
 	}
 

@@ -7,12 +7,12 @@ import java.util.Comparator;
 import exception.*;
 import model.actor.Hero;
 import model.actor.IActor;
-import model.castle.ICastle;
+import model.castle.ICastleController;
 
 public class God {
 	private static God god; //lazy way, singleton pattern
 	private Assembler assembler = Assembler.getInstance();
-	private ICastle castle = assembler.getCastle();
+	private ICastleController castle = assembler.getCastle();
 	private NextAction nextAction = NextAction.getInstance();
 	private ArrayList<IActor> floorActors = castle.getFloorActors();
 	
@@ -70,14 +70,19 @@ public class God {
 			moveActorDown(actor);
 		else if (action == 68)
 			moveActorRight(actor);
-		else if (action == 32);
+		else if (action == 32)
 			holdPosition(actor); // pass turn
+		else if (action == 81)
+			consumePotion();
 	}
 	
 	private void moveActorUp(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) { // item and door.
 			actor.setPosY(actor.getPosY() - 1);
 		} else { // if there is an enemy: attack; else:
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null) {
+				
+			}
 			throw new exception.InvalidMovement("Você não é um fantasma!"); 
 		}
 	}
@@ -107,6 +112,16 @@ public class God {
 	}
 	
 	private void holdPosition(IActor actor) {}
+	
+	private void consumePotion() {}
+	
+	private void attack(IActor attacker, IActor target) {
+		
+	}
+	
+	private int calculateDamage(IActor attacker, IActor target) {
+		
+	}
 	
 	/*
 	// teste

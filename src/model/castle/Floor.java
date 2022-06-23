@@ -85,6 +85,10 @@ public class Floor implements IFloor {
 		return tiles[i][j];
 	}
 	
+	public String getTileId(int x, int y) {
+		return tiles[y][x].getId();
+	}
+	
 	public IActor getHero() {
 		return hero;
 	}
