@@ -60,9 +60,7 @@ public class Renderer {
 					
 					graphics.drawImage(texture, offset(j, posHeroX),
 												offset(i, posHeroY) ,
-							                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);	
-				
-			
+							                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 		}
 	}
 	}
@@ -88,19 +86,19 @@ public class Renderer {
 		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,40 );
 		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,55);
 		
-		if(hero.isArmorIsEquipped()) {
-			BufferedImage texture = Textures.getTexture("shield");
-			graphics.drawImage(texture, 50 ,70, texture.getWidth(), texture.getHeight(), null);
-		}
-
-		if(hero.isWeaponIsEquipped()) {
-			BufferedImage texture = Textures.getTexture("sword");
-			graphics.drawImage(texture, 20 ,70, texture.getWidth(), texture.getHeight(), null);
-		}
-		if(hero.countPotions()>0) {
+		BufferedImage armourTexture = Textures.getTexture("shield");
+		graphics.drawImage(armourTexture, 50 ,70, armourTexture.getWidth(), armourTexture.getHeight(), null);
+		// graphics.drawString(String.valueof(hero.getArmourLevel()), x, y);
+		
+		BufferedImage weaponTexture = Textures.getTexture("sword");
+		graphics.drawImage(weaponTexture, 20 ,70, weaponTexture.getWidth(), weaponTexture.getHeight(), null);
+		// graphics.drawString(String.valueof(hero.getWeaponLevel()), x, y)
+		
+		
+		if (hero.countPotions()>0) {
 			BufferedImage texture = Textures.getTexture("potion");
 			graphics.drawImage(texture, 80 ,70, texture.getWidth(), texture.getHeight(), null);
-			graphics.drawString(String.valueOf(hero.countPotions()),91,96 );
+			graphics.drawString(String.valueOf(hero.countPotions()), 91,96);
 		}
 		
 	}

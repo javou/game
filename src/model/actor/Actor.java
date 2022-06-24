@@ -2,8 +2,7 @@ package model.actor;
 
 public class Actor implements IActor {
 	protected String name = "";
-	protected int hp, hpMax, speed, armour, evasion;
-	protected int damage; // weapon exclusive
+	protected int hp, hpMax, speed, damage, armour, evasion;
 	protected int energy = 0;
 	protected int posx, posy;
 	
@@ -75,10 +74,11 @@ public class Actor implements IActor {
 
 	public void addPotion() {}
 
-	public void improveArmor(int n) {}
+	public void improveArmour() {}
 
-	public void improveDamage(int n) {}
-
+	public void improveDamage() {}
+	
+	/*
 	public boolean isArmorIsEquipped() {
 		return false;
 	}
@@ -90,11 +90,11 @@ public class Actor implements IActor {
 	}
 
 	public void setWeaponIsEquipped(boolean swordIsEquipped) {}
+	*/
 	
 	public int countPotions() {
 		return 0;
 	}
-	
 
 	
 }

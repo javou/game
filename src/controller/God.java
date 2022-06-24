@@ -81,54 +81,62 @@ public class God {
 		else if (action == 81)
 			actor.usePotion();
 		else
-			throw new exception.InvalidKey("Tecla invÃ¡lida.");
+			throw new exception.InvalidKey("Tecla invÃ¡lida");
 	}
 	
 	private void moveActorUp(IActor actor) throws InvalidMovement {
-		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) {
+		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) { // make new tile unoccupiable and the previous one occupiable
 			actor.setPosY(actor.getPosY() - 1);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() + 1, true);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY(), false);
 			interactWithDestination(actor.getPosX(), actor.getPosY(),actor);
 		} else { // if there is an enemy: attack; else:
-			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
-				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1));
 			else
-				throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
 	private void moveActorLeft(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() - 1);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX() + 1, actor.getPosY(), true);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY(), false);
 			interactWithDestination(actor.getPosX(), actor.getPosY(),actor);
 		} else {
-			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
-				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			if (castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
 	private void moveActorDown(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() + 1)) {
 			actor.setPosY(actor.getPosY() + 1);
-			interactWithDestination(actor.getPosX(), actor.getPosY(), actor);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1, true);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY(), false);
+			interactWithDestination(actor.getPosX(), actor.getPosY() + 1, actor);
 		} else {
-			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
-				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1));
 			else
-				throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
 	private void moveActorRight(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() + 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() + 1);
-			interactWithDestination(actor.getPosX(), actor.getPosY(), actor);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY(), true);
+			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY(), false);
+			interactWithDestination(actor.getPosX() + 1, actor.getPosY(), actor);
 		} else {
-			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
-				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
+			if (castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()) != null)
+				attack(actor, castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Vocï¿½ nï¿½o ï¿½ um fantasma!"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
@@ -167,13 +175,13 @@ public class God {
 		}
 		else if(castle.typeAtTileInCurrentFloor(x, y) == "chest" ) {
 			castle.removeItemAtCurrentFloor(x, y);
-			if(Math.random() < 0.5) {//better weapon, +1 damage
-				actor.setWeaponIsEquipped(true);
-				actor.improveDamage(1);
+			if(Math.random() < 0.5) { //better weapon, +damage
+				// actor.setWeaponIsEquipped(true);
+				actor.improveDamage();
 			}
-			else {//better armor, +1 defense
-				actor.setArmorIsEquipped(true);
-				actor.improveArmor(1);
+			else { //better armor, +defense
+				// actor.setArmorIsEquipped(true);
+				actor.improveArmour();
 			}
 		}
 	}

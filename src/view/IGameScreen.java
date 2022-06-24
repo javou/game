@@ -1,5 +1,5 @@
 package view;
 
-public interface IGameScreenView {
+public interface IGameScreen {
 	public void setMessage(String message);
 }

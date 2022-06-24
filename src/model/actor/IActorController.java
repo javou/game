@@ -14,11 +14,13 @@ public interface IActorController {
 	public int getDamage();
 	public void usePotion();
 	public void addPotion();
-	public void improveArmor(int n);
-	public void improveDamage(int n);
+	public void improveArmour();
+	public void improveDamage();
+	/*
 	public boolean isArmorIsEquipped();
 	public void setArmorIsEquipped(boolean armorIsEquipped);
 	public boolean isWeaponIsEquipped();
 	public void setWeaponIsEquipped(boolean swordIsEquipped);
+	*/
 	public int countPotions();
 }

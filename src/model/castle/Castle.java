@@ -41,7 +41,11 @@ public class Castle implements ICastle {
 	}
 	
 	public boolean isTileAtCurrentFloorOccupiable(int x, int y) {
-		return floors.get(currentFloor).getTile(x, y).isOccupiableSpace();
+		return floors.get(currentFloor).getTile(x, y).isOccupiable();
+	}
+	
+	public void setTileAtCurrentFloorOccupiable(int x, int y, boolean occupiable) {
+		floors.get(currentFloor).getTile(x, y).setOccupiable(occupiable);
 	}
 	
 	public String typeAtTileInCurrentFloor(int x, int y) {
@@ -74,6 +78,8 @@ public class Castle implements ICastle {
 		IFloor current = floors.get(currentFloor);
 		return current;
 	}
+	
+	
 	
 	/*
 	public void moveHeroNextFloor() {

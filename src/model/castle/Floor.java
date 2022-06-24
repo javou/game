@@ -25,7 +25,7 @@ public class Floor implements IFloor {
 					tiles[i][j] = new Tile(j,i,false,"wall");
 					break;
 				case 'H':
-					tiles[i][j] = new Tile(j,i,true,"hero");
+					tiles[i][j] = new Tile(j,i,false,"hero");
 					spawnX = j;
 					spawnY = i;
 					break;

@@ -6,5 +6,6 @@ public interface IActorView {
 	public int getPosY();
 	public int getHp();
 	public int getArmour();
+	public int getDamage();
 	public String getName();
 }

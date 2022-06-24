@@ -2,7 +2,7 @@ package controller;
 
 import model.castle.Castle;
 import model.castle.ICastle;
-import resources.Music;
+// import resources.Music;
 import view.IWindow;
 import view.Window;
 
@@ -20,16 +20,12 @@ public class Assembler {
 		return assembler;
 	}
 	
-	public void newWorld() {
-		//create hero, castle, monster....
+	public void newGame() {
 		castle = Castle.getInstance();
-	}
-	
-	public void createWindow() {
 		window = Window.getInstance();
 		window.create();
-		Music.setSong("songs/suspense.wav");
-		Music.loop();
+		// Music.setSong("songs/suspense.wav"); // música gera erro
+		// Music.loop();
 	}
 	
 	public ICastle getCastle() {

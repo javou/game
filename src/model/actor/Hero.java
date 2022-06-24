@@ -1,17 +1,15 @@
 package model.actor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import model.item.Item;
 import model.item.HpPotion;
-import model.item.Weapon;
 
 public class Hero extends Actor {
 	private static Hero hero;
 	private ArrayList<Item> items = new ArrayList<Item>();
-	private boolean armorIsEquipped = false;
-	private boolean weaponIsEquipped = false;
+	private int armourLevel = 0; //private boolean armorIsEquipped = false;
+	private int weaponLevel = 0; //private boolean weaponIsEquipped = false;
 	
 	public static Hero getInstance() {
 		if (hero == null) {
@@ -45,13 +43,29 @@ public class Hero extends Actor {
 		
 	}
 	
-	public void improveArmor(int n) {
+	public void improveArmour() {
+		this.armour += 5; // chest improves stats by a fixed amount
+		armourLevel++;
+	}
+	
+	public void improveDamage() {
+		this.damage += 5;
+		weaponLevel++;
+	}
+	
+	/*
+	public void improveArmor(int n) { 
 		this.armour += n;
 	}
+	*/
+	
+	/*
 	public void improveDamage(int n) {
 		this.damage += n;
 	}
+	*/
 	
+	/*
 	public boolean isArmorIsEquipped() {
 		return armorIsEquipped;
 	}
@@ -64,6 +78,7 @@ public class Hero extends Actor {
 	public void setWeaponIsEquipped(boolean swordIsEquipped) {
 		this.weaponIsEquipped = swordIsEquipped;
 	}
+	
 	
 	public void equipItem(Item newItem) {
 		for(Item item : items) {
@@ -82,5 +97,5 @@ public class Hero extends Actor {
 			}
 		}
 	}
-	
+	*/
 }

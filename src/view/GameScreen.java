@@ -10,7 +10,7 @@ import resources.Textures;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class GameScreen extends JPanel implements IGameScreenView{
+public class GameScreen extends JPanel implements IGameScreen{
 	
 	private static final long serialVersionUID = -1683041340076218616L;
 	

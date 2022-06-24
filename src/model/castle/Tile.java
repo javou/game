@@ -3,14 +3,14 @@ package model.castle;
 public class Tile {
 	private int x, y;
 
-	private boolean occupiableSpace; //wall/actor or free(occupiable space)
+	private boolean occupiable; //wall/actor or free(occupiable space)
 	private boolean visible;
 	private String id; //wall, door, item
 	
-	public Tile(int x, int y, boolean occupiableSpace, String id) {
+	public Tile(int x, int y, boolean occupiable, String id) {
 		this.x = x;
 		this.y = y;
-		this.occupiableSpace = occupiableSpace;
+		this.occupiable = occupiable;
 		this.visible = true; //for the moment, we have day light in the room
 		this.id = id;
 	}
@@ -27,9 +27,14 @@ public class Tile {
 		this.visible = visible;
 	}
 
-	public boolean isOccupiableSpace() {
-		return occupiableSpace;
+	public boolean isOccupiable() {
+		return occupiable;
 	}
+	
+	public void setOccupiable(boolean occupiable) {
+		this.occupiable = occupiable;
+	}
+	
 
 	public void setId(String id) {
 		this.id = id;
