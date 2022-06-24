@@ -2,6 +2,7 @@ package controller;
 
 import model.castle.Castle;
 import model.castle.ICastle;
+import resources.Music;
 import view.IWindow;
 import view.Window;
 
@@ -27,6 +28,8 @@ public class Assembler {
 	public void createWindow() {
 		window = Window.getInstance();
 		window.create();
+		Music.setSong("songs/suspense.wav");
+		Music.loop();
 	}
 	
 	public ICastle getCastle() {

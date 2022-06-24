@@ -12,4 +12,13 @@ public interface IActorController {
 	public void setHp(int hp);
 	public int getArmour();
 	public int getDamage();
+	public void usePotion();
+	public void addPotion();
+	public void improveArmor(int n);
+	public void improveDamage(int n);
+	public boolean isArmorIsEquipped();
+	public void setArmorIsEquipped(boolean armorIsEquipped);
+	public boolean isWeaponIsEquipped();
+	public void setWeaponIsEquipped(boolean swordIsEquipped);
+	public int countPotions();
 }

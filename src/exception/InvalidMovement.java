@@ -1,11 +1,15 @@
 package exception;
 
+import view.GameScreen;
+import view.IGameScreenView;
+
 public class InvalidMovement extends GameException {
-	// Indica que o usuário tentou mover o herói para uma célula não ocupável (ex: parede).
+	// Indica que o usuï¿½rio tentou mover o herï¿½i para uma cï¿½lula nï¿½o ocupï¿½vel (ex: parede).
 	
 	private static final long serialVersionUID = -5023345320519284560L;
-
+	private IGameScreenView gmv = GameScreen.getInstance();
 	public InvalidMovement(String errorMessage) {
         super(errorMessage);
+        gmv.setMessage(errorMessage);
     }
 }

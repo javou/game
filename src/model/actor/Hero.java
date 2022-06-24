@@ -1,6 +1,7 @@
 package model.actor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import model.item.Item;
 import model.item.HpPotion;
@@ -9,7 +10,7 @@ import model.item.Weapon;
 public class Hero extends Actor {
 	private static Hero hero;
 	private ArrayList<Item> items = new ArrayList<Item>();
-	private boolean armorIsEquipped = true;
+	private boolean armorIsEquipped = false;
 	private boolean weaponIsEquipped = false;
 	
 	public static Hero getInstance() {
@@ -17,6 +18,12 @@ public class Hero extends Actor {
 			hero = new Hero("hero", 100, 10, 0, 0, 10, 0, 0);
 		}
 		return hero;
+	}
+	
+	public int countPotions() {
+		
+		return items.size();//it works because we can get only potions as items.
+		
 	}
 	
 	private Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
@@ -37,6 +44,14 @@ public class Hero extends Actor {
 		}
 		
 	}
+	
+	public void improveArmor(int n) {
+		this.armour += n;
+	}
+	public void improveDamage(int n) {
+		this.damage += n;
+	}
+	
 	public boolean isArmorIsEquipped() {
 		return armorIsEquipped;
 	}

@@ -79,7 +79,7 @@ public class God {
 		else if (action == 32)
 			holdPosition(actor); // pass turn
 		else if (action == 81)
-			consumePotion();
+			actor.usePotion();
 		else
 			throw new exception.InvalidKey("Tecla inválida.");
 	}
@@ -87,7 +87,7 @@ public class God {
 	private void moveActorUp(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1)) {
 			actor.setPosY(actor.getPosY() - 1);
-			interactWithDestination(actor.getPosX(), actor.getPosY());
+			interactWithDestination(actor.getPosX(), actor.getPosY(),actor);
 		} else { // if there is an enemy: attack; else:
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
@@ -99,7 +99,7 @@ public class God {
 	private void moveActorLeft(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() - 1);
-			interactWithDestination(actor.getPosX(), actor.getPosY());
+			interactWithDestination(actor.getPosX(), actor.getPosY(),actor);
 		} else {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
@@ -111,7 +111,7 @@ public class God {
 	private void moveActorDown(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() + 1)) {
 			actor.setPosY(actor.getPosY() + 1);
-			interactWithDestination(actor.getPosX(), actor.getPosY());
+			interactWithDestination(actor.getPosX(), actor.getPosY(), actor);
 		} else {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
@@ -123,7 +123,7 @@ public class God {
 	private void moveActorRight(IActor actor) throws InvalidMovement {
 		if (castle.isTileAtCurrentFloorOccupiable(actor.getPosX() + 1, actor.getPosY())) {
 			actor.setPosX(actor.getPosX() + 1);
-			interactWithDestination(actor.getPosX(), actor.getPosY());
+			interactWithDestination(actor.getPosX(), actor.getPosY(), actor);
 		} else {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY()));
@@ -134,7 +134,6 @@ public class God {
 	
 	private void holdPosition(IActor actor) {}
 	
-	private void consumePotion() {}
 	
 	private void attack(IActor attacker, IActor target) {
 		target.setHp(target.getHp() - calculateDamage(attacker, target));
@@ -158,13 +157,24 @@ public class God {
 	*/
 	
 
-	private void interactWithDestination(int x, int y) {
+	private void interactWithDestination(int x, int y, IActor actor) {
 		if (castle.typeAtTileInCurrentFloor(x, y) == "door") {
 			moveHeroNextFloor();
 		}
 		else if(castle.typeAtTileInCurrentFloor(x, y) == "potion" ) {
 			castle.removeItemAtCurrentFloor(x, y);
-			// hero.addPotion();
+			actor.addPotion();
+		}
+		else if(castle.typeAtTileInCurrentFloor(x, y) == "chest" ) {
+			castle.removeItemAtCurrentFloor(x, y);
+			if(Math.random() < 0.5) {//better weapon, +1 damage
+				actor.setWeaponIsEquipped(true);
+				actor.improveDamage(1);
+			}
+			else {//better armor, +1 defense
+				actor.setArmorIsEquipped(true);
+				actor.improveArmor(1);
+			}
 		}
 	}
 }

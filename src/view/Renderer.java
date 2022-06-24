@@ -74,30 +74,34 @@ public class Renderer {
 	public void messageBox(Graphics graphics, String message) {
 		if(message != null) {
 			graphics.setColor(Color.WHITE);
-			graphics.setFont(new Font("Verdana", Font.PLAIN, 40));
-			graphics.drawString(message,Constants.CELL_SIZE*7, Constants.CELL_SIZE*29);
+			graphics.setFont(new Font("Verdana", Font.PLAIN, 30));
+			graphics.drawString(message,Constants.CELL_SIZE*7, Window.HEIGHT/2 + Constants.CELL_SIZE*9);
+			
 		}
 	}
 	
 	public void heroStatus(Graphics graphics, IActor hero) {
 		graphics.setColor(Color.WHITE);
 		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*5, Constants.CELL_SIZE*3, 10, 10);
-		graphics.setFont(new Font("Verdana", Font.PLAIN, 15));
+		graphics.setFont(new Font("Verdana", Font.BOLD, 15));
 		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,25 );
 		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,40 );
 		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,55);
-		/*
-		//if the hero has a shield equipped
+		
 		if(hero.isArmorIsEquipped()) {
 			BufferedImage texture = Textures.getTexture("shield");
-			graphics.drawImage(texture, 0 ,Window.HEIGHT*1/4, texture.getWidth(), texture.getHeight(), null);
+			graphics.drawImage(texture, 50 ,70, texture.getWidth(), texture.getHeight(), null);
 		}
-			//if the hero has a sword equipped
+
 		if(hero.isWeaponIsEquipped()) {
 			BufferedImage texture = Textures.getTexture("sword");
-			graphics.drawImage(texture, 0 ,Window.HEIGHT*1/4+Constants.CELL_SIZE, texture.getWidth(), texture.getHeight(), null);
-	
-		}*/
+			graphics.drawImage(texture, 20 ,70, texture.getWidth(), texture.getHeight(), null);
+		}
+		if(hero.countPotions()>0) {
+			BufferedImage texture = Textures.getTexture("potion");
+			graphics.drawImage(texture, 80 ,70, texture.getWidth(), texture.getHeight(), null);
+			graphics.drawString(String.valueOf(hero.countPotions()),91,96 );
+		}
 		
 	}
 	/*
@@ -124,13 +128,15 @@ public class Renderer {
 			
 			int posHeroX = floor.getHero().getPosX();
 			int posHeroY = floor.getHero().getPosY();
+			//System.out.println(posHeroX);
+			//System.out.println(posHeroY);
 			for(IActor actor : actors) {
 				if(actor instanceof Hero) {
 					texture = Textures.getTexture("hero");
 					graphics.drawImage(texture, Window.WIDTH/2 , Window.HEIGHT/2 , texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 				}
 				else {	
-					System.out.println(actor.getName());
+					
 					texture = Textures.getTexture(actor.getName());
 					graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
 							offset(actor.getPosY(),posHeroY) ,

@@ -69,5 +69,32 @@ public class Actor implements IActor {
 	public int getDamage() {
 		return damage;
 	}
+
+	
+	public void usePotion() {}
+
+	public void addPotion() {}
+
+	public void improveArmor(int n) {}
+
+	public void improveDamage(int n) {}
+
+	public boolean isArmorIsEquipped() {
+		return false;
+	}
+
+	public void setArmorIsEquipped(boolean armorIsEquipped) {}
+
+	public boolean isWeaponIsEquipped() {
+		return false;
+	}
+
+	public void setWeaponIsEquipped(boolean swordIsEquipped) {}
+	
+	public int countPotions() {
+		return 0;
+	}
+	
+
 	
 }
