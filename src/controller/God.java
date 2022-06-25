@@ -15,6 +15,7 @@ public class God {
 	private ICastleController castle = assembler.getCastle();
 	private NextAction nextAction = NextAction.getInstance();
 	private ArrayList<IActor> floorActors = castle.getFloorActors();
+	private IActor hero = castle.getHero();
 	
 	private God() {};
 	
@@ -24,16 +25,20 @@ public class God {
 		return god;
 	}
 	
-	public void gameLoop() {
+	private void sortFloorActors() {
 		Collections.sort(floorActors, new Comparator<IActor>() {
 			@Override
 			public int compare(IActor actor1, IActor actor2) {
 				return actor1.getSpeed() > actor2.getSpeed() ? -1 : actor1.getSpeed() == actor2.getSpeed() ? 0 : 1; 
  			}
-		}); // ordena a lista com base no atributo speed dos atores.
-		
+		});
+	}
+	
+	public void gameLoop() {
+		sortFloorActors();
+		int gameState = 0;
 		int i = 0;
-		while (true) { // mudar condi��o. // hp > 0; bossAlive.
+		while (gameState == 0) { // mudar condi��o. // hp > 0; bossAlive.
 			IActor actor = floorActors.get(i);
 			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
 			if (actor.getEnergy() >= 1000) {
@@ -48,6 +53,11 @@ public class God {
 				actor.setEnergy(actor.getEnergy() - 1000);
 			}
 			i = (i + 1) % floorActors.size();
+			if (hero.getHp() <= 0)
+				gameState = -1;
+		}
+		if (gameState == -1) {
+			// gameOver
 		}
 	}
 	
@@ -63,7 +73,7 @@ public class God {
 				}
 			}
 		} else {
-			// executar melhor a��o.
+			enemyAction(actor.getPosX(), actor.getPosY(), actor);
 		}
 	}
 	
@@ -76,8 +86,7 @@ public class God {
 			moveActorDown(actor);
 		else if (action == 68)
 			moveActorRight(actor);
-		else if (action == 32)
-			holdPosition(actor); // pass turn
+		else if (action == 32) {}
 		else if (action == 81)
 			actor.usePotion();
 		else
@@ -140,20 +149,46 @@ public class God {
 		}
 	}
 	
-	private void holdPosition(IActor actor) {}
-	
-	
 	private void attack(IActor attacker, IActor target) {
 		target.setHp(target.getHp() - calculateDamage(attacker, target));
+		if (target.getHp() <= 0) {
+			castle.setTileAtCurrentFloorOccupiable(target.getPosX(), target.getPosY(), true);
+			castle.removeActorAtCurrentFloor(target);
+			floorActors = castle.getFloorActors();
+			sortFloorActors();
+		}
 	}
 	
 	private int calculateDamage(IActor attacker, IActor target) {
 		return attacker.getDamage() - target.getArmour();
 	}
 	
+	private void enemyAction(int enemyPosX, int enemyPosY, IActor actor) throws InvalidMovement {
+		if (Math.sqrt((Math.pow((enemyPosX - hero.getPosX()), 2)  + Math.pow((enemyPosY - hero.getPosY()), 2))) < 4) {
+			if (Math.abs(enemyPosX - hero.getPosX()) >= Math.abs((enemyPosY - hero.getPosY()))) {
+				if (enemyPosX > hero.getPosX()) {
+					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX - 1, enemyPosY) || ((enemyPosX - 1) == hero.getPosX() && enemyPosY == hero.getPosY()))
+						moveActorLeft(actor);
+				} else {
+					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX + 1, enemyPosY) || ((enemyPosX + 1) == hero.getPosX() && enemyPosY == hero.getPosY()))
+						moveActorRight(actor);
+				}
+			} else {
+				if (enemyPosY > hero.getPosY()) {
+					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX, enemyPosY - 1) || (enemyPosX == hero.getPosX() && (enemyPosY - 1) == hero.getPosY()))
+						moveActorUp(actor);
+				} else {
+					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX, enemyPosY + 1) || (enemyPosX == hero.getPosX() && (enemyPosY + 1) == hero.getPosY()))
+						moveActorDown(actor);
+				}
+			}
+		}
+	}
+	
 	private void moveHeroNextFloor() {
 		castle.updateCurrentFloor();
 		floorActors = castle.getFloorActors();
+		sortFloorActors();
 	}
 	
 	// teste
@@ -166,22 +201,24 @@ public class God {
 	
 
 	private void interactWithDestination(int x, int y, IActor actor) {
-		if (castle.typeAtTileInCurrentFloor(x, y) == "door") {
-			moveHeroNextFloor();
-		}
-		else if(castle.typeAtTileInCurrentFloor(x, y) == "potion" ) {
-			castle.removeItemAtCurrentFloor(x, y);
-			actor.addPotion();
-		}
-		else if(castle.typeAtTileInCurrentFloor(x, y) == "chest" ) {
-			castle.removeItemAtCurrentFloor(x, y);
-			if(Math.random() < 0.5) { //better weapon, +damage
-				// actor.setWeaponIsEquipped(true);
-				actor.improveDamage();
+		if (actor instanceof Hero) {
+			if (castle.typeAtTileInCurrentFloor(x, y) == "door") {
+				moveHeroNextFloor();
 			}
-			else { //better armor, +defense
-				// actor.setArmorIsEquipped(true);
-				actor.improveArmour();
+			else if(castle.typeAtTileInCurrentFloor(x, y) == "potion" ) {
+				castle.removeItemAtCurrentFloor(x, y);
+				actor.addPotion();
+			}
+			else if(castle.typeAtTileInCurrentFloor(x, y) == "chest" ) {
+				castle.removeItemAtCurrentFloor(x, y);
+				if(Math.random() < 0.5) { //better weapon, +damage
+					// actor.setWeaponIsEquipped(true);
+					actor.improveDamage();
+				}
+				else { //better armor, +defense
+					// actor.setArmorIsEquipped(true);
+					actor.improveArmour();
+				}
 			}
 		}
 	}

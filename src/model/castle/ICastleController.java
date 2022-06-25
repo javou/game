@@ -12,4 +12,6 @@ public interface ICastleController {
 	public void setTileAtCurrentFloorOccupiable(int x, int y, boolean occupiable);
 	public String typeAtTileInCurrentFloor(int x, int y);
 	public void removeItemAtCurrentFloor(int x, int y);
+	public void removeActorAtCurrentFloor(IActor actor);
+	public IActor getHero();
 }

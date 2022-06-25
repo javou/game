@@ -17,58 +17,58 @@ public class Floor implements IFloor {
 		tiles = new Tile[floorData.length][];
 		this.actors = new ArrayList<IActor>();
 		
-		for(int i = 0; i < floorData.length; i++) {
-				tiles[i] = new Tile[floorData[i].length()]; // i -> y; j -> x
-			for(int j = 0; j < floorData[i].length(); j++) {
-				switch(floorData[i].charAt(j)) {
+		for(int y = 0; y < floorData.length; y++) {
+				tiles[y] = new Tile[floorData[y].length()]; // i -> y; j -> x
+			for(int x = 0; x < floorData[y].length(); x++) {
+				switch(floorData[y].charAt(x)) {
 				case '#':
-					tiles[i][j] = new Tile(j,i,false,"wall");
+					tiles[y][x] = new Tile(x,y,false,"wall");
 					break;
 				case 'H':
-					tiles[i][j] = new Tile(j,i,false,"hero");
-					spawnX = j;
-					spawnY = i;
+					tiles[y][x] = new Tile(x,y,false,"hero");
+					spawnX = x;
+					spawnY = y;
 					break;
 				case ' ':
-					tiles[i][j] = new Tile(j,i,true,"corridor");
+					tiles[y][x] = new Tile(x,y,true,"corridor");
 					break;
 				case 'D':
-					tiles[i][j] = new Tile(j,i,true,"door");
+					tiles[y][x] = new Tile(x,y,true,"door");
 					break;
 				case 'C':
-					tiles[i][j] = new Tile(j,i,false,"chest");
+					tiles[y][x] = new Tile(x,y,true,"chest");
 					break;
 				case '1':
-					tiles[i][j] = new Tile(j,i,false,"1");
-					this.actors.add(new Enemy("1", 100, 10, 0, 0, 10, j, i));
+					tiles[y][x] = new Tile(x,y,false,"1");
+					this.actors.add(new Enemy("1", 100, 10, 0, 0, 10, x, y));
 					break;
 				case '2':
-					tiles[i][j] = new Tile(i,j,false,"2");
-					this.actors.add(new Enemy("2", 100, 10, 0, 0, 10, j, i));
+					tiles[y][x] = new Tile(x,y,false,"2");
+					this.actors.add(new Enemy("2", 100, 10, 0, 0, 10, x, y));
 					break;
 				case '3':
-					tiles[i][j] = new Tile(i,j,false,"3");
-					this.actors.add(new Enemy("3", 100, 10, 0, 0, 10, j, i));
+					tiles[y][x] = new Tile(x,y,false,"3");
+					this.actors.add(new Enemy("3", 100, 10, 0, 0, 10, x, y));
 					break;
 				case '4':
-					tiles[i][j] = new Tile(i,j,false,"4");
-					this.actors.add(new Enemy("4", 100, 10, 0, 0, 10, j, i));
+					tiles[y][x] = new Tile(x,y,false,"4");
+					this.actors.add(new Enemy("4", 100, 10, 0, 0, 10, x, y));
 					break;
 				case '5':
-					tiles[i][j] = new Tile(i,j,false,"5");
-					this.actors.add(new Enemy("5", 100, 10, 0, 0, 10, j, i));
+					tiles[y][x] = new Tile(x,y,false,"5");
+					this.actors.add(new Enemy("5", 100, 10, 0, 0, 10, x, y));
 					break;
 				case 'P':
-					tiles[i][j] = new Tile(i,j,true,"potion");
+					tiles[y][x] = new Tile(x,y,true,"potion");
 					break;
 				case 'A':
-					tiles[i][j] = new Tile(i,j,true,"armour");
+					tiles[y][x] = new Tile(x,y,true,"armour");
 					break;
 				case 'S':
-					tiles[i][j] = new Tile(i,j,true,"shield");
+					tiles[y][x] = new Tile(x,y,true,"shield");
 					break;
 				default:
-					tiles[i][j] = new Tile(i,j,false,"error");
+					tiles[y][x] = new Tile(x,y,false,"error");
 					break;
 				}
 			}
@@ -90,8 +90,8 @@ public class Floor implements IFloor {
 		return tiles[0].length;
 	}
 	
-	public Tile getTile(int i, int j) {
-		return tiles[i][j];
+	public Tile getTile(int x, int y) {
+		return tiles[y][x];
 	}
 	
 	public String getTileId(int x, int y) {
@@ -104,6 +104,10 @@ public class Floor implements IFloor {
 	
 	public ArrayList<IActor> getActors() {
 		return actors;
+	}
+	
+	public void removeActor(IActor actor) {
+		actors.remove(actor);
 	}
 	
 	/*

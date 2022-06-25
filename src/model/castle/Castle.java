@@ -71,7 +71,11 @@ public class Castle implements ICastle {
 	}
 	
 	public void removeItemAtCurrentFloor(int x, int y) {
-		floors.get(currentFloor).getTile(y, x).setId("corridor");
+		floors.get(currentFloor).getTile(x, y).setId("corridor");
+	}
+	
+	public void removeActorAtCurrentFloor(IActor actor) {
+		floors.get(currentFloor).removeActor(actor);
 	}
 	
 	public IFloor getCurrentFloor() {
@@ -79,7 +83,19 @@ public class Castle implements ICastle {
 		return current;
 	}
 	
+	public IActor getHero() {
+		return floors.get(currentFloor).getHero();
+	}
 	
+	/*
+	public int getHeroPosX() {
+		return floors.get(currentFloor).getHero().getPosX();
+	}
+	
+	public int getHeroPosY() {
+		return floors.get(currentFloor).getHero().getPosY();
+	}
+	*/
 	
 	/*
 	public void moveHeroNextFloor() {
