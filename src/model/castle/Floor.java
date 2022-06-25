@@ -98,6 +98,17 @@ public class Floor implements IFloor {
 		return tiles[y][x].getId();
 	}
 	
+	public boolean getHeroTrail(int x, int y) {
+		if(x >= 0 && x < tiles[0].length && y >= 0 && y < tiles.length ){
+			return tiles[y][x].isHeroPassedHere();	
+		}
+		return false;
+		}
+	
+	public void setHeroTrail(int x, int y) {
+		tiles[y][x].setHeroPassedHere(true);
+	}
+	
 	public IActor getHero() {
 		return hero;
 	}

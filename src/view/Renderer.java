@@ -53,29 +53,38 @@ public class Renderer {
 	public void drawFloor(Graphics graphics, IFloor floor) {
 		int posHeroX = floor.getHero().getPosX();
 		int posHeroY = floor.getHero().getPosY();
+		floor.setHeroTrail(posHeroX, posHeroY);	
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
 			for (int j = 0; j < floor.getWidth(); j++) {
-						texture = Textures.getTexture("corridor");
-						graphics.drawImage(texture, offset(j, posHeroX),
-													offset(i, posHeroY),
-													texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-													null);
-	
-						if(floor.getTileId(j, i) == "door")
-							texture = Textures.getTexture("door");
-						else if(floor.getTileId(j, i) == "wall")
-							texture = Textures.getTexture("wall");
-						else if(floor.getTileId(j, i) == "chest")
-							texture = Textures.getTexture("chest");
-						else if(floor.getTileId(j, i) == "potion")
-							texture = Textures.getTexture("potion");
-						else if(floor.getTileId(j, i) == "error")
-							texture = Textures.getTexture("error");
-						
-						graphics.drawImage(texture, offset(j, posHeroX),
-													offset(i, posHeroY) ,
-								                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+						if(floor.getHeroTrail(j, i) || floor.getHeroTrail(j, i + 1) || floor.getHeroTrail(j, i - 1)
+													|| floor.getHeroTrail(j + 1, i) || floor.getHeroTrail(j - 1, i)
+													|| floor.getHeroTrail(j + 1, i + 1) || floor.getHeroTrail(j + 1, i - 1)
+													|| floor.getHeroTrail(j + 1, i + 1) || floor.getHeroTrail(j - 1, i + 1)
+													|| floor.getHeroTrail(j - 1, i + 1) || floor.getHeroTrail(j - 1, i - 1)
+													|| floor.getHeroTrail(j + 1, i - 1) || floor.getHeroTrail(j - 1, i - 1)) {
+							
+							texture = Textures.getTexture("corridor");
+							graphics.drawImage(texture, offset(j, posHeroX),
+														offset(i, posHeroY),
+														texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+														null);
+		
+							if(floor.getTileId(j, i) == "door")
+								texture = Textures.getTexture("door");
+							else if(floor.getTileId(j, i) == "wall")
+								texture = Textures.getTexture("wall");
+							else if(floor.getTileId(j, i) == "chest")
+								texture = Textures.getTexture("chest");
+							else if(floor.getTileId(j, i) == "potion")
+								texture = Textures.getTexture("potion");
+							else if(floor.getTileId(j, i) == "error")
+								texture = Textures.getTexture("error");
+							
+							graphics.drawImage(texture, offset(j, posHeroX),
+														offset(i, posHeroY) ,
+									                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+						}
 		}
 	}
 	}

@@ -10,4 +10,6 @@ public interface IFloor {
 	public String getTileId(int x, int y);
 	public IActor getHero();
 	public ArrayList<IActor> getActors();
+	public boolean getHeroTrail(int x, int y);
+	public void setHeroTrail(int x, int y);
 }
