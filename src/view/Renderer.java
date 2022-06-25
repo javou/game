@@ -162,10 +162,17 @@ public class Renderer {
 				}
 				else {	
 					
-					texture = Textures.getTexture(actor.getName());
-					graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
-							offset(actor.getPosY(),posHeroY) ,
-		                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+						if(floor.getHeroTrail(actor.getPosX(),actor.getPosY()) || floor.getHeroTrail(actor.getPosX(), actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX(), actor.getPosY() - 1)
+								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY()) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY())
+								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() - 1)
+								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() + 1)
+								|| floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() - 1)
+								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() - 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() - 1)) {
+						texture = Textures.getTexture(actor.getName());
+						graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
+								offset(actor.getPosY(),posHeroY) ,
+			                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+					}
 				}
 			}
 		}

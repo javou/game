@@ -55,7 +55,7 @@ public class God {
 			key = nextAction.getKey();
 			if(key == KeyEvent.VK_BACK_SPACE)
 				hero.removeLetterName();
-			else if(key != 0) {
+			else if(key != 0 && key != KeyEvent.VK_ENTER) {
 				hero.setName(KeyEvent.getKeyText(key));
 			}
 			System.out.print("");//it needs something here to make the rendering works
