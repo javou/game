@@ -8,12 +8,14 @@ import model.item.HpPotion;
 public class Hero extends Actor {
 	private static Hero hero;
 	private ArrayList<Item> items = new ArrayList<Item>();
-	private int armourLevel = 0; //private boolean armorIsEquipped = false;
-	private int weaponLevel = 0; //private boolean weaponIsEquipped = false;
+	private int armourLevel = 0; 
+	private boolean armorIsEquipped = false;
+	private int weaponLevel = 0; 
+	private boolean weaponIsEquipped = false;
 	
 	public static Hero getInstance() {
 		if (hero == null) {
-			hero = new Hero("hero", 100, 10, 0, 0, 10, 0, 0);
+			hero = new Hero("", 100, 10, 0, 0, 10, 0, 0);
 		}
 		return hero;
 	}
@@ -65,7 +67,7 @@ public class Hero extends Actor {
 	}
 	*/
 	
-	/*
+	
 	public boolean isArmorIsEquipped() {
 		return armorIsEquipped;
 	}
@@ -79,7 +81,7 @@ public class Hero extends Actor {
 		this.weaponIsEquipped = swordIsEquipped;
 	}
 	
-	
+	/*
 	public void equipItem(Item newItem) {
 		for(Item item : items) {
 			

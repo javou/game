@@ -16,11 +16,11 @@ public interface IActorController {
 	public void addPotion();
 	public void improveArmour();
 	public void improveDamage();
-	/*
 	public boolean isArmorIsEquipped();
 	public void setArmorIsEquipped(boolean armorIsEquipped);
 	public boolean isWeaponIsEquipped();
 	public void setWeaponIsEquipped(boolean swordIsEquipped);
-	*/
 	public int countPotions();
+	public void setName(String name);
+	public void removeLetterName();
 }

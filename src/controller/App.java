@@ -12,6 +12,7 @@ public class App {
 		assembler = Assembler.getInstance();
 		assembler.newGame();
 		god = God.getInstance();
+		god.nameHero();
 		god.gameLoop();
 	}
 }

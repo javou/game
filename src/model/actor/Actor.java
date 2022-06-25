@@ -18,6 +18,14 @@ public class Actor implements IActor {
 		this.posy = posy;
 	}
 	
+	public void setName(String name) {
+		this.name = this.name + name;
+	}
+	public void removeLetterName() {
+		if(this.name.length() > 0)
+			this.name = this.name.substring(0, this.name.length()-1);
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -78,7 +86,6 @@ public class Actor implements IActor {
 
 	public void improveDamage() {}
 	
-	/*
 	public boolean isArmorIsEquipped() {
 		return false;
 	}
@@ -90,7 +97,7 @@ public class Actor implements IActor {
 	}
 
 	public void setWeaponIsEquipped(boolean swordIsEquipped) {}
-	*/
+	
 	
 	public int countPotions() {
 		return 0;

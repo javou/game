@@ -6,6 +6,7 @@ public class Tile {
 	private boolean occupiable; //wall/actor or free(occupiable space)
 	private boolean visible;
 	private String id; //wall, door, item
+	private boolean heroPassedHere = false;
 	
 	public Tile(int x, int y, boolean occupiable, String id) {
 		this.x = x;
@@ -13,6 +14,14 @@ public class Tile {
 		this.occupiable = occupiable;
 		this.visible = true; //for the moment, we have day light in the room
 		this.id = id;
+	}
+
+	public boolean isHeroPassedHere() {
+		return heroPassedHere;
+	}
+
+	public void setHeroPassedHere(boolean heroPassedHere) {
+		this.heroPassedHere = heroPassedHere;
 	}
 
 	public String getId() {

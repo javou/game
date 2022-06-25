@@ -31,6 +31,23 @@ public class Renderer {
 		graphics.drawString("THE HAUNTED CASTLE", 100, 100);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
 		graphics.drawString("Do you wanna play a game?", 100, 150);
+		graphics.drawString("Type the hero name and press enter to play", 3*32, 17*32);
+		graphics.drawString("Hero name: " + Hero.getInstance().getName(), 5*32, 18*32);
+	}
+	
+	public void gameOverScreen(Graphics graphics){
+		graphics.setColor(Color.WHITE);
+		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
+		graphics.drawString("Monster: so weak, I was expecting more fun", 32, 150);
+		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
+		graphics.drawString("GAME OVER!", 35*5, 32*10);
+	}
+	
+	public void victoryScreen(Graphics graphics){
+		graphics.setColor(Color.WHITE);
+		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
+		graphics.drawString("Congratualations!!!", 35*5, 32*10);
+		graphics.drawString("You save the castle", 35*5, 32*11);
 	}
 	
 	public void drawFloor(Graphics graphics, IFloor floor) {
@@ -39,28 +56,26 @@ public class Renderer {
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
 			for (int j = 0; j < floor.getWidth(); j++) {
-				
-					
-					texture = Textures.getTexture("corridor");
-					graphics.drawImage(texture, offset(j, posHeroX),
-												offset(i, posHeroY),
-												texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-												null);
-
-					if(floor.getTileId(j, i) == "door")
-						texture = Textures.getTexture("door");
-					else if(floor.getTileId(j, i) == "wall")
-						texture = Textures.getTexture("wall");
-					else if(floor.getTileId(j, i) == "chest")
-						texture = Textures.getTexture("chest");
-					else if(floor.getTileId(j, i) == "potion")
-						texture = Textures.getTexture("potion");
-					else if(floor.getTileId(j, i) == "error")
-						texture = Textures.getTexture("error");
-					
-					graphics.drawImage(texture, offset(j, posHeroX),
-												offset(i, posHeroY) ,
-							                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+						texture = Textures.getTexture("corridor");
+						graphics.drawImage(texture, offset(j, posHeroX),
+													offset(i, posHeroY),
+													texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+													null);
+	
+						if(floor.getTileId(j, i) == "door")
+							texture = Textures.getTexture("door");
+						else if(floor.getTileId(j, i) == "wall")
+							texture = Textures.getTexture("wall");
+						else if(floor.getTileId(j, i) == "chest")
+							texture = Textures.getTexture("chest");
+						else if(floor.getTileId(j, i) == "potion")
+							texture = Textures.getTexture("potion");
+						else if(floor.getTileId(j, i) == "error")
+							texture = Textures.getTexture("error");
+						
+						graphics.drawImage(texture, offset(j, posHeroX),
+													offset(i, posHeroY) ,
+								                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 		}
 	}
 	}
@@ -80,18 +95,21 @@ public class Renderer {
 	
 	public void heroStatus(Graphics graphics, IActor hero) {
 		graphics.setColor(Color.WHITE);
-		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*5, Constants.CELL_SIZE*3, 10, 10);
+		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*4, Constants.CELL_SIZE*3, 10, 10);
 		graphics.setFont(new Font("Verdana", Font.BOLD, 15));
-		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,25 );
-		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,40 );
-		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,55);
-		
-		BufferedImage armourTexture = Textures.getTexture("shield");
-		graphics.drawImage(armourTexture, 50 ,70, armourTexture.getWidth(), armourTexture.getHeight(), null);
+		graphics.drawString(hero.getName(),20,25 );
+		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,40 );
+		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,55 );
+		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,70);
+		if(hero.isArmorIsEquipped()) {
+			BufferedImage armourTexture = Textures.getTexture("shield");
+			graphics.drawImage(armourTexture, 50 ,75, armourTexture.getWidth(), armourTexture.getHeight(), null);
+		}
 		// graphics.drawString(String.valueof(hero.getArmourLevel()), x, y);
-		
-		BufferedImage weaponTexture = Textures.getTexture("sword");
-		graphics.drawImage(weaponTexture, 20 ,70, weaponTexture.getWidth(), weaponTexture.getHeight(), null);
+		if(hero.isWeaponIsEquipped()) {
+			BufferedImage weaponTexture = Textures.getTexture("sword");
+			graphics.drawImage(weaponTexture, 20 ,75, weaponTexture.getWidth(), weaponTexture.getHeight(), null);
+		}
 		// graphics.drawString(String.valueof(hero.getWeaponLevel()), x, y)
 		
 		

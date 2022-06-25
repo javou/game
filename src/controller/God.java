@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,6 +9,8 @@ import exception.*;
 import model.actor.Hero;
 import model.actor.IActor;
 import model.castle.ICastleController;
+import view.GameScreen;
+import view.IGameScreen;
 
 public class God {
 	private static God god; //lazy way, singleton pattern
@@ -16,6 +19,7 @@ public class God {
 	private NextAction nextAction = NextAction.getInstance();
 	private ArrayList<IActor> floorActors = castle.getFloorActors();
 	private IActor hero = castle.getHero();
+	private int gameState = 0; //0 initial screen, -1 hero is dead, 1 playing, 2 boss is defeated
 	
 	private God() {};
 	
@@ -25,6 +29,16 @@ public class God {
 		return god;
 	}
 	
+	public int getGameState() {
+		return gameState;
+	}
+	
+	
+
+	public void setGameState(int gameState) {
+		this.gameState = gameState;
+	}
+
 	private void sortFloorActors() {
 		Collections.sort(floorActors, new Comparator<IActor>() {
 			@Override
@@ -34,11 +48,28 @@ public class God {
 		});
 	}
 	
+	public void nameHero() {
+		int key = 0;
+		IGameScreen gs = GameScreen.getInstance();
+		while(key != KeyEvent.VK_ENTER) {
+			key = nextAction.getKey();
+			if(key == KeyEvent.VK_BACK_SPACE)
+				hero.removeLetterName();
+			else if(key != 0) {
+				hero.setName(KeyEvent.getKeyText(key));
+			}
+			System.out.print("");//it needs something here to make the rendering works
+		}
+		setGameState(1);	
+	}
+	
 	public void gameLoop() {
 		sortFloorActors();
-		int gameState = 0;
+		
 		int i = 0;
-		while (gameState == 0) { // mudar condiï¿½ï¿½o. // hp > 0; bossAlive.
+		
+		
+		while (gameState == 1) { // mudar condiï¿½ï¿½o. // hp > 0; bossAlive.
 			IActor actor = floorActors.get(i);
 			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
 			if (actor.getEnergy() >= 1000) {
@@ -103,7 +134,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
 		}
 	}
 	
@@ -117,7 +148,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
 		}
 	}
 	
@@ -131,7 +162,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
 		}
 	}
 	
@@ -145,7 +176,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
 		}
 	}
 	
@@ -195,7 +226,7 @@ public class God {
 	/*
 	public static void moveHero() {
 		GameScreen.setMessage("");//always reset
-		GameScreen.disablePrintOnce();
+		
 	}
 	*/
 	
@@ -212,11 +243,11 @@ public class God {
 			else if(castle.typeAtTileInCurrentFloor(x, y) == "chest" ) {
 				castle.removeItemAtCurrentFloor(x, y);
 				if(Math.random() < 0.5) { //better weapon, +damage
-					// actor.setWeaponIsEquipped(true);
+					actor.setWeaponIsEquipped(true);
 					actor.improveDamage();
 				}
 				else { //better armor, +defense
-					// actor.setArmorIsEquipped(true);
+					actor.setArmorIsEquipped(true);
 					actor.improveArmour();
 				}
 			}

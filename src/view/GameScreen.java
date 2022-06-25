@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JPanel;
 
+import controller.God;
 import controller.NextAction;
 import model.castle.Castle;
 import model.castle.ICastleView;
@@ -16,9 +17,10 @@ public class GameScreen extends JPanel implements IGameScreen{
 	
 	private static GameScreen gameScreen;
 	private Renderer renderer;
-	private static boolean printOnce = false;
+	private static boolean printOnce = true;
 	private static String message = "";
 	private ICastleView castle;
+	private God god = God.getInstance();
 	
 	private GameScreen() {
 		super();
@@ -41,12 +43,12 @@ public class GameScreen extends JPanel implements IGameScreen{
 		super.paintComponents(graphics);
 		
 		try {
-			if(printOnce) {
+			if(god.getGameState() == 0) {
 			graphics.setColor(Color.BLACK);
 			graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 			renderer.firstScreen(graphics);
 			}
-			else {
+			else if(god.getGameState() == 1) {
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 				renderer.drawFloor(graphics, castle.getCurrentFloor());
@@ -54,6 +56,13 @@ public class GameScreen extends JPanel implements IGameScreen{
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics, castle.getCurrentFloor().getHero());
 				
+			}
+			else if(god.getGameState() == -1) {
+				//gameover
+				renderer.gameOverScreen(graphics);
+			}
+			else if(god.getGameState() == 2) {
+				//win
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

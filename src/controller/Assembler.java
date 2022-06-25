@@ -1,7 +1,13 @@
 package controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import model.castle.Castle;
 import model.castle.ICastle;
+import resources.Music;
+import view.GameScreen;
+import view.IGameScreen;
 // import resources.Music;
 import view.IWindow;
 import view.Window;
@@ -24,8 +30,15 @@ public class Assembler {
 		castle = Castle.getInstance();
 		window = Window.getInstance();
 		window.create();
-		// Music.setSong("songs/suspense.wav"); // música gera erro
-		// Music.loop();
+		IGameScreen gmv = GameScreen.getInstance();
+		Music.setSong("songs/suspense.wav"); // mï¿½sica gera erro
+		Music.loop();
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				gmv.setMessage("");
+			}
+		}, 0,1500);
 	}
 	
 	public ICastle getCastle() {

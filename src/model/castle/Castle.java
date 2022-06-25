@@ -10,19 +10,29 @@ import resources.Constants;
 public class Castle implements ICastle {
 	private static Castle castle;
 	private ArrayList<Floor>  floors;
-	private Floor firstFloor; //always the same
 	private int currentFloor = 0; //identify in which floor the hero currently is
 	
 	private Castle() {
 		//the first floor is always the same and the other are shuffled randomly
 		floors = new ArrayList<Floor>();
-		firstFloor = new Floor(true, Constants.FIRST_ROOM);
-		floors.add(new Floor(true, Constants.ENTRY_1));
-		floors.add(new Floor(true, Constants.ENTRY_2));
-		shuffleFloors();
+		ArrayList<Floor> aux = new ArrayList<Floor>();
+		
+		//easier levels
+		aux.add(new Floor(true, Constants.ENTRY_1));
+		aux.add(new Floor(true, Constants.ENTRY_2));
+		Collections.shuffle(aux);
+		floors.addAll(aux);
+		//harder levels
+		aux.add(new Floor(true, Constants.ENTRY_3));
+		aux.add(new Floor(true, Constants.ENTRY_4));
+		floors.addAll(aux);
+		Floor firstFloor = new Floor(true, Constants.FIRST_ROOM);
 		floors.add(0, firstFloor);
+		Floor finalFloor = new Floor(true, Constants.FINAL_ROOM);
+		floors.add(floors.size()-1, finalFloor);
+		
 		IActor hero = Hero.getInstance();
-		firstFloor.addHero(hero);
+		floors.get(0).addHero(hero);
 	}
 	
 	public static Castle getInstance() {
@@ -32,8 +42,8 @@ public class Castle implements ICastle {
 		return castle;
 	}
 	
-	public void shuffleFloors() {
-		Collections.shuffle(floors);
+	public void shuffleFloors( ArrayList<Floor>  f) {
+		Collections.shuffle(f);
 	}
 	
 	public ArrayList<IActor> getFloorActors() {
