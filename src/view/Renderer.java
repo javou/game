@@ -47,7 +47,7 @@ public class Renderer {
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
 		graphics.drawString("Congratualations!!!", 35*5, 32*10);
-		graphics.drawString("You save the castle", 35*5, 32*11);
+		graphics.drawString("You saved the castle", 35*5, 32*11);
 	}
 	
 	public void drawFloor(Graphics graphics, IFloor floor) {
@@ -63,6 +63,7 @@ public class Renderer {
 													|| floor.getHeroTrail(j + 1, i + 1) || floor.getHeroTrail(j - 1, i + 1)
 													|| floor.getHeroTrail(j - 1, i + 1) || floor.getHeroTrail(j - 1, i - 1)
 													|| floor.getHeroTrail(j + 1, i - 1) || floor.getHeroTrail(j - 1, i - 1)) {
+						
 							
 							texture = Textures.getTexture("corridor");
 							graphics.drawImage(texture, offset(j, posHeroX),
@@ -172,7 +173,7 @@ public class Renderer {
 						graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
 								offset(actor.getPosY(),posHeroY) ,
 			                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
-					}
+						}
 				}
 			}
 		}

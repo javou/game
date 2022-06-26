@@ -13,23 +13,31 @@ public class Castle implements ICastle {
 	private int currentFloor = 0; //identify in which floor the hero currently is
 	
 	private Castle() {
-		//the first floor is always the same and the other are shuffled randomly
+		//the first floor is always the same and the others are shuffled randomly
 		floors = new ArrayList<Floor>();
 		ArrayList<Floor> aux = new ArrayList<Floor>();
 		
-		//easier levels
+		//starting floor
+		Floor firstFloor = new Floor(true, Constants.FIRST_ROOM);
+		floors.add(firstFloor);
+		
+		//level 1
 		aux.add(new Floor(true, Constants.ENTRY_1));
 		aux.add(new Floor(true, Constants.ENTRY_2));
 		Collections.shuffle(aux);
-		floors.addAll(aux);
-		//harder levels
+		floors.add(aux.get(0));
+		aux.clear();
+		
+		//level 2
 		aux.add(new Floor(true, Constants.ENTRY_3));
 		aux.add(new Floor(true, Constants.ENTRY_4));
-		floors.addAll(aux);
-		Floor firstFloor = new Floor(true, Constants.FIRST_ROOM);
-		floors.add(0, firstFloor);
+		Collections.shuffle(aux);
+		floors.add(aux.get(0));
+		aux.clear();
+		
+		//final floor
 		Floor finalFloor = new Floor(true, Constants.FINAL_ROOM);
-		floors.add(floors.size()-1, finalFloor);
+		floors.add(finalFloor);
 		
 		IActor hero = Hero.getInstance();
 		floors.get(0).addHero(hero);
@@ -75,7 +83,7 @@ public class Castle implements ICastle {
 	
 	public void updateCurrentFloor() {
 		IActor hero = floors.get(currentFloor).getHero();
-		// remove
+		// remove hero
 		currentFloor += 1;
 		floors.get(currentFloor).addHero(hero);
 	}

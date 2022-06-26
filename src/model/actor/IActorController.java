@@ -23,4 +23,6 @@ public interface IActorController {
 	public int countPotions();
 	public void setName(String name);
 	public void removeLetterName();
+	public boolean isHeroSeen();
+	public void setHeroSeen(boolean heroSeen);
 }

@@ -77,7 +77,6 @@ public class Actor implements IActor {
 		return damage;
 	}
 
-	
 	public void usePotion() {}
 
 	public void addPotion() {}
@@ -103,5 +102,9 @@ public class Actor implements IActor {
 		return 0;
 	}
 
+	public boolean isHeroSeen() {
+		return false;
+	}
 	
+	public void setHeroSeen(boolean heroSeen) {}
 }

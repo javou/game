@@ -40,23 +40,23 @@ public class Floor implements IFloor {
 					break;
 				case '1':
 					tiles[y][x] = new Tile(x,y,false,"1");
-					this.actors.add(new Enemy("1", 100, 10, 0, 0, 10, x, y));
+					this.actors.add(new Enemy("1", 30, 15, 0, 0, 15, x, y));
 					break;
 				case '2':
 					tiles[y][x] = new Tile(x,y,false,"2");
-					this.actors.add(new Enemy("2", 100, 10, 0, 0, 10, x, y));
+					this.actors.add(new Enemy("2", 125, 5, 2, 0, 8, x, y));
 					break;
 				case '3':
 					tiles[y][x] = new Tile(x,y,false,"3");
-					this.actors.add(new Enemy("3", 100, 10, 0, 0, 10, x, y));
+					this.actors.add(new Enemy("3", 50, 7, 0, 0, 20, x, y));
 					break;
 				case '4':
 					tiles[y][x] = new Tile(x,y,false,"4");
-					this.actors.add(new Enemy("4", 100, 10, 0, 0, 10, x, y));
+					this.actors.add(new Enemy("4", 70, 10, 0, 0, 15, x, y));
 					break;
 				case '5':
 					tiles[y][x] = new Tile(x,y,false,"5");
-					this.actors.add(new Enemy("5", 100, 10, 0, 0, 10, x, y));
+					this.actors.add(new Enemy("5", 150, 8, 5, 0, 30, x, y));
 					break;
 				case 'P':
 					tiles[y][x] = new Tile(x,y,true,"potion");

@@ -8,7 +8,6 @@ import model.castle.ICastle;
 import resources.Music;
 import view.GameScreen;
 import view.IGameScreen;
-// import resources.Music;
 import view.IWindow;
 import view.Window;
 
@@ -31,8 +30,8 @@ public class Assembler {
 		window = Window.getInstance();
 		window.create();
 		IGameScreen gmv = GameScreen.getInstance();
-		Music.setSong("songs/suspense.wav"); // m�sica gera erro
-		Music.loop();
+		// Music.setSong("songs/suspense.wav"); // m�sica gera erro
+		// Music.loop();
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			public void run() {

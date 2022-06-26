@@ -50,12 +50,12 @@ public class God {
 	
 	public void nameHero() {
 		int key = 0;
-		IGameScreen gs = GameScreen.getInstance();
+		IGameScreen gs = GameScreen.getInstance(); // remove?
 		while(key != KeyEvent.VK_ENTER) {
 			key = nextAction.getKey();
 			if(key == KeyEvent.VK_BACK_SPACE)
 				hero.removeLetterName();
-			else if(key != 0 && key != KeyEvent.VK_ENTER) {
+			else if(key >= 65 && key <= 90) {
 				hero.setName(KeyEvent.getKeyText(key));
 			}
 			System.out.print("");//it needs something here to make the rendering works
@@ -104,7 +104,7 @@ public class God {
 				}
 			}
 		} else {
-			enemyAction(actor.getPosX(), actor.getPosY(), actor);
+			enemyPathFinding(actor.getPosX(), actor.getPosY(), actor);
 		}
 	}
 	
@@ -157,7 +157,7 @@ public class God {
 			actor.setPosY(actor.getPosY() + 1);
 			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY() - 1, true);
 			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY(), false);
-			interactWithDestination(actor.getPosX(), actor.getPosY() + 1, actor);
+			interactWithDestination(actor.getPosX(), actor.getPosY(), actor);
 		} else {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1));
@@ -171,7 +171,7 @@ public class God {
 			actor.setPosX(actor.getPosX() + 1);
 			castle.setTileAtCurrentFloorOccupiable(actor.getPosX() - 1, actor.getPosY(), true);
 			castle.setTileAtCurrentFloorOccupiable(actor.getPosX(), actor.getPosY(), false);
-			interactWithDestination(actor.getPosX() + 1, actor.getPosY(), actor);
+			interactWithDestination(actor.getPosX(), actor.getPosY(), actor);
 		} else {
 			if (castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()));
@@ -181,12 +181,14 @@ public class God {
 	}
 	
 	private void attack(IActor attacker, IActor target) {
-		target.setHp(target.getHp() - calculateDamage(attacker, target));
-		if (target.getHp() <= 0) {
-			castle.setTileAtCurrentFloorOccupiable(target.getPosX(), target.getPosY(), true);
-			castle.removeActorAtCurrentFloor(target);
-			floorActors = castle.getFloorActors();
-			sortFloorActors();
+		if (target.getClass() != attacker.getClass()) {
+			target.setHp(target.getHp() - calculateDamage(attacker, target));
+			if (target.getHp() <= 0) {
+				castle.setTileAtCurrentFloorOccupiable(target.getPosX(), target.getPosY(), true);
+				castle.removeActorAtCurrentFloor(target);
+				floorActors = castle.getFloorActors();
+				sortFloorActors();
+			}
 		}
 	}
 	
@@ -194,25 +196,143 @@ public class God {
 		return attacker.getDamage() - target.getArmour();
 	}
 	
-	private void enemyAction(int enemyPosX, int enemyPosY, IActor actor) throws InvalidMovement {
-		if (Math.sqrt((Math.pow((enemyPosX - hero.getPosX()), 2)  + Math.pow((enemyPosY - hero.getPosY()), 2))) < 4) {
+	private void enemyPathFinding(int enemyPosX, int enemyPosY, IActor enemy) throws InvalidMovement {
+		if (!enemy.isHeroSeen() && Math.sqrt((Math.pow((enemyPosX - hero.getPosX()), 2) + Math.pow((enemyPosY - hero.getPosY()), 2))) < 4)
+			enemy.setHeroSeen(true);
+		if (enemy.isHeroSeen()) {
+			if (Math.random() < 0.5) {
+				if (enemyPosX > hero.getPosX()) {
+					try {
+						moveActorLeft(enemy);
+					} catch (InvalidMovement e) {
+						if (enemyPosY > hero.getPosY()) {
+							try {
+								moveActorUp(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else if (enemyPosY < hero.getPosY()) {
+							try {
+								moveActorDown(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else {
+							e.printStackTrace();
+						}
+					}
+				} else if (enemyPosX < hero.getPosX()) {
+					try {
+						moveActorRight(enemy);
+					} catch (InvalidMovement e) {
+						if (enemyPosY > hero.getPosY()) {
+							try {
+								moveActorUp(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else if (enemyPosY < hero.getPosY()) {
+							try {
+								moveActorDown(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else {
+							e.printStackTrace();
+						}
+					}
+				} else {
+					if (enemyPosY > hero.getPosY()) {
+						try {
+							moveActorUp(enemy);
+						} catch (InvalidMovement e) {
+							e.printStackTrace();
+						}
+					} else {
+						try {
+							moveActorDown(enemy);
+						} catch (InvalidMovement e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			} else {
+				if (enemyPosY > hero.getPosY()) {
+					try {
+						moveActorUp(enemy);
+					} catch (InvalidMovement e) {
+						if (enemyPosX > hero.getPosX()) {
+							try {
+								moveActorLeft(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else if (enemyPosX < hero.getPosX()) {
+							try {
+								moveActorRight(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else {
+							e.printStackTrace();
+						}
+					}
+				} else if (enemyPosY < hero.getPosY()) {
+					try {
+						moveActorDown(enemy);
+					} catch (InvalidMovement e) {
+						if (enemyPosX > hero.getPosX()) {
+							try {
+								moveActorLeft(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else if (enemyPosX < hero.getPosX()) {
+							try {
+								moveActorRight(enemy);
+							} catch (InvalidMovement f) {
+								f.printStackTrace();
+							}
+						} else {
+							e.printStackTrace();
+						}
+					}
+				} else {
+					if (enemyPosX > hero.getPosX()) {
+						try {
+							moveActorLeft(enemy);
+						} catch (InvalidMovement e) {
+							e.printStackTrace();
+						}
+					} else {
+						try {
+							moveActorRight(enemy);
+						} catch (InvalidMovement e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			
+			/*
 			if (Math.abs(enemyPosX - hero.getPosX()) >= Math.abs((enemyPosY - hero.getPosY()))) {
 				if (enemyPosX > hero.getPosX()) {
 					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX - 1, enemyPosY) || ((enemyPosX - 1) == hero.getPosX() && enemyPosY == hero.getPosY()))
-						moveActorLeft(actor);
+						moveActorLeft(enemy);
 				} else {
 					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX + 1, enemyPosY) || ((enemyPosX + 1) == hero.getPosX() && enemyPosY == hero.getPosY()))
-						moveActorRight(actor);
+						moveActorRight(enemy);
 				}
 			} else {
 				if (enemyPosY > hero.getPosY()) {
 					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX, enemyPosY - 1) || (enemyPosX == hero.getPosX() && (enemyPosY - 1) == hero.getPosY()))
-						moveActorUp(actor);
+						moveActorUp(enemy);
 				} else {
 					if(castle.isTileAtCurrentFloorOccupiable(enemyPosX, enemyPosY + 1) || (enemyPosX == hero.getPosX() && (enemyPosY + 1) == hero.getPosY()))
-						moveActorDown(actor);
+						moveActorDown(enemy);
 				}
 			}
+			*/
 		}
 	}
 	
