@@ -15,13 +15,18 @@ import view.IGameScreen;
 public class God {
 	private static God god; //lazy way, singleton pattern
 	private Assembler assembler = Assembler.getInstance();
-	private ICastleController castle = assembler.getCastle();
 	private NextAction nextAction = NextAction.getInstance();
-	private ArrayList<IActor> floorActors = castle.getFloorActors();
-	private IActor hero = castle.getHero();
+	private ICastleController castle;
+	private ArrayList<IActor> floorActors;
+	private IActor hero;
 	private int gameState = 0; //0 initial screen, -1 hero is dead, 1 playing, 2 boss is defeated
+	private boolean bossAlive = true;
 	
-	private God() {};
+	private God() {
+		 castle = assembler.getCastle();
+		 floorActors = castle.getFloorActors();
+		 hero = castle.getHero();
+	};
 	
 	public static God getInstance() { 
 		if (god == null)
@@ -32,11 +37,16 @@ public class God {
 	public int getGameState() {
 		return gameState;
 	}
-	
-	
 
-	public void setGameState(int gameState) {
+	public void setGameState(int gameState) { // remove?
 		this.gameState = gameState;
+	}
+	
+	private void restart() {
+		assembler.restart();
+		castle = assembler.getCastle();
+		floorActors = castle.getFloorActors();
+		hero = castle.getHero();
 	}
 
 	private void sortFloorActors() {
@@ -64,31 +74,37 @@ public class God {
 	}
 	
 	public void gameLoop() {
-		sortFloorActors();
-		
-		int i = 0;
-		
-		
-		while (gameState == 1) { // mudar condi��o. // hp > 0; bossAlive.
-			IActor actor = floorActors.get(i);
-			actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
-			if (actor.getEnergy() >= 1000) {
-				while (true) {
-					try {
-						act(actor);
-						break;
-					} catch (InvalidMovement e) {
-						e.printStackTrace();
+		boolean quit = false;
+		while (quit == false) {
+			sortFloorActors();
+			int i = 0;
+			while (gameState == 1) { // hp > 0; bossAlive.
+				IActor actor = floorActors.get(i);
+				actor.setEnergy(actor.getEnergy() + actor.getSpeed() * 10);
+				if (actor.getEnergy() >= 1000) {
+					while (true) {
+						try {
+							act(actor);
+							break;
+						} catch (InvalidMovement e) {
+							e.printStackTrace();
+						}
 					}
+					actor.setEnergy(actor.getEnergy() - 1000);
 				}
-				actor.setEnergy(actor.getEnergy() - 1000);
+				i = (i + 1) % floorActors.size();
+				if (hero.getHp() <= 0)
+					gameState = -1;
+				else if (!bossAlive)
+					gameState = 2;
+				
 			}
-			i = (i + 1) % floorActors.size();
-			if (hero.getHp() <= 0)
-				gameState = -1;
-		}
-		if (gameState == -1) {
-			// gameOver
+			while (gameState == -1 || gameState == 2) {
+				if (nextAction.getKey() == KeyEvent.VK_R) {
+					restart();
+					gameState = 1;
+				}
+			}
 		}
 	}
 	
@@ -188,19 +204,21 @@ public class God {
 				castle.removeActorAtCurrentFloor(target);
 				floorActors = castle.getFloorActors();
 				sortFloorActors();
+				if (target.getName() == "1")
+					bossAlive = false;
 			}
 		}
 	}
 	
 	private int calculateDamage(IActor attacker, IActor target) {
-		return attacker.getDamage() - target.getArmour();
+		return Math.max(attacker.getDamage() - target.getArmour(), 0);
 	}
 	
 	private void enemyPathFinding(int enemyPosX, int enemyPosY, IActor enemy) throws InvalidMovement {
 		if (!enemy.isHeroSeen() && Math.sqrt((Math.pow((enemyPosX - hero.getPosX()), 2) + Math.pow((enemyPosY - hero.getPosY()), 2))) < 4)
 			enemy.setHeroSeen(true);
 		if (enemy.isHeroSeen()) {
-			if (Math.random() < 0.5) {
+			if (Math.abs(enemyPosX - hero.getPosX()) >= Math.abs((enemyPosY - hero.getPosY()))) { // random?
 				if (enemyPosX > hero.getPosX()) {
 					try {
 						moveActorLeft(enemy);

@@ -40,6 +40,11 @@ public class Assembler {
 		}, 0,1500);
 	}
 	
+	public void restart() {
+		castle.restart();
+		castle = Castle.getInstance();
+	}
+	
 	public ICastle getCastle() {
 		return castle;
 	}

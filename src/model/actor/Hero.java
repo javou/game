@@ -13,6 +13,10 @@ public class Hero extends Actor {
 	private int weaponLevel = 0; 
 	private boolean weaponIsEquipped = false;
 	
+	private Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
+		super(name, hpMax, speed, armour, evasion, damage, posx, posy);		
+	}
+	
 	public static Hero getInstance() {
 		if (hero == null) {
 			hero = new Hero("", 100, 10, 0, 0, 10, 0, 0);
@@ -20,16 +24,16 @@ public class Hero extends Actor {
 		return hero;
 	}
 	
+	public void restart() {
+		hero = new Hero("", 100, 10, 0, 0, 10, 0, 0);
+	}
+	
 	public int countPotions() {
 		
 		return items.size();//it works because we can get only potions as items.
 		
 	}
-	
-	private Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
-		super(name, hpMax, speed, armour, evasion, damage, posx, posy);		
-	}
-	
+
 	public void addPotion() {
 		items.add(new HpPotion(10));
 	}

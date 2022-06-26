@@ -102,9 +102,12 @@ public class Actor implements IActor {
 		return 0;
 	}
 
+	// flaws
 	public boolean isHeroSeen() {
 		return false;
 	}
 	
 	public void setHeroSeen(boolean heroSeen) {}
+	
+	public void restart() {}
 }

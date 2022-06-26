@@ -50,9 +50,191 @@ public class Renderer {
 		graphics.drawString("You saved the castle", 35*5, 32*11);
 	}
 	
+	private int[] readDirection(char direction, int posX, int posY) {
+		if (direction == 'u') {
+			posY--; // ?
+		} else if (direction == 'r') {
+			posX++;
+		} else if (direction == 'd') {
+			posY++;
+		} else {
+			posX--;
+		}
+		int[] newCoordinates = {posX, posY}; 
+		return newCoordinates;
+	}
+	
+	private void createRay1(Graphics graphics, IFloor floor, char direction, int posHeroX, int posHeroY) {
+		int posX = posHeroX;
+		int posY = posHeroY;
+		while (true) {
+			BufferedImage texture;
+			texture = Textures.getTexture("corridor");
+			graphics.drawImage(texture, offset(posX, posHeroX),
+										offset(posY, posHeroY),
+										texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+										null);
+			if (Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("wall") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("chest") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("potion") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("door") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("error")) {
+				texture = Textures.getTexture(floor.getTileId(posX, posY));
+				graphics.drawImage(texture, offset(posX, posHeroX),
+											offset(posY, posHeroY),
+											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+											null);
+			}
+			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+				break;
+			posX = readDirection(direction, posX, posY)[0];
+			posY = readDirection(direction, posX, posY)[1];
+		}
+	}
+	
+	private void createRay11(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+		int posX = posHeroX;
+		int posY = posHeroY;
+		char[] instructions = {direction1, direction2};
+		int i = 0;
+		while (true) {
+			BufferedImage texture;
+			texture = Textures.getTexture("corridor");
+			graphics.drawImage(texture, offset(posX, posHeroX),
+										offset(posY, posHeroY),
+										texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+										null);
+			if (Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("wall") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("chest") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("potion") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("door") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("error")) {
+				texture = Textures.getTexture(floor.getTileId(posX, posY));
+				graphics.drawImage(texture, offset(posX, posHeroX),
+											offset(posY, posHeroY),
+											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+											null);
+			}
+			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+				break;
+			posX = readDirection(instructions[i], posX, posY)[0];
+			posY = readDirection(instructions[i], posX, posY)[1];
+			i = (i + 1) % 2;
+		}
+	}
+	
+	private void createRay21(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+		int posX = posHeroX;
+		int posY = posHeroY;
+		char[] instructions = {direction1, direction1, direction2};
+		int i = 0;
+		while (true) {
+			BufferedImage texture;
+			texture = Textures.getTexture("corridor");
+			graphics.drawImage(texture, offset(posX, posHeroX),
+										offset(posY, posHeroY),
+										texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+										null);
+			if (Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("wall") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("chest") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("potion") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("door") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("error")) {
+				texture = Textures.getTexture(floor.getTileId(posX, posY));
+				graphics.drawImage(texture, offset(posX, posHeroX),
+											offset(posY, posHeroY),
+											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+											null);
+			}
+			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+				break;
+			posX = readDirection(instructions[i], posX, posY)[0];
+			posY = readDirection(instructions[i], posX, posY)[1];
+			i = (i + 1) % 3;
+		}
+	}
+	
+	private void createRay12(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+		int posX = posHeroX;
+		int posY = posHeroY;
+		char[] instructions = {direction1, direction2, direction2};
+		int i = 0;
+		while (true) {
+			BufferedImage texture;
+			texture = Textures.getTexture("corridor");
+			graphics.drawImage(texture, offset(posX, posHeroX),
+										offset(posY, posHeroY),
+										texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+										null);
+			if (Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("wall") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("chest") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("potion") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("door") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("error")) {
+				texture = Textures.getTexture(floor.getTileId(posX, posY));
+				graphics.drawImage(texture, offset(posX, posHeroX),
+											offset(posY, posHeroY),
+											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+											null);
+			}
+			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+				break;
+			posX = readDirection(instructions[i], posX, posY)[0];
+			posY = readDirection(instructions[i], posX, posY)[1];
+			i = (i + 1) % 3;
+		}
+	}
+	private void createRay31(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+		int posX = posHeroX;
+		int posY = posHeroY;
+		char[] instructions = {direction1, direction1, direction1, direction2};
+		int i = 0;
+		while (true) {
+			BufferedImage texture;
+			texture = Textures.getTexture("corridor");
+			graphics.drawImage(texture, offset(posX, posHeroX),
+										offset(posY, posHeroY),
+										texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+										null);
+			if (Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("wall") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("chest") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("potion") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("door") ||
+					Textures.getTexture(floor.getTileId(posX, posY)) == Textures.getTexture("error")) {
+				texture = Textures.getTexture(floor.getTileId(posX, posY));
+				graphics.drawImage(texture, offset(posX, posHeroX),
+											offset(posY, posHeroY),
+											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+											null);
+			}
+			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+				break;
+			posX = readDirection(instructions[i], posX, posY)[0];
+			posY = readDirection(instructions[i], posX, posY)[1];
+			i = (i + 1) % 4;
+		}
+	}
+	
 	public void drawFloor(Graphics graphics, IFloor floor) {
 		int posHeroX = floor.getHero().getPosX();
 		int posHeroY = floor.getHero().getPosY();
+		
+		/*
+		char[] directions = {'u', 'r', 'd', 'l'};
+		for (int i = 0; i < 4; i++) {
+			createRay1(graphics, floor, directions[i], posHeroX, posHeroY);
+			createRay11(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
+			createRay11(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
+			createRay21(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
+			createRay21(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
+			createRay12(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
+			createRay12(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
+			createRay31(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
+			createRay31(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
+		}
+		*/
+		
+		
 		floor.setHeroTrail(posHeroX, posHeroY);	
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
@@ -86,8 +268,8 @@ public class Renderer {
 														offset(i, posHeroY) ,
 									                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 						}
+			}
 		}
-	}
 	}
 	
 	public int offset(int k, int posHero) {
@@ -147,6 +329,7 @@ public class Renderer {
 		}
 	}
 	*/
+	
 	public void drawActors(Graphics graphics, IFloor floor) {
 		ArrayList<IActor> actors = floor.getActors(); 
 		if(actors != null) {
@@ -162,17 +345,17 @@ public class Renderer {
 					graphics.drawImage(texture, Window.WIDTH/2 , Window.HEIGHT/2 , texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 				}
 				else {	
-					
 						if(floor.getHeroTrail(actor.getPosX(),actor.getPosY()) || floor.getHeroTrail(actor.getPosX(), actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX(), actor.getPosY() - 1)
 								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY()) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY())
 								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() - 1)
 								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() + 1)
 								|| floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() - 1)
 								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() - 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() - 1)) {
-						texture = Textures.getTexture(actor.getName());
-						graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
-								offset(actor.getPosY(),posHeroY) ,
-			                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
+								
+							texture = Textures.getTexture(actor.getName());
+							graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
+									offset(actor.getPosY(),posHeroY) ,
+				                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
 						}
 				}
 			}

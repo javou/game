@@ -14,4 +14,5 @@ public interface ICastleController {
 	public void removeItemAtCurrentFloor(int x, int y);
 	public void removeActorAtCurrentFloor(IActor actor);
 	public IActor getHero();
+	public void restart();
 }

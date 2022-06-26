@@ -63,6 +63,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 			}
 			else if(god.getGameState() == 2) {
 				//win
+				renderer.victoryScreen(graphics);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

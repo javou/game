@@ -25,4 +25,5 @@ public interface IActorController {
 	public void removeLetterName();
 	public boolean isHeroSeen();
 	public void setHeroSeen(boolean heroSeen);
+	public void restart();
 }
