@@ -12,7 +12,7 @@ public class Textures {
 	private static HashMap<String, BufferedImage> textures;
 	public static void init() {
 		textures = new HashMap<String, BufferedImage>();
-		File folder = new File("images");
+		File folder = new File("assets/images");
 		for(File file : folder.listFiles()) {
 			try {
 				textures.put(file.getName().replaceAll(".png",""), ImageIO.read(file));
