@@ -48,6 +48,7 @@ public class God {
 		floorActors = castle.getFloorActors();
 		hero = Hero.getInstance();
 		GameScreen.getInstance().restart();
+		bossAlive = true;
 		god.nameHero();
 		god.gameLoop();
 		
@@ -105,7 +106,7 @@ public class God {
 			}
 			while (gameState == -1 || gameState == 2) {
 				System.out.print("");
-				if (nextAction.getKey() != 0) {
+				if (nextAction.getKey() == KeyEvent.VK_R) {
 					gameState = 0;
 					restart();
 					

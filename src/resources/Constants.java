@@ -123,6 +123,7 @@ public class Constants {
 		 "################################################################################"};
 
 	public static final int CELL_SIZE = 32;
+	public static final int CELL_NUMBER = 20;
 	public static final int ZOOM = 2;
 	
 }

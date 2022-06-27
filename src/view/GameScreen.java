@@ -25,6 +25,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 	private long startTime = 0;
 	private long stopTime = 0;
 	private boolean running = false;
+	private static long bestTime = 999999999;
 	
 	private GameScreen() {
 		super();
@@ -44,6 +45,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 	
 	public void restart() {
 		castle = Castle.getInstance();
+		god = God.getInstance();
 	}
 
 	@Override
@@ -51,7 +53,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 		super.paintComponents(graphics);
 		
 		try {
-			System.out.println(god.getGameState());
+			//System.out.println(god.getGameState());
 			if(god.getGameState() == 0) {
 			graphics.setColor(Color.BLACK);
 			graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
@@ -78,6 +80,7 @@ public class GameScreen extends JPanel implements IGameScreen{
 					this.running = false;
 				}
 				renderer.gameOverScreen(graphics, (stopTime - startTime)/1000);
+				renderer.bestTime(graphics, bestTime);
 				
 			}
 			else if(god.getGameState() == 2) {
@@ -87,6 +90,9 @@ public class GameScreen extends JPanel implements IGameScreen{
 					this.running = false;
 				}
 				renderer.victoryScreen(graphics, (stopTime - startTime)/1000);
+				if((stopTime - startTime)/1000 < bestTime)
+					bestTime = (stopTime - startTime)/1000;
+				renderer.bestTime(graphics, bestTime);
 				
 				
 			}

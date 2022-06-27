@@ -15,7 +15,7 @@ import resources.Textures;
 public class Renderer {
 	public int ativarPaint = 0;
 	public static Renderer renderer; //singleton pattern, lazy way
-	
+	public static int len = Constants.CELL_NUMBER * Constants.CELL_SIZE;
 	private Renderer() {};
 	
 	public static Renderer getInstance() {
@@ -37,21 +37,41 @@ public class Renderer {
 	
 	public void gameOverScreen(Graphics graphics,long time){
 		graphics.setColor(Color.WHITE);
+		String s;
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
-		graphics.drawString("Monster: so weak, I was expecting more fun", 32, 150);
-		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
-		graphics.drawString(String.valueOf(time/60) + " : ",32*10-50,32*8 );
-		graphics.drawString(String.valueOf(time%60),32*10+10,32*8 );
-		graphics.drawString("GAME OVER!", 35*5, 32*10);
+		s = "Monster: so weak, I was expecting more fun";
+		graphics.drawString(s,(len-s.length()*10)/2, 150);
+		graphics.setFont(new Font("Verdana", Font.PLAIN, 40));
+		s = String.valueOf(time/60) + "minutes : " + String.valueOf(time%60 + "seconds");
+		graphics.drawString(s,(len-s.length()*20)/2,32*8 );
+		s = "GAME OVER!";
+		graphics.drawString(s, (len-s.length()*20)/2, 32*10);
+		s = "Press R to restart";
+		graphics.drawString(s, (len-s.length()*20)/2, 32*18);
 	}
 	
 	public void victoryScreen(Graphics graphics, long time){
 		graphics.setColor(Color.WHITE);
-		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
-		graphics.drawString("Congratualations!!!", 32*3, 32*9);
-		graphics.drawString("You saved the castle", 32*1, 32*11);
-		graphics.drawString(String.valueOf(time/60) + " : ",32*10-50,32*8 );
-		graphics.drawString(String.valueOf(time%60),32*10+10,32*8 );
+		String s;
+		graphics.setFont(new Font("Verdana", Font.PLAIN, 40));
+		s = "Congratualations!!!";
+		graphics.drawString(s, (len-s.length()*20)/2, 32*11);
+		s = "You saved the castle!";
+		graphics.drawString(s, (len-s.length()*20)/2, 32*15);
+		s = "You defeated the boss in:";
+		graphics.drawString(s,(len-s.length()*20)/2,32*7 );
+		s = String.valueOf(time/60) + "minutes : " + String.valueOf(time%60 + "seconds");
+		graphics.drawString(s,(len-s.length()*20)/2,32*8 );	
+		s = "Press R to restart";
+		graphics.drawString(s, (len-s.length()*20)/2, 32*18);
+		
+	}
+	
+	public void bestTime(Graphics graphics, long bt) {
+		String s;
+		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
+		s = "Best time: " + String.valueOf(bt/60) + "minutes : " + String.valueOf(bt%60 + "seconds");
+		graphics.drawString(s, (len-s.length()*10)/2, 32*2);
 	}
 	
 	private int[] readDirection(char direction, int posX, int posY) {

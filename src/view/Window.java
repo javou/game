@@ -3,9 +3,11 @@ package view;
 import java.awt.*;
 import javax.swing.JFrame;
 
+import resources.Constants;
+
 public class Window implements IWindow {
-	public static final int HEIGHT = 32*20;
-	public static final int WIDTH = 32*20;
+	public static final int HEIGHT = Constants.CELL_NUMBER * Constants.CELL_SIZE;
+	public static final int WIDTH = Constants.CELL_NUMBER * Constants.CELL_SIZE;
 	private static JFrame jframe;
 	private static Window window;
 	
