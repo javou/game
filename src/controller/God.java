@@ -46,7 +46,11 @@ public class God {
 		assembler.restart();
 		castle = assembler.getCastle();
 		floorActors = castle.getFloorActors();
-		hero = castle.getHero();
+		hero = Hero.getInstance();
+		GameScreen.getInstance().restart();
+		god.nameHero();
+		god.gameLoop();
+		
 	}
 
 	private void sortFloorActors() {
@@ -100,9 +104,11 @@ public class God {
 				
 			}
 			while (gameState == -1 || gameState == 2) {
-				if (nextAction.getKey() == KeyEvent.VK_R) {
+				System.out.print("");
+				if (nextAction.getKey() != 0) {
+					gameState = 0;
 					restart();
-					gameState = 1;
+					
 				}
 			}
 		}

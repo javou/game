@@ -35,19 +35,23 @@ public class Renderer {
 		graphics.drawString("Hero name: " + Hero.getInstance().getName(), 5*32, 18*32);
 	}
 	
-	public void gameOverScreen(Graphics graphics){
+	public void gameOverScreen(Graphics graphics,long time){
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 20));
 		graphics.drawString("Monster: so weak, I was expecting more fun", 32, 150);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
+		graphics.drawString(String.valueOf(time/60) + " : ",32*10-50,32*8 );
+		graphics.drawString(String.valueOf(time%60),32*10+10,32*8 );
 		graphics.drawString("GAME OVER!", 35*5, 32*10);
 	}
 	
-	public void victoryScreen(Graphics graphics){
+	public void victoryScreen(Graphics graphics, long time){
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("Verdana", Font.PLAIN, 50));
-		graphics.drawString("Congratualations!!!", 35*5, 32*10);
-		graphics.drawString("You saved the castle", 35*5, 32*11);
+		graphics.drawString("Congratualations!!!", 32*3, 32*9);
+		graphics.drawString("You saved the castle", 32*1, 32*11);
+		graphics.drawString(String.valueOf(time/60) + " : ",32*10-50,32*8 );
+		graphics.drawString(String.valueOf(time%60),32*10+10,32*8 );
 	}
 	
 	private int[] readDirection(char direction, int posX, int posY) {
@@ -285,11 +289,13 @@ public class Renderer {
 		}
 	}
 	
-	public void heroStatus(Graphics graphics, IActor hero) {
+	public void heroStatus(Graphics graphics, IActor hero, long time) {
 		graphics.setColor(Color.WHITE);
 		graphics.drawRoundRect(10, 10, Constants.CELL_SIZE*4, Constants.CELL_SIZE*3, 10, 10);
 		graphics.setFont(new Font("Verdana", Font.BOLD, 15));
 		graphics.drawString(hero.getName(),20,25 );
+		graphics.drawString(String.valueOf(time/60) + " : ",32*10-25,25 );
+		graphics.drawString(String.valueOf(time%60),32*10+10,25 );
 		graphics.drawString("HP:" + String.valueOf(hero.getHp()),20,40 );
 		graphics.drawString("Speed: " + String.valueOf(hero.getSpeed()),20,55 );
 		graphics.drawString("Armour: " + String.valueOf(hero.getArmour()),20,70);

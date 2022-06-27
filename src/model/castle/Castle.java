@@ -47,6 +47,7 @@ public class Castle implements ICastle {
 		IActor hero = Hero.getInstance();
 		hero.restart();
 		castle = new Castle();
+		
 	}
 	
 	public static Castle getInstance() {

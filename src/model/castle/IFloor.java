@@ -12,4 +12,5 @@ public interface IFloor {
 	public ArrayList<IActor> getActors();
 	public boolean getHeroTrail(int x, int y);
 	public void setHeroTrail(int x, int y);
+	public void addHero(IActor hero);
 }
