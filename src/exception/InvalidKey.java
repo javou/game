@@ -1,18 +1,10 @@
 package exception;
 
-/*
-import view.GameScreen;
-import view.IGameScreenView;
-*/
-
 public class InvalidKey extends GameException {
-	// Indica que a ultima tecla apertada √© inv√°lida.
+	// Indica que a ultima tecla apertada È inv·lida.
 	
 	private static final long serialVersionUID = 5166517148764999980L;
-	// private IGameScreen gmv = GameScreen.getInstance();
 	public InvalidKey(String errorMessage) {
         super(errorMessage);
-        // gmv.setMessage(errorMessage);
-        
     }
 }

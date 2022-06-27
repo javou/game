@@ -10,9 +10,8 @@ import model.actor.Hero;
 import model.actor.IActor;
 import model.castle.ICastleController;
 import view.GameScreen;
-import view.IGameScreen;
 
-public class God {
+public class God implements IGod {
 	private static God god; //lazy way, singleton pattern
 	private Assembler assembler = Assembler.getInstance();
 	private NextAction nextAction = NextAction.getInstance();
@@ -36,10 +35,6 @@ public class God {
 	
 	public int getGameState() {
 		return gameState;
-	}
-
-	public void setGameState(int gameState) { // remove?
-		this.gameState = gameState;
 	}
 	
 	private void restart() {
@@ -65,7 +60,6 @@ public class God {
 	
 	public void nameHero() {
 		int key = 0;
-		IGameScreen gs = GameScreen.getInstance(); // remove?
 		while(key != KeyEvent.VK_ENTER) {
 			key = nextAction.getKey();
 			if(key == KeyEvent.VK_BACK_SPACE)
@@ -73,9 +67,9 @@ public class God {
 			else if(key >= 65 && key <= 90) {
 				hero.setName(KeyEvent.getKeyText(key));
 			}
-			System.out.print("");//it needs something here to make the rendering works
+			System.out.print("");//it needs something here to make the rendering work
 		}
-		setGameState(1);	
+		this.gameState = 1;	
 	}
 	
 	public void gameLoop() {
@@ -144,7 +138,7 @@ public class God {
 		else if (action == 81)
 			actor.usePotion();
 		else
-			throw new exception.InvalidKey("Tecla invÃ¡lida");
+			throw new exception.InvalidKey("Tecla inválida");
 	}
 	
 	private void moveActorUp(IActor actor) throws InvalidMovement {
@@ -157,7 +151,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1));
 			else
-				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
@@ -171,7 +165,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
@@ -185,7 +179,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1));
 			else
-				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
@@ -199,7 +193,7 @@ public class God {
 			if (castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Movimento invï¿½lido"); 
+				throw new exception.InvalidMovement("Movimento inválido"); 
 		}
 	}
 	
@@ -211,7 +205,7 @@ public class God {
 				castle.removeActorAtCurrentFloor(target);
 				floorActors = castle.getFloorActors();
 				sortFloorActors();
-				if (target.getName() == "1")
+				if (target.getId() == "1")
 					bossAlive = false;
 			}
 		}
@@ -366,14 +360,6 @@ public class God {
 		floorActors = castle.getFloorActors();
 		sortFloorActors();
 	}
-	
-	// teste
-	/*
-	public static void moveHero() {
-		GameScreen.setMessage("");//always reset
-		
-	}
-	*/
 	
 
 	private void interactWithDestination(int x, int y, IActor actor) {

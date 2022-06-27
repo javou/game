@@ -8,4 +8,5 @@ public interface IActorView {
 	public int getArmour();
 	public int getDamage();
 	public String getName();
+	public String getId();
 }

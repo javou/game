@@ -3,6 +3,7 @@ package view;
 import javax.swing.JPanel;
 
 import controller.God;
+import controller.IGod;
 import controller.NextAction;
 import model.castle.Castle;
 import model.castle.ICastleView;
@@ -18,10 +19,9 @@ public class GameScreen extends JPanel implements IGameScreen{
 	
 	private static GameScreen gameScreen;
 	private Renderer renderer;
-	private static boolean printOnce = true;
 	private static String message = "";
 	private ICastleView castle;
-	private God god = God.getInstance();
+	private IGod god = God.getInstance();
 	private long startTime = 0;
 	private long stopTime = 0;
 	private boolean running = false;
@@ -67,8 +67,9 @@ public class GameScreen extends JPanel implements IGameScreen{
 				}
 				graphics.setColor(Color.BLACK);
 				graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-				renderer.drawFloor(graphics, castle.getCurrentFloor());
-				renderer.drawActors(graphics, castle.getCurrentFloor());
+				//renderer.drawFloor(graphics, castle.getCurrentFloor());
+				//renderer.drawActors(graphics, castle.getCurrentFloor());
+				renderer.rayTracing(graphics, castle.getCurrentFloor());
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics, castle.getCurrentFloor().getHero(),(System.currentTimeMillis()-startTime)/1000);
 				
@@ -100,10 +101,6 @@ public class GameScreen extends JPanel implements IGameScreen{
 			e.printStackTrace();
 		}
 		repaint();
-	}
-
-	public void disablePrintOnce() {
-		printOnce = false;
 	}
 
 	public String getMessage() {

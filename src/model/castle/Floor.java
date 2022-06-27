@@ -10,10 +10,8 @@ public class Floor implements IFloor {
 	private ArrayList<IActor> actors;
 	private IActor hero;
 	private int spawnX, spawnY;
-	private boolean darkMode;//in the future, a floor might be dark and the hero must use a light source to see around
 	
-	public Floor(boolean darkMode, String[] floorData) {
-		this.darkMode = darkMode;
+	public Floor(String[] floorData) {
 		tiles = new Tile[floorData.length][];
 		this.actors = new ArrayList<IActor>();
 		

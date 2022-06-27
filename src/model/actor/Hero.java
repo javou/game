@@ -13,19 +13,19 @@ public class Hero extends Actor {
 	private int weaponLevel = 0; 
 	private boolean weaponIsEquipped = false;
 	
-	private Hero(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
-		super(name, hpMax, speed, armour, evasion, damage, posx, posy);		
+	private Hero(String id, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
+		super(id, hpMax, speed, armour, evasion, damage, posx, posy);		
 	}
 	
 	public static Hero getInstance() {
 		if (hero == null) {
-			hero = new Hero("", 100, 10, 0, 0, 10, 0, 0);
+			hero = new Hero("hero", 100, 10, 0, 0, 10, 0, 0);
 		}
 		return hero;
 	}
 	
 	public void restart() {
-		hero = new Hero("", 100, 10, 0, 0, 10, 0, 0);
+		hero = new Hero("hero", 100, 10, 0, 0, 10, 0, 0);
 	}
 	
 	public int countPotions() {
@@ -58,19 +58,6 @@ public class Hero extends Actor {
 		this.damage += 5;
 		weaponLevel++;
 	}
-	
-	/*
-	public void improveArmor(int n) { 
-		this.armour += n;
-	}
-	*/
-	
-	/*
-	public void improveDamage(int n) {
-		this.damage += n;
-	}
-	*/
-	
 	
 	public boolean isArmorIsEquipped() {
 		return armorIsEquipped;

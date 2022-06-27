@@ -1,13 +1,14 @@
 package model.actor;
 
 public class Actor implements IActor {
+	protected String id = "";
 	protected String name = "";
 	protected int hp, hpMax, speed, damage, armour, evasion;
 	protected int energy = 0;
 	protected int posx, posy;
 	
-	public Actor(String name, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
-		this.name = name;
+	public Actor(String id, int hpMax, int speed, int armour, int evasion, int damage, int posx, int posy) {
+		this.id = id;
 		this.hpMax = hpMax;
 		hp = hpMax;
 		this.speed = speed;
@@ -16,6 +17,10 @@ public class Actor implements IActor {
 		this.damage = damage;
 		this.posx = posx;
 		this.posy = posy;
+	}
+	
+	public String getId() {
+		return id;
 	}
 	
 	public void setName(String name) {

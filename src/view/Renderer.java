@@ -88,7 +88,7 @@ public class Renderer {
 		return newCoordinates;
 	}
 	
-	private void createRay1(Graphics graphics, IFloor floor, char direction, int posHeroX, int posHeroY) {
+	private void createRay1(Graphics graphics, IFloor floor, char direction, int posHeroX, int posHeroY, ArrayList<IActor> actors) {
 		int posX = posHeroX;
 		int posY = posHeroY;
 		while (true) {
@@ -108,15 +108,25 @@ public class Renderer {
 											offset(posY, posHeroY),
 											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
 											null);
+				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+					break;
+			} else {
+				for (IActor actor : actors) {
+					if (actor.getPosX() == posX && actor.getPosY() == posY) {
+						texture = Textures.getTexture(actor.getId());
+						graphics.drawImage(texture, offset(posX, posHeroX),
+								offset(posY, posHeroY),
+								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+								null);
+					}
+				}
 			}
-			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
-				break;
 			posX = readDirection(direction, posX, posY)[0];
 			posY = readDirection(direction, posX, posY)[1];
 		}
 	}
 	
-	private void createRay11(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+	private void createRay11(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY, ArrayList<IActor> actors) {
 		int posX = posHeroX;
 		int posY = posHeroY;
 		char[] instructions = {direction1, direction2};
@@ -138,16 +148,26 @@ public class Renderer {
 											offset(posY, posHeroY),
 											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
 											null);
+				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+					break;
+			} else {
+				for (IActor actor : actors) {
+					if (actor.getPosX() == posX && actor.getPosY() == posY) {
+						texture = Textures.getTexture(actor.getId());
+						graphics.drawImage(texture, offset(posX, posHeroX),
+								offset(posY, posHeroY),
+								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+								null);
+					}
+				}
 			}
-			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
-				break;
 			posX = readDirection(instructions[i], posX, posY)[0];
 			posY = readDirection(instructions[i], posX, posY)[1];
 			i = (i + 1) % 2;
 		}
 	}
 	
-	private void createRay21(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+	private void createRay21(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY, ArrayList<IActor> actors) {
 		int posX = posHeroX;
 		int posY = posHeroY;
 		char[] instructions = {direction1, direction1, direction2};
@@ -169,16 +189,26 @@ public class Renderer {
 											offset(posY, posHeroY),
 											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
 											null);
+				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+					break;
+			} else {
+				for (IActor actor : actors) {
+					if (actor.getPosX() == posX && actor.getPosY() == posY) {
+						texture = Textures.getTexture(actor.getId());
+						graphics.drawImage(texture, offset(posX, posHeroX),
+								offset(posY, posHeroY),
+								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+								null);
+					}
+				}
 			}
-			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
-				break;
 			posX = readDirection(instructions[i], posX, posY)[0];
 			posY = readDirection(instructions[i], posX, posY)[1];
 			i = (i + 1) % 3;
 		}
 	}
 	
-	private void createRay12(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+	private void createRay12(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY, ArrayList<IActor> actors) {
 		int posX = posHeroX;
 		int posY = posHeroY;
 		char[] instructions = {direction1, direction2, direction2};
@@ -200,15 +230,25 @@ public class Renderer {
 											offset(posY, posHeroY),
 											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
 											null);
+				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+					break;
+			} else {
+				for (IActor actor : actors) {
+					if (actor.getPosX() == posX && actor.getPosY() == posY) {
+						texture = Textures.getTexture(actor.getId());
+						graphics.drawImage(texture, offset(posX, posHeroX),
+								offset(posY, posHeroY),
+								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+								null);
+					}
+				}
 			}
-			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
-				break;
 			posX = readDirection(instructions[i], posX, posY)[0];
 			posY = readDirection(instructions[i], posX, posY)[1];
 			i = (i + 1) % 3;
 		}
 	}
-	private void createRay31(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY) {
+	private void createRay31(Graphics graphics, IFloor floor, char direction1, char direction2, int posHeroX, int posHeroY, ArrayList<IActor> actors) {
 		int posX = posHeroX;
 		int posY = posHeroY;
 		char[] instructions = {direction1, direction1, direction1, direction2};
@@ -230,35 +270,48 @@ public class Renderer {
 											offset(posY, posHeroY),
 											texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
 											null);
+				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
+					break;
+			} else {
+				for (IActor actor : actors) {
+					if (actor.getPosX() == posX && actor.getPosY() == posY) {
+						texture = Textures.getTexture(actor.getId());
+						graphics.drawImage(texture, offset(posX, posHeroX),
+								offset(posY, posHeroY),
+								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+								null);
+					}
+				}
 			}
-			if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
-				break;
 			posX = readDirection(instructions[i], posX, posY)[0];
 			posY = readDirection(instructions[i], posX, posY)[1];
 			i = (i + 1) % 4;
 		}
 	}
 	
+	public void rayTracing (Graphics graphics, IFloor floor) {
+		int posHeroX = floor.getHero().getPosX();
+		int posHeroY = floor.getHero().getPosY();
+		ArrayList<IActor> actors = floor.getActors();
+		
+		char[] directions = {'u', 'r', 'd', 'l'};
+		for (int i = 0; i < 4; i++) {
+			createRay1(graphics, floor, directions[i], posHeroX, posHeroY, actors);
+			createRay11(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY, actors);
+			createRay11(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY, actors);
+			createRay21(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY, actors);
+			createRay21(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY, actors);
+			createRay12(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY, actors);
+			createRay12(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY, actors);
+			createRay31(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY, actors);
+			createRay31(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY, actors);
+		}
+		
+	}
+	
 	public void drawFloor(Graphics graphics, IFloor floor) {
 		int posHeroX = floor.getHero().getPosX();
 		int posHeroY = floor.getHero().getPosY();
-		
-		/*
-		char[] directions = {'u', 'r', 'd', 'l'};
-		for (int i = 0; i < 4; i++) {
-			createRay1(graphics, floor, directions[i], posHeroX, posHeroY);
-			createRay11(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
-			createRay11(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
-			createRay21(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
-			createRay21(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
-			createRay12(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
-			createRay12(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
-			createRay31(graphics, floor, directions[i], directions[(i + 1) % 4], posHeroX, posHeroY);
-			createRay31(graphics, floor, directions[(i + 1) % 4], directions[i], posHeroX, posHeroY);
-		}
-		*/
-		
-		
 		floor.setHeroTrail(posHeroX, posHeroY);	
 		BufferedImage texture;
 		for(int i = 0; i < floor.getHeight(); i++) {
@@ -338,29 +391,11 @@ public class Renderer {
 		}
 		
 	}
-	/*
-	public void drawEnemies(Graphics graphics, IFloor floor, IHero hero) { // drawActors
-		ArrayList<Enemy> enemies = God.getInstance().getCastle().getCurrentFloor().getMonsters(); // gameScreen should pass actors
-		if(enemies != null) {
-			BufferedImage texture;
-			int posHeroX = hero.getPosX();
-			int posHeroY = hero.getPosY();
-			for(Enemy enemy : enemies) {
-				System.out.println(enemy.getName());
-				texture = Textures.getTexture(enemy.getName());
-				graphics.drawImage(texture, offset(enemy.getPosX(),posHeroX),
-						offset(enemy.getPosY(),posHeroY) ,
-	                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);
-			}
-		}
-	}
-	*/
 	
 	public void drawActors(Graphics graphics, IFloor floor) {
 		ArrayList<IActor> actors = floor.getActors(); 
 		if(actors != null) {
 			BufferedImage texture;
-			
 			int posHeroX = floor.getHero().getPosX();
 			int posHeroY = floor.getHero().getPosY();
 			//System.out.println(posHeroX);
@@ -378,7 +413,7 @@ public class Renderer {
 								|| floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() + 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() - 1)
 								|| floor.getHeroTrail(actor.getPosX() + 1,actor.getPosY() - 1) || floor.getHeroTrail(actor.getPosX() - 1,actor.getPosY() - 1)) {
 								
-							texture = Textures.getTexture(actor.getName());
+							texture = Textures.getTexture(actor.getId());
 							graphics.drawImage(texture, offset(actor.getPosX(),posHeroX),
 									offset(actor.getPosY(),posHeroY) ,
 				                    texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM, null);

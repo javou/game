@@ -18,25 +18,25 @@ public class Castle implements ICastle {
 		ArrayList<Floor> aux = new ArrayList<Floor>();
 		
 		//starting floor
-		Floor firstFloor = new Floor(true, Constants.FIRST_ROOM);
+		Floor firstFloor = new Floor(Constants.FIRST_ROOM);
 		floors.add(firstFloor);
 		
 		//level 1
-		aux.add(new Floor(true, Constants.ENTRY_1));
-		aux.add(new Floor(true, Constants.ENTRY_2));
+		aux.add(new Floor(Constants.ENTRY_1));
+		aux.add(new Floor(Constants.ENTRY_2));
 		Collections.shuffle(aux);
 		floors.add(aux.get(0));
 		aux.clear();
 		
 		//level 2
-		aux.add(new Floor(true, Constants.ENTRY_3));
-		aux.add(new Floor(true, Constants.ENTRY_4));
+		aux.add(new Floor(Constants.ENTRY_3));
+		aux.add(new Floor(Constants.ENTRY_4));
 		Collections.shuffle(aux);
 		floors.add(aux.get(0));
 		aux.clear();
 		
 		//final floor
-		Floor finalFloor = new Floor(true, Constants.FINAL_ROOM);
+		Floor finalFloor = new Floor(Constants.FINAL_ROOM);
 		floors.add(finalFloor);
 		
 		IActor hero = Hero.getInstance();
@@ -90,7 +90,6 @@ public class Castle implements ICastle {
 	
 	public void updateCurrentFloor() {
 		IActor hero = floors.get(currentFloor).getHero();
-		// remove hero
 		currentFloor += 1;
 		floors.get(currentFloor).addHero(hero);
 	}
@@ -111,20 +110,4 @@ public class Castle implements ICastle {
 	public IActor getHero() {
 		return floors.get(currentFloor).getHero();
 	}
-	
-	/*
-	public int getHeroPosX() {
-		return floors.get(currentFloor).getHero().getPosX();
-	}
-	
-	public int getHeroPosY() {
-		return floors.get(currentFloor).getHero().getPosY();
-	}
-	*/
-	
-	/*
-	public void moveHeroNextFloor() {
-		currentFloor++;
-	}
-	*/
 }

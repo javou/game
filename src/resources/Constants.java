@@ -4,9 +4,9 @@ package resources;
 public class Constants {
 	public static final String[] FIRST_ROOM = 
 		{"####D####",
-		 "##  1  ##",
-		 "##  H  ##",
 		 "##     ##",
+		 "##  H  ##",
+		 "##   2 ##",
 		 "##     ##",
 		 "##  P  ##",
 		 "#########"};
