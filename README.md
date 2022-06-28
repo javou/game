@@ -37,4 +37,4 @@ R - Recomaçar a partida quando morrer ou ganhar
 
 ## Diagrama Geral da Arquitetura do Jogo
 
-![](assets/Arquitetura.png)
+![](assets/arquitetura.png)
