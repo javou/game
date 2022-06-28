@@ -10,11 +10,13 @@ import model.actor.Hero;
 import model.actor.IActor;
 import model.castle.ICastleController;
 import view.GameScreen;
+import view.INextAction;
+import view.NextAction;
 
 public class God implements IGod {
 	private static God god; //lazy way, singleton pattern
 	private Assembler assembler = Assembler.getInstance();
-	private NextAction nextAction = NextAction.getInstance();
+	private INextAction nextAction = NextAction.getInstance();
 	private ICastleController castle;
 	private ArrayList<IActor> floorActors;
 	private IActor hero;

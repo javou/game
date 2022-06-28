@@ -1,9 +1,9 @@
-package controller;
+package view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class NextAction implements KeyListener {
+public class NextAction implements KeyListener, INextAction {
 	private static NextAction nextAction;
 	private int key;
 	

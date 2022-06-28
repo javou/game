@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 
 import controller.God;
 import controller.IGod;
-import controller.NextAction;
 import model.castle.Castle;
 import model.castle.ICastleView;
 import resources.Textures;
@@ -51,16 +50,13 @@ public class GameScreen extends JPanel implements IGameScreen{
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponents(graphics);
-		
 		try {
-			//System.out.println(god.getGameState());
 			if(god.getGameState() == 0) {
 			graphics.setColor(Color.BLACK);
 			graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 			renderer.firstScreen(graphics);
 			}
 			else if(god.getGameState() == 1) {
-				
 				if(!running) {
 					this.startTime = System.currentTimeMillis();
 					running = true;
@@ -72,7 +68,6 @@ public class GameScreen extends JPanel implements IGameScreen{
 				renderer.rayTracing(graphics, castle.getCurrentFloor());
 				renderer.messageBox(graphics, message);
 				renderer.heroStatus(graphics, castle.getCurrentFloor().getHero(),(System.currentTimeMillis()-startTime)/1000);
-				
 			}
 			else if(god.getGameState() == -1) {
 				//gameover
