@@ -26,4 +26,6 @@ public interface IActorController {
 	public boolean isHeroSeen();
 	public void setHeroSeen(boolean heroSeen);
 	public void restart();
+	public int getArmourLevel();
+	public int getWeaponLevel();
 }

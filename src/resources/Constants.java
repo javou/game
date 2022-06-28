@@ -2,7 +2,7 @@ package resources;
 
 //C - chest, H - hero, # - wall
 public class Constants {
-	public static final String[] FIRST_ROOM = 
+	public static final String[] FIRST_ROOM  = 
 		{"####D####",
 		 "##     ##",
 		 "##  H  ##",
@@ -10,7 +10,7 @@ public class Constants {
 		 "##     ##",
 		 "##  P  ##",
 		 "#########"};
-	public static final String[] ENTRY_1 = 
+	public static final String[] ENTRY_1= 
 		{"#######D#######",
 		 "#C   2   2   C#",
 		 "######   ######",
@@ -26,16 +26,16 @@ public class Constants {
 		 "#   #    #1   #",
 		 "#   #    #   P#",
 		 "#   #    ######",
-		 "#  C#         #",
+		 "#  C#1        #",
 		 "#####         #",
 		 "#             #",
-		 "#             #",
-		 "# H           D",
+		 "# CP          #",
+		 "# HPCCCC      D",
 		 "###############"};
 
 	public static final String[] ENTRY_2 = 
 		{"####################",
-		 "# C                #",
+		 "# C                D",
 		 "#                  #",
 		 "#       P          #",
 		 "#                  #",

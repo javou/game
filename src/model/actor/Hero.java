@@ -71,6 +71,14 @@ public class Hero extends Actor {
 	public void setWeaponIsEquipped(boolean swordIsEquipped) {
 		this.weaponIsEquipped = swordIsEquipped;
 	}
+
+	public int getArmourLevel() {
+		return armourLevel;
+	}
+
+	public int getWeaponLevel() {
+		return weaponLevel;
+	}
 	
 	/*
 	public void equipItem(Item newItem) {

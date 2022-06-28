@@ -115,4 +115,16 @@ public class Actor implements IActor {
 	public void setHeroSeen(boolean heroSeen) {}
 	
 	public void restart() {}
+
+	@Override
+	public int getArmourLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getWeaponLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -138,7 +138,7 @@ public class God implements IGod {
 		else if (action == 81)
 			actor.usePotion();
 		else
-			throw new exception.InvalidKey("Tecla inválida");
+			throw new exception.InvalidKey("Tecla invï¿½lida");
 	}
 	
 	private void moveActorUp(IActor actor) throws InvalidMovement {
@@ -151,7 +151,7 @@ public class God implements IGod {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() - 1));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("invalid movement"); 
 		}
 	}
 	
@@ -165,7 +165,7 @@ public class God implements IGod {
 			if (castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() - 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("you're not a ghost"); 
 		}
 	}
 	
@@ -179,7 +179,7 @@ public class God implements IGod {
 			if (castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX(), actor.getPosY() + 1));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("you're not a ghost"); 
 		}
 	}
 	
@@ -193,7 +193,7 @@ public class God implements IGod {
 			if (castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()) != null)
 				attack(actor, castle.getActorAtTile(actor.getPosX() + 1, actor.getPosY()));
 			else
-				throw new exception.InvalidMovement("Movimento inválido"); 
+				throw new exception.InvalidMovement("you're not a ghost"); 
 		}
 	}
 	

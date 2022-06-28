@@ -81,7 +81,10 @@ public class GameScreen extends JPanel implements IGameScreen{
 					this.running = false;
 				}
 				renderer.gameOverScreen(graphics, (stopTime - startTime)/1000);
-				renderer.bestTime(graphics, bestTime);
+				if(bestTime > 99999999)
+					renderer.bestTime(graphics, 0);
+				else
+					renderer.bestTime(graphics, bestTime);
 				
 			}
 			else if(god.getGameState() == 2) {
