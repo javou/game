@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import model.castle.Castle;
-import model.castle.ICastle;
+import model.castle.ICastleController;
 // import resources.Music;
 import view.GameScreen;
 import view.IGameScreen;
@@ -14,7 +14,7 @@ import view.Window;
 public class Assembler {
 	private static Assembler assembler;
 	private IWindow window;
-	private ICastle castle;
+	private ICastleController castle;
 	
 	private Assembler() {}
 	
@@ -45,7 +45,7 @@ public class Assembler {
 		castle = Castle.getInstance();
 	}
 	
-	public ICastle getCastle() {
+	public ICastleController getCastle() {
 		return castle;
 	}
 }
