@@ -2,7 +2,7 @@
 
 # Descrição Resumida do Projeto/Jogo
 
-> Descreva resumidamente o jogo e seu propósito.
+> O jogo Haunted Castle é baseado no estilo de jogo roguelike, onde o herói precisa vasculhar as salas na procura do vilão principal. Para tanto, ele irá precisar derrotar inimigos aliados do vilão. Na sua jornada, o héroi irá ficar mais forte e encontrar itens e equipamentos. Além disso, esse jogo não possui check points ou savepoints, então esse jogo não é muito longo e permite recomeçar o jogo caso o herói morra ou queira melhorar seu tempo (matar o vilão no menor tempo possível).
 
 # Equipe
 * Artur Paulos Pinheiro - 246955
