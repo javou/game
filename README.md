@@ -1,4 +1,4 @@
-# Projeto Haunted cast
+# Projeto Haunted Castle
 
 # Descrição Resumida do Projeto/Jogo
 
