@@ -50,7 +50,7 @@ public class Hero extends Actor {
 	}
 	
 	public void improveArmour() {
-		this.armour += 5; // chest improves stats by a fixed amount
+		this.armour += 3; // chest improves stats by a fixed amount
 		armourLevel++;
 	}
 	

@@ -111,15 +111,14 @@ public class Renderer {
 											null);
 				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
 					break;
-			} else {
-				for (IActor actor : actors) {
-					if (actor.getPosX() == posX && actor.getPosY() == posY) {
-						texture = Textures.getTexture(actor.getId());
-						graphics.drawImage(texture, offset(posX, posHeroX),
-								offset(posY, posHeroY),
-								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-								null);
-					}
+			}
+			for (IActor actor : actors) {
+				if (actor.getPosX() == posX && actor.getPosY() == posY) {
+					texture = Textures.getTexture(actor.getId());
+					graphics.drawImage(texture, offset(posX, posHeroX),
+							offset(posY, posHeroY),
+							texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+							null);
 				}
 			}
 			posX = readDirection(direction, posX, posY)[0];
@@ -151,15 +150,14 @@ public class Renderer {
 											null);
 				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
 					break;
-			} else {
-				for (IActor actor : actors) {
-					if (actor.getPosX() == posX && actor.getPosY() == posY) {
-						texture = Textures.getTexture(actor.getId());
-						graphics.drawImage(texture, offset(posX, posHeroX),
-								offset(posY, posHeroY),
-								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-								null);
-					}
+			}
+			for (IActor actor : actors) {
+				if (actor.getPosX() == posX && actor.getPosY() == posY) {
+					texture = Textures.getTexture(actor.getId());
+					graphics.drawImage(texture, offset(posX, posHeroX),
+							offset(posY, posHeroY),
+							texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+							null);
 				}
 			}
 			posX = readDirection(instructions[i], posX, posY)[0];
@@ -192,15 +190,14 @@ public class Renderer {
 											null);
 				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
 					break;
-			} else {
-				for (IActor actor : actors) {
-					if (actor.getPosX() == posX && actor.getPosY() == posY) {
-						texture = Textures.getTexture(actor.getId());
-						graphics.drawImage(texture, offset(posX, posHeroX),
-								offset(posY, posHeroY),
-								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-								null);
-					}
+			}
+			for (IActor actor : actors) {
+				if (actor.getPosX() == posX && actor.getPosY() == posY) {
+					texture = Textures.getTexture(actor.getId());
+					graphics.drawImage(texture, offset(posX, posHeroX),
+							offset(posY, posHeroY),
+							texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+							null);
 				}
 			}
 			posX = readDirection(instructions[i], posX, posY)[0];
@@ -233,15 +230,14 @@ public class Renderer {
 											null);
 				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
 					break;
-			} else {
-				for (IActor actor : actors) {
-					if (actor.getPosX() == posX && actor.getPosY() == posY) {
-						texture = Textures.getTexture(actor.getId());
-						graphics.drawImage(texture, offset(posX, posHeroX),
-								offset(posY, posHeroY),
-								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-								null);
-					}
+			}
+			for (IActor actor : actors) {
+				if (actor.getPosX() == posX && actor.getPosY() == posY) {
+					texture = Textures.getTexture(actor.getId());
+					graphics.drawImage(texture, offset(posX, posHeroX),
+							offset(posY, posHeroY),
+							texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+							null);
 				}
 			}
 			posX = readDirection(instructions[i], posX, posY)[0];
@@ -273,15 +269,14 @@ public class Renderer {
 											null);
 				if (texture == Textures.getTexture("wall") || texture == Textures.getTexture("door"))
 					break;
-			} else {
-				for (IActor actor : actors) {
-					if (actor.getPosX() == posX && actor.getPosY() == posY) {
-						texture = Textures.getTexture(actor.getId());
-						graphics.drawImage(texture, offset(posX, posHeroX),
-								offset(posY, posHeroY),
-								texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
-								null);
-					}
+			}
+			for (IActor actor : actors) {
+				if (actor.getPosX() == posX && actor.getPosY() == posY) {
+					texture = Textures.getTexture(actor.getId());
+					graphics.drawImage(texture, offset(posX, posHeroX),
+							offset(posY, posHeroY),
+							texture.getWidth()*Constants.ZOOM, texture.getHeight()*Constants.ZOOM,
+							null);
 				}
 			}
 			posX = readDirection(instructions[i], posX, posY)[0];
