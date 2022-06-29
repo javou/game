@@ -24,7 +24,9 @@ R - Recomaçar a partida quando morrer ou ganhar
 
 # Arquivo Executável do Jogo
 
-[Arquivo jar](assets/game.jar)
+[Arquivo jar (jdk 17)](assets/game.jar)
+[Arquivo jar (jdk 11)](assets/game_jdk11.jar)
+
 
 # Slides do Projeto
 
