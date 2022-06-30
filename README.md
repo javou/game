@@ -154,3 +154,46 @@ public void paintComponent(Graphics graphics) {
 		}
 	}
 ~~~
+
+# Destaques de Pattern
+
+## Diagrama do Pattern
+> Foram usados 2 design patterns:
+Singleton: Algumas classes só precisam ser instanciadas uma vez e o uso desse design pattern permite garantir isso.
+Facade: Do ponto de vista do usuário, quanto mais simples for para lançar o jogo melhor. A implementação desse design pattern faz com que o usuário precise apenas abrir o jogo e jogar!
+
+## Código do Pattern
+~~~java
+public class Assembler {
+	private static Assembler assembler;
+	private IWindow window;
+	private ICastleController castle;
+	
+	private Assembler() {}
+	
+	public static Assembler getInstance() {
+		if (assembler == null) {
+			assembler = new Assembler();
+		}
+		return assembler;
+	}
+	
+public class App {
+	private static God god;
+	private static Assembler assembler;
+	
+	public static void main(String[] args) {
+		executeGame(); //facade pattern
+	}
+	
+	private static void executeGame() {
+		assembler = Assembler.getInstance();
+		assembler.newGame();
+		god = God.getInstance();
+		god.nameHero();
+		god.gameLoop();
+	}
+}
+~~~
+
+
