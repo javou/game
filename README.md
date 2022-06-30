@@ -52,7 +52,7 @@ A importancia do planejamento do projeto de maneira exaustiva. Ao longo do desen
 
 # Destaques de Código
 
-> O primeiro destaca é o uso do método paintComponent do java swing para a criação da interface gráfica. O jogo possui 4 estados (tela inicial, tela principal, tela de vitória e tela de derrota)
+> O primeiro destaca é o uso do método paintComponent do java swing para a criação da interface gráfica. O jogo possui 4 estados (tela inicial, tela principal, tela de vitória e tela de derrota) e a renderização é feita com base nesse estado. Por exemplo, no estado 1 (player jogando) o método vai ler o modelo e gerar o mapa.
 
 ~~~java
 public void paintComponent(Graphics graphics) {
@@ -106,6 +106,15 @@ public void paintComponent(Graphics graphics) {
 	}
 ~~~
 
+
+
+# Destaques de Orientação a Objetos
+> No jogo, as classes Hero e Enemy são classes filhas da classe mãe Actor. No método gameloop, um vetor actors que contém todos os inimigos e o herói é percorrido a cada iteração. Na versão atual, apenas o herói é inteligente o suficiente para usar itens, poções, e etc. A vantagem desse tipo de implementação é a facilidade de adaptar o código para fazer com que os inimigos possuam uma certa inteligência e usarem items como o herói.
+
+## Diagrama de Classes usada no destaque OO:
+> Sugere-se um diagrama de classes para o destaque, mas podem ser usados outros tipos de diagrama, conforme a necessidade.
+
+## Código do Destaque OO
 ~~~java
 
 	public void gameLoop() {
@@ -144,19 +153,4 @@ public void paintComponent(Graphics graphics) {
 			}
 		}
 	}
-~~~
-
-# Destaques de Orientação a Objetos
-> Destaque partes do código em que a orientação a objetos foi aplicada para aprimorar seu código. Por exemplo, o uso de polimorfismo para ajustar ações conforme o contexto. Sugestão de estrutura:
-
-## Diagrama de Classes usada no destaque OO:
-> Sugere-se um diagrama de classes para o destaque, mas podem ser usados outros tipos de diagrama, conforme a necessidade.
-
-## Código do Destaque OO
-~~~java
-// Recorte do código do pattern seguindo as mesmas diretrizes de outros destaques
-public void algoInteressante(…) {
-   …
-   trechoInteressante = 100;
-}
 ~~~
