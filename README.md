@@ -4,23 +4,23 @@
 
 > O jogo Haunted Castle é baseado no estilo de jogo roguelike, onde o herói precisa vasculhar as salas na procura do vilão principal. Para tanto, ele irá precisar derrotar inimigos aliados do vilão. Na sua jornada, o héroi irá ficar mais forte e encontrar itens e equipamentos. Além disso, esse jogo não possui check points ou savepoints, então esse jogo não é muito longo e permite recomeçar o jogo caso o herói morra ou queira melhorar seu tempo (matar o vilão no menor tempo possível).
 
-W - Andar para cima
+>W - Andar para cima
+>
+>A - Andar para a esquerda
+>
+>S - Andar para baixo
+>
+>D - Andar para a direita
+>
+>Q - Usar poção
 
-A - Andar para a esquerda
+>Para atacar, avance na direção do monstro
 
-S - Andar para baixo
-
-D - Andar para a direita
-
-Q - Usar poção
-
-Para atacar, avance na direção do monstro
-
-R - Recomaçar a partida quando morrer ou ganhar
+>R - Recomaçar a partida quando morrer ou ganhar
 
 # Equipe
-* Artur
-* Marcos
+>* Artur
+>* Marcos
 
 # Arquivo Executável do Jogo
 
@@ -45,10 +45,13 @@ R - Recomaçar a partida quando morrer ou ganhar
 ## Relatório de Evolução
 > Relatório de evolução, descrevendo as evoluções do design do projeto, dificuldades enfrentadas, mudanças de rumo, melhorias e lições aprendidas. Referências aos diagramas e recortes de mudanças são bem-vindos.
 
-O primeiro desafio foi desenvolver um primeiro esboço da arquitetura foi a falta de experiência em como criar uma interface de jogo. Então vários testes foram realizados para testar o java swing e entender o funcionamento da criação de uma interface gráfica.
-No nosso jogo, algumas classes são instanciadas apenas uma vez. Em um primeiro momento, méthodos estáticos para evitar uma dupla instanciação. Após a aula de design patterns, lazy singleton foi implementado.
-A complexidade do nosso jogo depende diretamente da nossa criatividade para gerenciar os eventos durante o jogo. Então, foi difícil ponderar o que deveríamos fazer em uma primeira versão. Então, elaborou-se uma arquitetura de jogo base que pudesse receber upgrades.
-A importancia do planejamento do projeto de maneira exaustiva. Ao longo do desenvolvimento do projeto, houve momentos em que adaptações foram feitas pois não tinhamos considerado certos aspectos no planejamento inicial.  Por exemplo, como reiniciar o jogo uma vez que o jogo chega ao seu fim (vitória ou derrota).
+>O primeiro desafio foi desenvolver um primeiro esboço da arquitetura foi a falta de experiência em como criar uma interface de jogo. Então vários testes foram realizados para testar o java swing e entender o funcionamento da criação de uma interface gráfica.
+>
+>No nosso jogo, algumas classes são instanciadas apenas uma vez. Em um primeiro momento, méthodos estáticos para evitar uma dupla instanciação. Após a aula de design patterns, lazy singleton foi implementado.
+>
+>A complexidade do nosso jogo depende diretamente da nossa criatividade para gerenciar os eventos durante o jogo. Então, foi difícil ponderar o que deveríamos fazer em uma primeira versão. Então, elaborou-se uma arquitetura de jogo base que pudesse receber upgrades.
+>
+>A importancia do planejamento do projeto de maneira exaustiva. Ao longo do desenvolvimento do projeto, houve momentos em que adaptações foram feitas pois não tinhamos considerado certos aspectos no planejamento inicial.  Por exemplo, como reiniciar o jogo uma vez que o jogo chega ao seu fim (vitória ou derrota).
 
 # Destaques de Código
 
@@ -200,22 +203,22 @@ public class App {
 
 # Conclusões e Trabalhos Futuros
 
- Por ser um jogo de RPG, várias melhorias podem ser feitas para melhorar a experiência do usuário e deixar o jogo mais divertido/desafiador. No início, foi difícil ponderar o que poderia ser feito no tempo de um mês. Abaixo seguem algumas melhorias que poderiam ser implementadas:
-
-Mais tipos de ações: atualmente o herói pode se mover, usar poção e atacar um inimigo. Ações como esconder, fugir, e defender poderiam ser adicionados ao jogo.
-
-Movimentação mais otimizada monstros: Em certas condições, é possível prender um monstro em uma parede e o monstro não consegue perseguir o herói. Isso é bem díficil de acontecer na versão atual, mas algo mais interessante poderia ser feito utilizando grafos.
-
-Novos itens, texturas, monstros, equipamentos: Melhorias no design do jogo de maneira geral.
-
-Multiplayer: Adicionar um segundo herói ou mesmo um pet que ajude o herói (pode ser um bot ou um outro jogador)
-
-Sistema de ataque mais complexo: Ataques a distância, uso de 
-
-Mais inteligência para os monstros: Na versão atual, os monstros apenas seguem o herói quando ele se aproxima e ataca ele até a sua morte. Alguns monstros, poderiam ser mais inteligentes e fazer ações mais estratégicas do que apenas perseguir e atacar.
-
-Implementação de efeitos sonoros: A proposta inicial era usar sons de suspenses, músicas de combate, sons de ataques e etc, mas devido há um bug que acontecia em função do computador utilizado, isso não foi implementado.
-
-Raytracing: Na versão atual, alguns cantos não são exibidos quando deriam ser. Então uma melhoria seria criar um lógica que melhorasse esse aspecto.
+>Por ser um jogo de RPG, várias melhorias podem ser feitas para melhorar a experiência do usuário e deixar o jogo mais divertido/desafiador. No início, foi difícil ponderar o que poderia ser feito no tempo de um mês. Abaixo seguem algumas melhorias que poderiam ser implementadas:
+>
+>Mais tipos de ações: atualmente o herói pode se mover, usar poção e atacar um inimigo. Ações como esconder, fugir, e defender poderiam ser adicionados ao jogo.
+>
+>Movimentação mais otimizada monstros: Em certas condições, é possível prender um monstro em uma parede e o monstro não consegue perseguir o herói. Isso é bem díficil de acontecer na versão atual, mas algo mais interessante poderia ser feito utilizando grafos.
+>
+>Novos itens, texturas, monstros, equipamentos: Melhorias no design do jogo de maneira geral.
+>
+>Multiplayer: Adicionar um segundo herói ou mesmo um pet que ajude o herói (pode ser um bot ou um outro jogador)
+>
+>Sistema de ataque mais complexo: Ataques a distância, uso de 
+>
+>Mais inteligência para os monstros: Na versão atual, os monstros apenas seguem o herói quando ele se aproxima e ataca ele até a sua morte. Alguns monstros, poderiam ser mais inteligentes e fazer ações mais estratégicas do que apenas perseguir e atacar.
+>
+>Implementação de efeitos sonoros: A proposta inicial era usar sons de suspenses, músicas de combate, sons de ataques e etc, mas devido há um bug que acontecia em função do computador utilizado, isso não foi implementado.
+>
+>Raytracing: Na versão atual, alguns cantos não são exibidos quando deriam ser. Então uma melhoria seria criar um lógica que melhorasse esse aspecto.
 
 
