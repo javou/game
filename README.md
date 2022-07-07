@@ -377,7 +377,7 @@ Método | Objetivo
 `getWeaponLevel` | Retorna o level da arma.
 `getId` | Retorna o identificador do ator .
 
-### Interface `IDataSetProperties`
+### Interface `IFloor`
 
 Define as informações que podem ser obtidas de um andar.
 
