@@ -377,8 +377,33 @@ Método | Objetivo
 `getWeaponLevel` | Retorna o level da arma.
 `getId` | Retorna o identificador do ator .
 
+### Interface `IDataSetProperties`
 
+Define as informações que podem ser obtidas de um andar.
 
+~~~java
+public interface IFloor {
+	public int getHeight();
+	public int getWidth();
+	public String getTileId(int x, int y);
+	public IActor getHero();
+	public ArrayList<IActor> getActors();
+	public boolean getHeroTrail(int x, int y);
+	public void setHeroTrail(int x, int y);
+	public void addHero(IActor hero);
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`getHeight` | Retorna o tamanho do andar em Y.
+`getWidth` | Retorna o tamanho do andar em X.
+`getTileId` | Retorna o identificador da célula previamente especificada.
+`getHero` | Retorna o herói.
+`getActors` | Retorna os atores naquele andar.
+`getHeroTrail` | Deve ser excluído uma vez que o raytracing for implementado.
+`setHeroTrail` | Deve ser excluído uma vez que o raytracing for implementado.
+`addHero` | Retorna adiciona o herói naquele andar.
 
 # Plano de Exceções
 
