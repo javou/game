@@ -383,17 +383,15 @@ Método | Objetivo
 # Plano de Exceções
 
 ## Diagrama da hierarquia de exceções
-> Elabore um diagrama com a hierarquia de exceções como detalhado a seguir.
+> Na versão atual, apenas excessões relacionadas as entradas e ao tratamento dessas entradas foram implementadas.
 
-![Hierarquia Exceções](exception-hierarchy.png)
+![Hierarquia Exceções](./assets/exception.png)
 
 ## Descrição das classes de exceção
 
-> Monte uma tabela descritiva seguindo o exemplo:
-
 Classe | Descrição
 ----- | -----
-DivisaoInvalida | Engloba todas as exceções de divisões não aceitas.
-DivisaoInutil | Indica que a divisão por 1 é inútil.
-DivisaoNaoInteira | Indica uma divisão não inteira.
+GameException | Engloba todas as exceções.
+InvalidKey | Indica que o usuário pressinou uma técla não válida.
+InvalidMovement | Indica que a tecla pressionada é válida, mas não é possível fazer aquela ação naquele momento.
 
