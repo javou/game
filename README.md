@@ -295,51 +295,90 @@ public interface IDataSet extends ITableProducer, IDataSetProperties {
 
 ## Detalhamento das Interfaces
 
-### Interface `<nome da interface>`
 
-`<Resumo do papel da interface.>`
 
-~~~
-<Interface em Java.>
-~~~
+### Interface `IActor`
 
-Método | Objetivo
--------| --------
-`<id do método em Java>` | `<objetivo do método e descrição dos parâmetros>`
-
-## Exemplo:
-
-### Interface `ITableProducer`
-
-Interface provida por qualquer fonte de dados que os forneça na forma de uma tabela.
+Interface que explicita os acessos que o controller e o view podem ter dos atores (monstros e herói). Para facilitar a interpretação do código, a interface IActor é resultado de duas interfaces  IActorController e IActorView.
 
 ~~~java
-public interface ITableProducer {
-  String[] requestAttributes();
-  String[][] requestInstances();
+public interface IActor extends IActorController, IActorView {
+}
+public interface IActorController {
+	public int getSpeed();
+	public int getEnergy();
+	public void setEnergy(int energy);
+	public int getPosX();
+	public void setPosX(int posx);
+	public int getPosY();
+	public void setPosY(int posy);
+	public int getHp();
+	public void setHp(int hp);
+	public int getArmour();
+	public int getDamage();
+	public void usePotion();
+	public void addPotion();
+	public void improveArmour();
+	public void improveDamage();
+	public boolean isArmorIsEquipped();
+	public void setArmorIsEquipped(boolean armorIsEquipped);
+	public boolean isWeaponIsEquipped();
+	public void setWeaponIsEquipped(boolean swordIsEquipped);
+	public int countPotions();
+	public void setName(String name);
+	public void removeLetterName();
+	public boolean isHeroSeen();
+	public void setHeroSeen(boolean heroSeen);
+	public void restart();
+	public int getArmourLevel();
+	public int getWeaponLevel();
+}
+
+public interface IActorView {
+	public int getSpeed();
+	public int getPosX();
+	public int getPosY();
+	public int getHp();
+	public int getArmour();
+	public int getDamage();
+	public String getName();
+	public String getId();
 }
 ~~~
 
 Método | Objetivo
 -------| --------
-`requestAttributes` | Retorna um vetor com o nome de todos os atributos (colunas) da tabela.
-`requestInstances` | Retorna uma matriz em que cada linha representa uma instância e cada coluna o valor do respectivo atributo (a ordem dos atributos é a mesma daquela fornecida por `requestAttributes`.
+`getSpeed` | Retorna a velocidade do ator.
+`getEnergy` | Retorna a energia do ator.
+`setEnergy` | Atualiaza a energia do ator.
+`getPosX` | Retorna a posição horizontal X.
+`setPosX` | Atualiza a posição horizontal X.
+`getPosY` | Retorna a posição vertical Y.
+`setPosY` | Atualiza a posição vertical Y.
+`getHp` | Retorna a vida do ator .
+`setHp` | Atualiza a vida do ator.
+`getArmour` | Retorna o valor da armadura do ator.
+`getDamage` | Retorna o dano causado pelo ator.
+`usePotion` | Incrementa a vida do ator caso tenha uma poção .
+`addPotion` | Adiciona uma poção ao inventário do ator.
+`improveArmour` | Incrementa o valor da armadura do ator .
+`improveDamage` | Incrementa o valor do dano do ator.
+`isArmorIsEquipped` | Retorna se o ator está usando uma armadura.
+`setArmorIsEquipped` | Define que o ator está usando uma armadura.
+`isWeaponIsEquipped` | Retorna se o ator está usando uma arma.
+`setWeaponIsEquipped` | Define que o ator está usando uma arma.
+`countPotions` | Retorna a quantidade de poções que o ator possui .
+`setName` | Define o nome do ator.
+`removeLetterName` | Remove a última lettra do nome do ator .
+`isHeroSeen` | Retorna se o ator(monstro) viu o herói.
+`setHeroSeen` | Define que o herói foi visto pelo ator(monstro).
+`restart` | Reinicia os status do ator.
+`getArmourLevel` | Retorna o level da armadura.
+`getWeaponLevel` | Retorna o level da arma.
+`getId` | Retorna o identificador do ator .
 
-### Interface `IDataSetProperties`
 
-Define o recurso (usualmente o caminho para um arquivo em disco) que é a fonte de dados.
 
-~~~java
-public interface IDataSetProperties {
-  public String getDataSource();
-  public void setDataSource(String dataSource);
-}
-~~~
-
-Método | Objetivo
--------| --------
-`getDataSource` | Retorna o caminho da fonte de dados.
-`setDataSource` | Define o caminho da fonte de dados, informado através do parâmetro `dataSource`.
 
 # Plano de Exceções
 
