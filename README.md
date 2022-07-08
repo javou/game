@@ -575,5 +575,5 @@ Classe | Descrição
 ----- | -----
 GameException | Engloba todas as exceções.
 InvalidKey | Indica que o usuário pressinou uma técla não válida.
-InvalidMovement | Indica que a tecla pressionada é válida, mas não é possível fazer aquela ação naquele momento.
+InvalidMovement | Indica que um ator se moveu para uma célula para a qual não pode (ex: parede).
 
