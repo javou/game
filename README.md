@@ -2,7 +2,7 @@
 
 # Descrição Resumida do Projeto/Jogo
 
-> O jogo Haunted Castle é baseado no estilo de jogo roguelike, onde o herói precisa vasculhar as salas na procura do vilão principal. Para tanto, ele irá precisar derrotar inimigos aliados do vilão. Na sua jornada, o héroi irá ficar mais forte e encontrar itens e equipamentos. Além disso, esse jogo não possui check points ou savepoints, então esse jogo não é muito longo e permite recomeçar o jogo caso o herói morra ou queira melhorar seu tempo (matar o vilão no menor tempo possível).
+> O jogo Haunted Castle é baseado no estilo de jogo roguelike, onde o herói precisa vasculhar as salas na procura do vilão principal. Para tanto, ele irá precisar derrotar inimigos aliados do vilão. Na sua jornada, o héroi irá ficar mais forte e encontrar itens e equipamentos. Além disso, esse jogo não possui check points ou savepoints, então esse jogo não é muito longo e permite recomeçar o jogo caso o herói morra ou queira melhorar seu tempo (matar o vilão no menor tempo possível). Para garantir melhor rejogabilidade, a geração do mapa do jogo é parcialmente aleatória, combinando diferentes versões de cada nível sempre que o jogo é recomeçado. 
 
 >W - Andar para cima
 >
@@ -37,12 +37,6 @@ PS: Para que o jogo funcione é necessário colocar o arquivo jar e a pasta asse
 [Apresentação](assets/apresentacao.pptx)
 
 [link google docs](https://docs.google.com/presentation/d/1B6teRCCtoXIbOURUIhgIFJ0BdB3L0MHDZnfgQQkIvsU/edit?usp=sharing)
-
-# Diagramas
-
-## Diagrama Geral da Arquitetura do Jogo
-
-![](assets/arquitetura.png)
 
 ## Relatório de Evolução
 > Relatório de evolução, descrevendo as evoluções do design do projeto, dificuldades enfrentadas, mudanças de rumo, melhorias e lições aprendidas. Referências aos diagramas e recortes de mudanças são bem-vindos.
@@ -215,7 +209,7 @@ public class App {
 >
 >Sistema de ataque mais complexo: Ataques à distância, uso de magias
 >
->Mais inteligência para os monstros: Na versão atual, os monstros apenas seguem o herói quando ele se aproxima e ataca ele até a sua morte. Alguns monstros, poderiam ser mais inteligentes e fazer ações mais estratégicas do que apenas perseguir e atacar.
+>Mais inteligência para os monstros: Na versão atual, os monstros apenas seguem o herói quando ele se aproxima e atacam ele até a sua morte. Alguns monstros, poderiam ser mais inteligentes e fazer ações mais estratégicas do que apenas perseguir e atacar.
 >
 >Implementação de efeitos sonoros: A proposta inicial era usar sons de suspenses, músicas de combate, sons de ataques e etc, mas devido há um bug que acontecia em função do computador utilizado, isso não foi implementado.
 >
@@ -231,15 +225,11 @@ public class App {
 
 # Documentação dos Componentes
 
-O vídeo a seguir apresenta um detalhamento de um projeto baseado em componentes:
-
-[![Projeto baseado em Componentes](http://img.youtube.com/vi/1LcSghlin6o/0.jpg)](https://youtu.be/1LcSghlin6o)
-
 # Diagramas
 
 ## Diagrama Geral da Arquitetura do Jogo
 
-> Apresente um diagrama geral da arquitetura do jogo. O formato é livre. A escolha de um ou mais estilos arquiteturais será considerado um diferencial.
+![](assets/arquitetura.png)
 
 > Faça uma breve descrição do diagrama.
 
