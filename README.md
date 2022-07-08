@@ -231,44 +231,24 @@ public class App {
 
 ![](assets/arquitetura.png)
 
-> Faça uma breve descrição do diagrama.
+> A arquitetura do Jogo é do tipo MVC (Model-View-Controller). No diagrama acima, percebe-se que a comunicação entre os três principais elementos (MVC) ocorre de maneira triangular, onde cada um deles interage com ambos os outros. Além disso, a disponibilização de métodos entre componentes ocorre sempre por meio de interfaces.
 
 ## Diagrama Geral de Componentes
 
 > Se você adotou componentes de software, apresente a documentação de componentes conforme o modelo.
 
-### Exemplo 1
+## Componente `Castle`
 
-Este é o diagrama compondo componentes para análise:
-
-![Diagrama Analise](diagrama-componentes-analise.png)
-
-### Exemplo 2
-
-Este é um diagrama inicial do projeto de jogos:
-
-![Diagrama Jogos](diagrama-componentes-jogos.png)
-
-### Exemplo 3
-
-Este é outro diagrama de um projeto de vendas:
-
-![Diagrama Vendas](diagrama-componentes-vendas.png)
-
-Para cada componente será apresentado um documento conforme o modelo a seguir:
-
-## Componente `<Nome do Componente>`
-
-> Resumo do papel do componente e serviços que ele oferece.
+> Responsável por modelar o mapa do jogo, podendo devolver informações sobre o estado atual dele. Possui 3 classes: Castle, que representa o mapa inteiro do jogo, com todos os andares (níveis); Floor, que representa cada andar (nível) do jogo, possuindo uma matriz de Tiles; e Tile, que é a projeção de uma célula de um andar.
 
 ![Componente](diagrama-componente.png)
 
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
-Autores | `<nome dos membros que criaram o componente>`
-Interfaces | `<listagem das interfaces do componente>`
+Classes | `src.model.castle`
+Autores | `Artur e Marcos`
+Interfaces | `ICastleController, ICastleView, IFloor, ICastle`
 
 ### Interfaces
 
@@ -279,13 +259,11 @@ Interfaces associadas a esse componente:
 Interface agregadora do componente em Java:
 
 ~~~java
-public interface IDataSet extends ITableProducer, IDataSetProperties {
+public interface ICastle extends ICastleController, ICastleView {
 }
 ~~~
 
 ## Detalhamento das Interfaces
-
-
 
 ### Interface `IActor`
 
