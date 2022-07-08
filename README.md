@@ -28,7 +28,7 @@
 
 [Arquivo jar (jdk 11)](assets/game_jdk11.jar)
 
-PS: Para que o jogo funcione é necessário colocar o arquivo jar e a pasta assets no mesmo local.
+PS: Para que o jogo funcione é necessário colocar o arquivo jar e a pasta assets no mesmo repositório.
 
 
 # Slides do Projeto
@@ -39,7 +39,6 @@ PS: Para que o jogo funcione é necessário colocar o arquivo jar e a pasta asse
 [link google docs](https://docs.google.com/presentation/d/1B6teRCCtoXIbOURUIhgIFJ0BdB3L0MHDZnfgQQkIvsU/edit?usp=sharing)
 
 ## Relatório de Evolução
-> Relatório de evolução, descrevendo as evoluções do design do projeto, dificuldades enfrentadas, mudanças de rumo, melhorias e lições aprendidas. Referências aos diagramas e recortes de mudanças são bem-vindos.
 
 >O primeiro desafio foi a falta de experiência em como criar uma interface de jogo. Então vários testes foram realizados para testar o java swing e entender o funcionamento da criação de uma interface gráfica.
 >
@@ -51,7 +50,7 @@ PS: Para que o jogo funcione é necessário colocar o arquivo jar e a pasta asse
 
 # Destaques de Código
 
-> O primeiro destaque é o uso do método paintComponent do java swing para a criação da interface gráfica. O jogo possui 4 estados (tela inicial, tela principal, tela de vitória e tela de derrota) e a renderização é feita com base nesse estado. Por exemplo, no estado 1 (player jogando) o método vai ler o modelo e gerar o mapa. Além disso, o método paintComponent não precisa ser chamado em nenhum momento pois isso é feita de forma autônoma pelo javaswing, ou seja, o método será chamado quando ele detectar uma mudança (como se fosse um observer).
+> O primeiro destaque é o uso do método paintComponent do java swing para a criação da interface gráfica. O jogo possui 4 estados (tela inicial, tela principal, tela de vitória e tela de derrota) e a renderização é feita com base nesses estados. Por exemplo, no estado 1 (player jogando) o método vai ler o modelo e gerar a interface para o usuário. Além disso, o método paintComponent não precisa ser chamado em nenhum momento pois isso é feita de forma autônoma pelo javaswing, ou seja, o método será chamado quando ele detectar uma mudança (como se fosse um observer).
 
 ~~~java
 public void paintComponent(Graphics graphics) {
