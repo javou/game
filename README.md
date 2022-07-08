@@ -41,13 +41,13 @@ PS: Para que o jogo funcione é necessário colocar o arquivo jar e a pasta asse
 ## Relatório de Evolução
 > Relatório de evolução, descrevendo as evoluções do design do projeto, dificuldades enfrentadas, mudanças de rumo, melhorias e lições aprendidas. Referências aos diagramas e recortes de mudanças são bem-vindos.
 
->O primeiro desafio foi desenvolver um primeiro esboço da arquitetura foi a falta de experiência em como criar uma interface de jogo. Então vários testes foram realizados para testar o java swing e entender o funcionamento da criação de uma interface gráfica.
+>O primeiro desafio foi a falta de experiência em como criar uma interface de jogo. Então vários testes foram realizados para testar o java swing e entender o funcionamento da criação de uma interface gráfica.
 >
->No nosso jogo, algumas classes são instanciadas apenas uma vez. Em um primeiro momento, méthodos estáticos para evitar uma dupla instanciação. Após a aula de design patterns, lazy singleton foi implementado.
+>No nosso jogo, algumas classes são instanciadas apenas uma vez. Em um primeiro momento, essas classes eram chamadas apenas de forma estática para evitar uma dupla instanciação. Após a aula de design patterns, lazy singleton foi implementado.
 >
 >A complexidade do nosso jogo depende diretamente da nossa criatividade para gerenciar os eventos durante o jogo. Então, foi difícil ponderar o que deveríamos fazer em uma primeira versão. Então, elaborou-se uma arquitetura de jogo base que pudesse receber upgrades.
 >
->A importancia do planejamento do projeto de maneira exaustiva. Ao longo do desenvolvimento do projeto, houve momentos em que adaptações foram feitas pois não tinhamos considerado certos aspectos no planejamento inicial.  Por exemplo, como reiniciar o jogo uma vez que o jogo chega ao seu fim (vitória ou derrota).
+>A principal lição aprendida foi a importancia do planejamento do projeto de maneira exaustiva. Ao longo do desenvolvimento do projeto, houve momentos em que adaptações foram feitas pois não tinhamos considerado certos aspectos no planejamento inicial.  Por exemplo, como reiniciar o jogo uma vez que o jogo chega ao seu fim (vitória ou derrota).
 
 # Destaques de Código
 
@@ -455,6 +455,112 @@ Método | Objetivo
 `getHeroTrail` | Deve ser excluído uma vez que o raytracing for implementado.
 `setHeroTrail` | Deve ser excluído uma vez que o raytracing for implementado.
 `addHero` | Retorna adiciona o herói naquele andar.
+
+### Interface `ICastleController`
+
+Permite acesso a diversos métodos da classe Castle, tanto que modificam o castelo quanto que fornecem informações sobre este. A ser usada por classes do componente Controller.
+
+~~~java
+public interface ICastleController {
+	public void updateCurrentFloor();
+	public ArrayList<IActor> getFloorActors();
+	public IActor getActorAtTile(int x, int y);
+	public boolean isTileAtCurrentFloorOccupiable(int x, int y);
+	public void setTileAtCurrentFloorOccupiable(int x, int y, boolean occupiable);
+	public String typeAtTileInCurrentFloor(int x, int y);
+	public void removeItemAtCurrentFloor(int x, int y);
+	public void removeActorAtCurrentFloor(IActor actor);
+	public IActor getHero();
+	public void restart();
+	public IFloor getCurrentFloor();
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`updateCurrentFloor` | Passa o herói para o próximo nível e atualiza o índice do nível atual.
+`getFloorActors` | Retorna um ArrayList com os atores do andar atual.
+`getActorAtTile` | Retorna o ator que está em uma célula do andar atual.
+`isTileAtCurrentFloorOccupiable` | Retorna se uma célula do andar atual é ocupável.
+`setTileAtCurrentFloorOccupiable` | Atualiza a condição de ocupável de uma célula do andar atual.
+`typeAtTileInCurrentFloor` | Devolve o que o ID de uma célula do andar atual, que representa o que havia nela quando o nível foi criado.
+`removeItemAtCurrentFloor` | Remove um item de uma célula do andar atual.
+`removeActorAtCurrentFloor` | Remove do jogo um ator que está no andar atual.
+`getHero` | Devolve uma referência para o herói.
+`restart` | Reinicia o castelo e o herói.
+`getCurrentFloor` | Retorna um IFloor referente ao andar atual.
+
+### Interface `ICastleView`
+
+Permite acesso ao IFloor referente ao andar em que o herói atualmente está. A ser usada por classes do componente View.
+
+~~~java
+public interface ICastleView {
+	public IFloor getCurrentFloor();
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`getCurrentFloor` | Retorna um IFloor referente ao andar atual.
+
+
+### Interface `IGod`
+
+Permite acesso ao estado atual do jogo.
+
+~~~java
+public interface IGod {
+	public int getGameState();
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`getGameState` | Retorna um código representando o estado atual do jogo.
+
+### Interface `INextAction`
+
+Devolve qual a última tecla do teclado lida.
+
+~~~java
+public interface INextAction {	
+	public int getKey();
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`getKey` | Retorna um código representando a última tecla digitada no teclado.
+
+### Interface `IWindow`
+
+Permite a criação de um JFrame representando a janela do jogo.
+
+~~~java
+public interface IWindow {
+	public void create();
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`create` | Cria um JFrame representando a janela do jogo.
+
+### Interface `IGameScreen`
+
+Permite a exibição de uma mensagem na tela
+
+~~~java
+public interface IGameScreen {
+	public void setMessage(String message);
+}
+~~~
+
+Método | Objetivo
+-------| --------
+`setMessage` | Exibe uma mensagem na tela.
+
 
 # Plano de Exceções
 
