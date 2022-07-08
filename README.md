@@ -235,7 +235,7 @@ public class App {
 
 ## Diagrama Geral de Componentes
 
-![](assets/Diagrama Componentes.drawio.png)
+![](assets/Diagrama_Componentes.drawio.png)
 
 ## Componente `Castle`
 
@@ -262,6 +262,89 @@ Interface agregadora do componente em Java:
 public interface ICastle extends ICastleController, ICastleView {
 }
 ~~~
+
+## Componente `Actor`
+
+> Modela os atores (Herói e inimigos), podendo devolver informações como os atributos e a posição atual de cada ator.
+
+![](assets/actorD.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classes | `src.model.actor`
+Autores | `Artur e Marcos`
+Interfaces | `IActor`
+
+### Interfaces
+
+Interfaces associadas a esse componente:
+
+![](assets/actorI.png)
+
+## Componente `Item`
+
+> Modela os itens que os atores podem usar (por enquanto, apenas poções, que só podem ser usadas pelo herói).
+
+![](assets/itemD.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classes | `src.model.actor`
+Autores | `Artur e Marcos`
+Interfaces | `-`
+
+## Componente `Controller`
+
+> Responsável pela criação e atualização do estado do jogo. Oferece, para o View, informações sobre o estado do jogo (se está rodando; na tela inicial; etc).
+
+![](assets/controllerD.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classes | `src.controller`
+Autores | `Artur e Marcos`
+Interfaces | `IGod`
+
+### Interfaces
+
+Interfaces associadas a esse componente:
+
+![](assets/controllerI.png)
+
+## Componente `View`
+
+> Responsável pela interface gráfica do jogo e pela leitura do teclado. Oferece qual foi a última tecla digitada, a possibilidade de criação da janela e a possibilidade de apresentação de uma mensagem na tela.
+
+![](assets/viewD.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classes | `src.view`
+Autores | `Artur e Marcos`
+Interfaces | `IWindow, INextAction, IGameScreen`
+
+### Interfaces
+
+Interfaces associadas a esse componente:
+
+![](assets/viewI.png)
+
+## Componente `Exception`
+
+> Contém as exceções do jogo.
+
+![](assets/exceptionD.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classes | `src.exception`
+Autores | `Artur e Marcos`
+Interfaces | `-`
 
 ## Detalhamento das Interfaces
 
