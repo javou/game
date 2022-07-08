@@ -235,7 +235,7 @@ public class App {
 
 ## Diagrama Geral de Componentes
 
-![](assets/Diagrama_Componentes.drawio.png)
+![](assets/diagrama_componentes.png)
 
 ## Componente `Castle`
 
