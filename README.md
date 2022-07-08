@@ -235,13 +235,13 @@ public class App {
 
 ## Diagrama Geral de Componentes
 
-> Se você adotou componentes de software, apresente a documentação de componentes conforme o modelo.
+![](assets/Diagrama Componentes.drawio.png)
 
 ## Componente `Castle`
 
 > Responsável por modelar o mapa do jogo, podendo devolver informações sobre o estado atual dele. Possui 3 classes: Castle, que representa o mapa inteiro do jogo, com todos os andares (níveis); Floor, que representa cada andar (nível) do jogo, possuindo uma matriz de Tiles; e Tile, que é a projeção de uma célula de um andar.
 
-![Componente](diagrama-componente.png)
+![](assets/castleD.png)
 
 **Ficha Técnica**
 item | detalhamento
@@ -254,7 +254,7 @@ Interfaces | `ICastleController, ICastleView, IFloor, ICastle`
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](diagrama-interfaces.png)
+![](assets/castleI.png)
 
 Interface agregadora do componente em Java:
 
